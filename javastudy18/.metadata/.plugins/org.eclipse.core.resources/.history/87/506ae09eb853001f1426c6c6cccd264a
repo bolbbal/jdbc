@@ -1,0 +1,44 @@
+package javaJDBCentry;
+
+import java.sql.*;
+import java.util.*;
+
+public class EntryDao {
+	Scanner sc = new Scanner(System.in);
+	
+	public void insertEntry() {
+		EntryVo vo = new EntryVo();
+		System.out.println(">>경영점수 등록 화면");
+		System.out.print("참가 번호 : ");
+		int entryNo = sc.nextInt();
+		System.out.println("심사위원 점수 등록");
+		System.out.print("김심사 점수 : ");
+		int score1 = sc.nextInt();
+		System.out.print("이심사 점수 : ");
+		int score2 = sc.nextInt();
+		System.out.print("박심사 점수 : ");
+		int score3 = sc.nextInt();
+		System.out.print("황심사 점수 : ");
+		int score4 = sc.nextInt();
+		System.out.print("조심사 점수 : ");
+		int score5 = sc.nextInt();
+		System.out.print("등록여부 [Y/N]");
+		String decide = sc.next();
+		if(decide.equalsIgnoreCase("n")) {
+			return;
+		} else if(decide.equalsIgnoreCase("y")) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			
+			String sql = "insert into entry_no values (?,?,?,?,?,?)";
+			
+			try {
+				conn = DBManager.getInstance().getDBManger();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, );
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} 
+	}
+}

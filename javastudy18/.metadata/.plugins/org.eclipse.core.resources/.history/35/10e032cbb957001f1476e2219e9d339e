@@ -1,0 +1,25 @@
+package usedCar;
+
+import java.util.*;
+
+public class UsedCarMain {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		boolean flag = true;
+		while (flag) {
+			System.out.println("[1]모든 회원 검색[2]][0]종료");
+			System.out.print("작업 선택 >>");
+			String work = sc.next();
+			if (work.equals("0")) {
+				flag = false;
+				
+				break;
+			} else if (work.equals("1")) {
+				System.out.println("모든 회원 검색");
+				
+			}
+		}
+	}
+
+}

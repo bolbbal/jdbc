@@ -1,0 +1,49 @@
+package javaJDBCOdition;
+import java.util.*;
+import java.sql.*;
+public class OditionDao {
+	Scanner sc = new Scanner(System.in);
+	public void insertOdition() {
+		
+		System.out.print("참가번호 : ");
+		String id = sc.next();
+		System.out.print("참가자명 : ");
+		String name = sc.next();
+		System.out.print("생년월일 : ");
+		String birth = sc.next();
+		System.out.print("성별 : [남자:M,여자:F] ");
+		String gender = sc.next();
+		System.out.print("특기 : [1]댄스[2]랩[3]노래 ");
+		String talent = sc.next();
+		System.out.print("소속사 : ");
+		String agency = sc.next();
+		System.out.print("등록하시겠습니까?[y/n] ");
+		String answer = sc.next();
+		
+		if (answer.equalsIgnoreCase("n")) {
+			return;
+		} else if (answer.equalsIgnoreCase("y")) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			
+			String sql = "insert into tbl_artist_201905 values (?,?,?,?,?,?)";
+			
+			try {
+				conn = DBManager.getInstance().getDBmanager();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.setString(2, name);
+				pstmt.setString(3, birth);
+				pstmt.setString(4, gender);
+				pstmt.setString(5, talent);
+				pstmt.setString(6, agency);
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+	}
+}

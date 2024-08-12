@@ -1,0 +1,16 @@
+package javaJDBCshop;
+
+
+public class ShopVo {
+	private int custnoAuto;
+
+	public int getCustnoAuto() {
+		return custnoAuto;
+	}
+
+	public void setCustnoAuto(int custnoAuto) {
+		this.custnoAuto = custnoAuto;
+	}
+	
+	
+}

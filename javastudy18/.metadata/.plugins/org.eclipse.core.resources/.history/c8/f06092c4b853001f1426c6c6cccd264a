@@ -1,0 +1,29 @@
+package javaJDBCentry;
+
+import java.util.Scanner;
+
+public class EntryMain {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		boolean flag = true;
+		EntryDao dao = new EntryDao();
+		while(flag) {
+			System.out.print("메뉴선택 : [1]경연점수등록[2]경연결과조회[3]최종등수조회[4]종료");
+			int sel = sc.nextInt();
+			if (sel == 1) {
+				
+			} else if (sel == 2) {
+				
+			} else if (sel == 3) {
+				
+			} else if (sel == 4) {
+				System.out.println("프로그램 종료");
+				flag = false;
+				break;
+			}
+		}
+
+	}
+
+}

@@ -1,0 +1,10 @@
+package javaJDBCOdition;
+
+public class OditionMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

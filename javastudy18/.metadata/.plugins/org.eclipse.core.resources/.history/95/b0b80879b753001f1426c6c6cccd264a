@@ -1,0 +1,11 @@
+package javaJDBCentry;
+
+public class EntryVo {
+	private String entry_no;
+	private int score1;
+	private int score2;
+	private int score3;
+	private int score4;
+	private int score5;
+	
+}

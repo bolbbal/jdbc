@@ -1,0 +1,14 @@
+package javaJDBCshop;
+
+public class ShopCustnoDao {
+	private int custno;
+
+	public int getCustno() {
+		return custno;
+	}
+
+	public void setCustno(int custno) {
+		this.custno = custno;
+	}
+	
+}

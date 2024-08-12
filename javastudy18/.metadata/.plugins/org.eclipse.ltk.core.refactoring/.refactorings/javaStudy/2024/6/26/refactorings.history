@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Java53_sort.java&apos; to &apos;javaBasic.Java53_sort.java&apos;&#x0D;&#x0A;- Original project: &apos;javaStudy&apos;&#x0D;&#x0A;- Destination element: &apos;javaBasic.Java53_sort.java&apos;&#x0D;&#x0A;- Original element: &apos;javaBasic.Java53_sort.java&apos;" description="Copy compilation unit" destination="/src&lt;javaBasic{Java53_sort.java" element1="/src&lt;javaBasic{Java53_sort.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1719216275971" units="1" version="1.0"/>
+</session>

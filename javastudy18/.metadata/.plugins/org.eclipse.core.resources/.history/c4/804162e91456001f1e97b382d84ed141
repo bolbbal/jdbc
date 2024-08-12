@@ -1,0 +1,47 @@
+package javaJDBCshop;
+
+import java.sql.*;
+import java.util.*;
+
+public class ShopDao {
+	public List<ShopVo> insertMember(List<ShopVo> list) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "insert into member_tbl_02 values (?, ?, ?, ?, ?, ?, ?)";
+		
+		try {
+			conn = DBManager.getInstance().getDBManager();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, getAuto());
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public int getAuto(int custno) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select max(custno)+1 as custno\r\n" + 
+				"from member_tbl_02)";
+		int custno = 0;
+		try {
+			conn = DBManager.getInstance().getDBManager();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				custno = rs.getInt("custno");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return custno;
+	}
+}

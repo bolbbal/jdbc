@@ -1,0 +1,102 @@
+package javaJDBCOdition;
+import java.util.*;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+public class OditionDao {
+	Scanner sc = new Scanner(System.in);
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	SimpleDateFormat ndf = new SimpleDateFormat("yyyy년 MM월 dd일");
+	public void insertOdition() {
+		
+		System.out.print("참가번호 : ");
+		String id = sc.next();
+		System.out.print("참가자명 : ");
+		String name = sc.next();
+		System.out.print("생년월일 : ");
+		String birth = sc.next();
+		System.out.print("성별 : [남자:M,여자:F] ");
+		String gender = sc.next();
+		System.out.print("특기 : [1]댄스[2]랩[3]노래 ");
+		String talent = sc.next();
+		System.out.print("소속사 : ");
+		String agency = sc.next();
+		System.out.print("등록하시겠습니까?[y/n] ");
+		String answer = sc.next();
+		
+		if (answer.equalsIgnoreCase("n")) {
+			return;
+		} else if (answer.equalsIgnoreCase("y")) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			
+			String sql = "insert into tbl_artist_201905 (artist_id, artist_name, artist_gender, artist_birth, talent, agency)values (?,?,?,?,?,?)";
+			
+			try {
+				conn = DBManager.getInstance().getDBmanager();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.setString(2, name);
+				pstmt.setString(3, gender);
+				pstmt.setString(4, birth);
+				pstmt.setString(5, talent);
+				pstmt.setString(6, agency);
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public void selectArtist() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		String sql = "select * from tbl_artist_201905";
+		
+		try {
+			conn = DBManager.getInstance().getDBmanager();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			List<OditionVo> list = new ArrayList<OditionVo>();
+			System.out.println("\t\t참가자 목록 조회");
+			System.out.println("참가번호\t참가자명\t생년월일\t\t성별\t특기\t소속사");
+			while(rs.next()) {
+				OditionVo vo = new OditionVo();
+				vo.setArtist_id(rs.getString("artist_id"));
+				vo.setArtist_name(rs.getString("artist_name"));
+				vo.setArtist_birth(rs.getString("artist_birth"));
+				vo.setArtist_gender(rs.getString("artist_gender"));
+				vo.setTalent(rs.getString("talent"));
+				vo.setAgency(rs.getString("agency"));
+				list.add(vo);
+			}
+			for(OditionVo vo : list) {
+				System.out.print(vo.getArtist_id() + "\t");
+				System.out.print(vo.getArtist_name() + "\t");
+				String birth = vo.getArtist_birth();
+				Date formatDate = sdf.parse(birth);
+				System.out.print(vo.getArtist_birth() + "\t\t");
+				String gender = null;
+				if (vo.getArtist_gender().equalsIgnoreCase("f")) {
+					gender = "여성";
+				} else if (vo.getArtist_gender().equalsIgnoreCase("m")) {
+					gender = "남성";
+				}
+				System.out.print(gender + "\t");
+				String talent = null;
+				if (vo.getTalent().equals("1")) {
+					talent = "댄스";
+				} else if (vo.getTalent().equals("2")) {
+					talent = "랩";
+				} else if (vo.getTalent().equals("3")) {
+					talent = "노래";
+				}
+				System.out.print(talent + "\t");
+				System.out.println(vo.getAgency());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

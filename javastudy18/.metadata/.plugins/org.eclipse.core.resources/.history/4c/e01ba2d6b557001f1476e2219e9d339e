@@ -1,0 +1,10 @@
+package usedCar;
+
+public class UsedCarMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,11 @@
+package usedCar;
+
+import java.util.*;
+
+public class UsedCarMain {
+
+	public static void main(String[] args) {
+		Scannner sc = new Scanner(System.in);
+	}
+
+}

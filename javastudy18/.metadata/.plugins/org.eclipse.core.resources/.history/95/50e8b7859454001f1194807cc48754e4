@@ -1,0 +1,40 @@
+package javaJDBCdepart;
+
+import java.sql.*;
+import java.util.*;
+
+public class DepartDao {
+	public List<DepartVo> selectEmployeeList() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<DepartVo> list = new ArrayList<DepartVo>();
+		
+		String sql = "select e.e_no, e.e_name, d.name as dname, l.name as lname, w.name as wname, e.performance, e.e_join_date\r\n" + 
+				"from tbl_company_employee e, tbl_company_depart d, tbl_company_level l, tbl_company_work w\r\n" + 
+				"where e.e_depart = d.depart_code and e.e_level = l.level_code and e.e_work_place = w.work_place\r\n" + 
+				"order by e.e_no";
+		
+		try {
+			conn = DBManager.getInstance().getDBManager();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				DepartVo vo = new DepartVo();
+				vo.setE_no(rs.getString("e_no"));
+				vo.setE_name(rs.getString("e_name"));
+				vo.setDname(rs.getString("dname"));
+				vo.setLname(rs.getString("lname"));
+				vo.setWname(rs.getString("wname"));
+				vo.setPerformance(rs.getString("performance"));
+				vo.setE_join_date(rs.getString("e_join_date"));
+				
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+}
