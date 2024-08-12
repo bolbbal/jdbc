@@ -756,3 +756,91 @@ from member_tbl_02 mem, money_tbl_02 mon
 where mem.custno = mon.custno
 group by mem.custno, mem.custname, mem.grade
 order by sum(mon.price) desc;
+
+--서브쿼리
+--scott보다 많은 급여를 받는 사원을 찾으시오
+select ename, salary from emp where ename = 'SCOTT';
+select ename, salary from emp where salary > 3000;
+
+select ename, salary
+from emp
+where salary  > (select salary
+                 from emp
+                 where ename = 'SCOTT');
+
+--SCOTT과 같은 부서에서 일하는 사람의 이름과 급여
+select dno from emp where ename = 'SCOTT'; --단일행 쿼리
+select ename, salary from emp where dno = 20;
+
+select ename, salary from emp where dno = (select dno from emp where ename = 'SCOTT');
+
+--메인 쿼리에 조건을 기술하기 위해 where절 대신 having절 사용 가능
+--서브 쿼리문의 결과값을 그룹함수와 비교해야 할 경우 having절을 사용 가능
+
+--30번 부서의 최소 급여를 구한 후 부서별 최소 급여가 최소급여보다 큰 부서만 출력
+select min(salary)
+from emp
+where dno = 30;
+
+select dno, min(salary)
+from emp
+group by dno
+having min(salary) > (select min(salary)
+                      from emp
+                      where dno = 30);
+                      
+--단일행 서브쿼리
+--내부 쿼리문의 결과로 얻어지는 로우가 한개
+--단일 행 비교 연산자 (>, >=, <, <=, <>)
+
+--다중행 서브쿼리
+--내부 쿼리문의 결과로 얻어지는 로우가 여러개
+--다중행 비교 연산자 (IN, ANY, SOME, ALL, EXISTS)
+--IN : 메인 쿼리 비교 조건(=)이 서브쿼리의 결과 중에서 하나라도 일치하면 참
+--ANY, SOME : 메인 쿼리 비교 조건이 서브쿼리의 검색 결과와 하나 이상이 일치하면 참
+--ALL : 메인 쿼리 비교 조건이 서브쿼리의 검색 결과와 모든 값이 일치하면 참
+--EXISTS : 메임 쿼리 비교 조건이 서브쿼리의 결과 중에서 만족하는 값이 하나라도 존재하면 참
+
+--부서별 최소 급여를 받는 사원의 사원 번호와 이름을 출력
+select eno, ename
+from emp
+where salary in (select min(salary) from emp group by dno);
+-- '=' 사용 불가. 여러개의 값을 받아 처리할 수 없기 때문에
+
+-- <any : 최대값보다 작음, >any : 최소값보다 큼, = any : in과 동일
+
+--직급이 salseman이 아니면서 급여가 임의의 salesman보다 낮은 사원 출력
+select * from emp;
+select eno, ename, job, salary from emp where salary < any (select salary from emp where job = 'SALESMAN') and job <> 'SALESMAN';
+--직급이 salseman이 아니면서 직급이 salesman인 사원보다 급여가 적은 사원 출력
+select min(salary) from emp where job = 'SALESMAN';
+select eno, ename, job, salary from emp where salary < all (select salary from emp where job = 'SALESMAN');
+--사원번호가 7788인 사원과 담당 업무가 같은 사원의 이름과 담당업무 검색
+select ename, job from emp where job  = (select job from emp where eno = 7788);
+--사원번호가 7788인 사원보다 급여가 많은 사원의 이름과 담당 업무
+select ename, job from emp where salary > (select salary from emp where eno = 7788);
+--최소 급여를 받는 사원의 이름, 담당업무 및 급여 검색
+select ename, job, salary from emp where salary = (select min(salary) from emp);
+
+--사원번호가 7499인 사원과 담당 업무가 같은 사원의 이름과 담당업무 검색
+select ename, job from emp where dno = (select dno from emp where eno = 7499);
+--사원번호가 7499인 사원보다 급여가 많은 사원의 이름과 담당 업무
+select ename, job from emp where salary > (select salary from emp where eno = 7499);
+--최소 급여를 받는 사원의 이름, 담당업무 및 급여 검색
+select ename, job, salary from emp where salary = (select min(salary) from emp);
+--평균 급여가 가장 적은 사원의 담당업무를 찾아 직급과 급여 평균을 출력
+select * from emp;
+select job, round(avg(salary),1) from emp group by job having round(avg(salary),1) = (select min(round(avg(salary),1)) from emp group by job); 
+select min(avg(salary)) from emp group by job;
+
+--각 부서의 최소 급여를 받는 사원을 검색하여 이름, 급여, 부서번호를 출력
+select ename, salary, dno from emp where salary in (select min(salary) from emp group by dno);
+select ename, salary, dno from emp where salary = any (select min(salary) from emp group by dno);
+
+--담당 업무가 analyst인 사원보다 급여가 적으면서 업무가 analyst가 아닌 사원들 중 사원번호, 이름, 담당업무, 급여를 출력
+select eno, ename, job, salary from emp where salary < any (select salary from emp where job = 'ANALYST') and job <> 'ANALYST';
+
+--부하직원이 없는 사원의 이름을 출력하시오
+select ename from emp where manager is null;
+select ename from emp where eno in (select eno from emp where manager is null);
+select ename from emp where eno in (select eno from emp where manager is not null);

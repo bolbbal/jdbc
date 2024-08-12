@@ -1,6 +1,0 @@
-package javaJDBCOdition;
-import java.util.*;
-import java.sql.*;
-public class OditionDao {
-	
-}
