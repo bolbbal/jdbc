@@ -1,0 +1,758 @@
+create table score(
+    bno number(4) not null,
+    name varchar2(12) not null,
+    kor number(3) not null,
+    eng number(3) not null,
+    mat number(3) not null,
+    CONSTRAINT score_pk primary key (bno)
+);
+-- DML : insert, select, update, delete
+insert into score (bno, name, kor, eng, mat) values (1, '홍길동', 100, 100, 100);
+insert into score (bno, name, kor, eng, mat) values (2, '김길동', 90, 90, 90);
+insert into score (bno, name, kor, eng, mat) values (3, '박길동', 40, 6, 70);
+insert into score (bno, name, kor, eng, mat) values (4, '최길동', 50, 60, 80);
+insert into score (bno, name, kor, eng, mat) values (5, '박길동', 85, 95, 70);
+
+commit;
+-- 반드시 commit 할 것
+select * from score;
+select name from score;
+select name, bno from score;
+select * from score where kor>=90;
+select * from score where kor >= 90 and eng >= 90 and mat >= 90;
+select * from score where name like '박%';
+select * from score where name like '%동';
+select * from score where name like '%길%';
+select * from score where name like '김%';
+select * from score where name like '박%' and kor >= 90;
+select * from score where name like '박%' or kor >= 90;
+select * from score where bno = 3;
+select * from score where bno < 3;
+select * from score;
+-- 
+--sequence
+--순번을 1씩 증가하면서 유일한 값을 만들 때 사용
+create sequence score_seq;
+
+--삭제
+select * from score;
+select * from score where kor >= 90;
+delete from score where bno = 1;
+select * from score;
+delete from score;
+select * from score;
+select * from score;
+select * from score order by bno desc;
+select * from score order by bno asc;
+commit;
+
+--수정
+select * from score;
+update score set kor = 80, eng = 97, mat = 88 where bno = 5;
+update score set name = '히틀러' where name = '서재덕';
+update score set kor = 65 where name = '채선기';
+update score set kor = kor+5 where name like '%인%';
+
+select * from score;
+--insert, delete, update는 반드시 commit할것!
+
+select * from emp;
+select * from dept;
+select * from sal;
+select * from emp where dno = 10;
+select * from emp;
+select * from emp where ename = 'SMITH';
+select * from emp where hiredate < '81/01/01';
+select * from emp where dno = 10 and job = 'MANAGER';
+select * from emp where dno = 10 or job = 'MANAGER';
+select * from emp where not dno = 10;
+select * from emp where salary >= 1000 and salary <= 1500;
+select * from emp where salary between 1000 and 1500;
+
+select * from emp where commission = 300 or commission = 500 or commission = 1400;
+select * from emp where commission in(300,500,1400);
+select * from emp where ename like 'F%';
+select * from emp where ename like '_A%';
+select * from emp where commission is null;
+select * from emp where commission is not null;
+select * from emp order by salary asc;
+select * from emp order by salary desc;
+select * from emp order by salary desc, ename asc;
+desc emp;
+--그룹합수
+select * from emp;
+select sum(commission) as 커미션총액 from emp;
+select sum(salary) saltot from emp;
+--테이블 행 개수
+select count(*) as 사원의수 from emp;
+select count(distinct job) as 직업수 from emp;
+select max(salary) from emp;
+select * from emp;
+select dno, avg(salary) as salave from emp group by dno order by salave asc;
+--부서별, 직업별 인원 수와 급여 총액, 급여 평균을 구하시오
+select dno, job, count(*) as jobtot, sum(salary) as saltot, avg(salary) as salave
+from emp
+group by dno, job
+order by dno, job;
+--그룹 결과 제한
+--사원 테이블에서 부서별 최고 많이 받는 사람의 급여를 구하라
+--단, 급여가 3000만원 이상인 사람들 중
+select dno, max(salary) as maxsal
+from emp
+group by dno
+having max(salary) >= 3000;
+--테이블 전체 조건 지정은 where, 그룹 지운 데이터 중 조건은 having
+select * from emp;
+select * from emp where ename = upper('scott');
+select * from emp where ename = lower('scott');
+--문자 길이 반환
+select length('oracle'), lengthb('오라클') from dual; --b는 byte 
+--문자열 결합
+select 'oracle', 'mania', concat('Oracle', 'mania') from dual;
+--문자열 일부 발췌
+select substr('oracle mania', 4, 3) from dual;
+--87년도에 입사한 사원 추출
+select * from emp;
+select * from emp where substr(hiredate, 1, 2) = '87';
+select * from emp where substr(ename, -1, 1) = 'N';
+--남은 자리에 특정 기호 채우기
+select LPAD(salary, 10, '*') from emp;
+select RPAD(salary, 10, '*') from emp;
+--공백 제거
+select trim('   oracle  mania   ') from dual;
+--반올림
+select 98.7654, round(98.7654), round(98.7654, 2), round(98.7654, -1) from dual;
+--버림
+select 98.7654, trunc(98.7654), trunc(98.7654, 2), trunc(98.7654, -1) from dual;
+--현재 날짜 검색
+select sysdate from dual;
+--날짜 연산
+select sysdate-1 yesterday, sysdate today, sysdate+1 tomorrow from dual;
+--날짜 반올림
+select round(sysdate - hiredate) 근무일수 from emp;
+--날짜 자르기
+select hiredate, trunc(hiredate, 'MONTH') from emp;
+--날짜와 날짜 사이의 개월 수 구하기
+select ename, sysdate, hiredate, trunc(months_between(sysdate, hiredate)) from emp;
+--해당 날짜를 기준으로 처음 돌아요는 요일에 해당하는 날짜 구하기
+select sysdate, next_day(sysdate, '토요일') from dual;
+--해당 날짜가 속한 달의 마지막 날짜 구하기
+select ename, hiredate, last_day(hiredate) from emp;
+--날짜나 숫자를 문자로 형변환
+select ename, hiredate, to_char(hiredate, 'YY-MM'), to_char(hiredate, 'YYYY/MM/DD DAY') from emp;
+--문자열을 날짜 형으로 변환
+select ename, hiredate from emp where hiredate = to_date('19810220');
+--숫자형으로 형번환
+select to_number('100000') - to_number('50000') from dual;
+--null 또는 0을 다른 값으로 변환
+select ename, salary, commission, NVL(commission, 0), salary*12+nvl(commission, 0) from emp order by job;
+--★조건에 따라 다양한 선택★
+select ename, dno, decode(dno, 10, 'aaa',
+                20, 'bbb',
+                30, 'ccc',
+                'default') as dname from emp;
+select ename, dno, case when dno = 10 then 'aaa'
+                        when dno = 20 then 'bbb'
+                        when dno = 30 then 'ccc'
+                        else 'default' end as dname from emp;
+--★★★★★★★테이블 조인★★★★★★
+--여러 테이블에 저장된 데이터를 한번에 조회해야 할 필요가 있을 때 사용
+--3개의 테이블을 조인할 때는 먼저 2개의 테이블을 조인하고, 그 결과와 나머니 테이블을 조인한다
+--join의 종류
+--inner join(equal join, natual join, cross join) null 상태의 데이터는 취급하지 않음. 출력하고 싶다면 outer join을 사용함
+--outer join(left join, right join, full outer join)
+
+--7788인 사원의 이름과 소속 부서명을 검색하시오
+select * from emp where eno = 7788;
+select * from dept where dno = 20;
+
+--equal join
+select eno, ename, emp.dno, dname
+from emp, dept
+where emp.dno = dept.dno;
+
+--equal join
+select e.eno, e.ename, e.salary, e.dno, d.dname
+from emp e, dept d
+where e.dno = d.dno;
+
+--모호한 컬럼명 자세히 지정하여 검색하기
+select e.eno, e.ename, e.salary, e.dno, d.dname
+from emp e, dept d
+where e.dno = d.dno and e.eno = 7788;
+
+--임의의 조건을 지정하거나 조인할 컬럼을 지정하여 검색
+select e.eno, e.ename, d.dname, e.dno
+from emp e join dept d
+on e.dno = d.dno
+where e.eno = 7788;
+
+select e.eno, e.ename, dno, d.dname
+from emp e join dept d
+using (dno)
+where e.eno = 7788;
+
+select * from sal;
+
+--non equi join
+--where 절에 <, between a and b 와 같이 = 조건이 아닌 연산자를 사용
+select ename, salary, grade
+from emp, sal
+where salary between losal and hisal;
+
+--3개의 테이블 조인하기
+select e.ename, d.dname, e.salary, s.grade
+from emp e, dept d, sal s
+where e.dno = d.dno and salary between losal and hisal;
+drop table student;
+create table tbl_student_201905 (
+    syear char(1) not null,
+    sclass char(2) not null,
+    sno char(2) not null,
+    sname varchar2(20),
+    birth char(8),
+    gender char(1),
+    tel1 char(3),
+    tel2 char(4),
+    tel3 char(4),
+    constraint student_pk primary key (syear, sclass, sno)    
+);
+insert into tbl_student_201905 values ('1', '01', '01', '김학생', '20020101', 'F', '010', '1234', '1001');
+insert into tbl_student_201905 values ('1', '01', '02', '이학생', '20020201', 'M', '010', '1234', '1002');
+insert into tbl_student_201905 values ('1', '01', '03', '박학생', '20020301', 'M', '010', '1234', '1003');
+insert into tbl_student_201905 values ('1', '02', '01', '조학생', '20020401', 'M', '010', '1234', '1004');
+insert into tbl_student_201905 values ('1', '02', '02', '유학생', '20020501', 'M', '010', '1234', '1005');
+insert into tbl_student_201905 values ('1', '02', '03', '여학생', '20020601', 'M', '010', '1234', '1006');
+insert into tbl_student_201905 values ('1', '03', '01', '남학생', '20020701', 'F', '010', '1234', '1007');
+insert into tbl_student_201905 values ('1', '03', '02', '황학생', '20020801', 'F', '010', '1234', '1008');
+insert into tbl_student_201905 values ('1', '03', '03', '전학생', '20020901', 'F', '010', '1234', '1009');
+select * from tbl_student_201905;
+commit;
+create table tbl_dept_201905 (
+    syear char(1) not null,
+    sclass char(2) not null,
+    tname varchar2(20),
+    constraint tbl_dept_pk primary key (syear, sclass)
+);
+insert into tbl_dept_201905 values ('1', '01', '김교사');
+insert into tbl_dept_201905 values ('1', '02', '이교사');
+insert into tbl_dept_201905 values ('1', '03', '박교사');
+select * from tbl_dept_201905;
+commit;
+create table tbl_score_201905 (
+    syear char(1),
+    sclass char(2),
+    sno char(2),
+    kor number(3),
+    eng number(3),
+    mat number(3),
+    constraint tbl_score_fk foreign key(syear, sclass, sno) REFERENCES tbl_student_201905(syear, sclass, sno)
+);
+insert into tbl_score_201905 values ('1', '01', '01', 50, 50, 50);
+insert into tbl_score_201905 values ('1', '01', '02', 60, 40, 100);
+insert into tbl_score_201905 values ('1', '01', '03', 70, 70, 70);
+insert into tbl_score_201905 values ('1', '02', '01', 80, 80, 80);
+insert into tbl_score_201905 values ('1', '02', '02', 50, 50, 50);
+insert into tbl_score_201905 values ('1', '02', '03', 40, 90, 80);
+insert into tbl_score_201905 values ('1', '03', '01', 70, 70, 70);
+insert into tbl_score_201905 values ('1', '03', '02', 80, 60, 90);
+insert into tbl_score_201905 values ('1', '03', '03', 90, 80, 70);
+drop table tbl_score_201905;
+select * from tbl_score_201905;
+select * from tbl_student_201905;
+commit;
+--join
+select std.syear, std.sclass, std.sno, std.sname, std.gender, sc.kor, sc.eng, sc.mat, sc.kor + sc.eng + sc.mat as tot, round((sc.kor + sc.eng + sc.mat) / 3, 1) as ave
+from tbl_student_201905 std, tbl_score_201905 sc  
+where std.syear = sc.syear and std.sclass = sc.sclass and std.sno = sc.sno;
+
+select d.syear, d.sclass, d.tname, sum(sc.kor) as korSum, sum(sc.eng) as engSum, sum(sc.mat) as matSum, round(avg(sc.kor), 1) as korAve, round(avg(sc.eng), 1) as engAve, round(avg(sc.mat), 1) as matAve
+from tbl_dept_201905 d, tbl_score_201905 sc
+where d.syear = sc.syear and d.sclass = sc.sclass
+group by d.syear, d.sclass, d.tname;
+
+create table tbl_artist_201905 (
+    artist_id char(4) not null primary key,
+    artist_name varchar2(20),
+    artist_gender char(1),
+    artist_birth char(8),
+    talent char(1),
+    agency varchar2(20)
+);
+desc tbl_artist_201905;
+insert into tbl_artist_201905 values ('A001', '김스타', 'F', '19970101', '1', 'A엔터테인먼트');
+insert into tbl_artist_201905 values ('A002', '조스타', 'M', '19980201', '2', 'B엔터테인먼트');
+insert into tbl_artist_201905 values ('A003', '왕스타', 'M', '19990301', '3', 'C엔터테인먼트');
+insert into tbl_artist_201905 values ('A004', '정스타', 'M', '20000401', '1', 'D엔터테인먼트');
+insert into tbl_artist_201905 values ('A005', '홍스타', 'F', '20010501', '2', 'E엔터테인먼트');
+select * from tbl_artist_201905;
+delete from tbl_artist_201905 where artist_id = 'A006';
+create table tbl_mento_201905 (
+    mento_id char(4) not null primary key,
+    mento_name varchar2(20)
+);
+insert into tbl_mento_201905 values ('J001', '함멘토');
+insert into tbl_mento_201905 values ('J002', '박멘토');
+insert into tbl_mento_201905 values ('J003', '장멘토');
+select * from tbl_mento_201905;
+insert into tbl_point_201905 values ('2019001', 'A001', 'J001', 78);
+insert into tbl_point_201905 values ('2019002', 'A001', 'J002', 76);
+insert into tbl_point_201905 values ('2019003', 'A001', 'J003', 70);
+insert into tbl_point_201905 values ('2019004', 'A002', 'J001', 80);
+insert into tbl_point_201905 values ('2019005', 'A002', 'J002', 72);
+insert into tbl_point_201905 values ('2019006', 'A002', 'J003', 78);
+insert into tbl_point_201905 values ('2019007', 'A003', 'J001', 90);
+insert into tbl_point_201905 values ('2019008', 'A003', 'J002', 92);
+insert into tbl_point_201905 values ('2019009', 'A003', 'J003', 88);
+insert into tbl_point_201905 values ('2019010', 'A004', 'J001', 96);
+insert into tbl_point_201905 values ('2019011', 'A004', 'J002', 90);
+insert into tbl_point_201905 values ('2019012', 'A004', 'J003', 98);
+insert into tbl_point_201905 values ('2019013', 'A005', 'J001', 88);
+insert into tbl_point_201905 values ('2019014', 'A005', 'J002', 86);
+insert into tbl_point_201905 values ('2019015', 'A005', 'J003', 86);
+select * from tbl_point_201905;
+commit;
+select p.serial_no, p.artist_id, p.mento_id, a.artist_birth, p.point, m.mento_name
+from tbl_point_201905 p, tbl_artist_201905 a, tbl_mento_201905 m
+where p.artist_id = a.artist_id and p.mento_id = m.mento_id
+order by p.serial_no asc;
+
+select a.artist_id, a.artist_name, a.artist_gender, sum(p.point) as sum, round(avg(p.point), 2) as ave
+from tbl_point_201905 p, tbl_artist_201905 a
+where p.artist_id = a.artist_id
+group by a.artist_id, a.artist_name, a.artist_gender
+order by ave desc;
+
+create table TBL_ENTRY_202106 (
+    ENTRY_NO char(4) not null,
+    ENTRY_NAME VARCHAR2(10),
+    ENTRY_JUMIN CHAR(13),
+    ENTRY_TYPE CHAR(1),
+    ENTRY_AREA VARCHAR(10),
+    CONSTRAINT ENTRY_PK PRIMARY KEY (ENTRY_NO)
+);
+DESC TBL_ENTRY_202106;
+INSERT INTO TBL_ENTRY_202106 VALUES ('0001', '김경연', '9901011000001', '1', '남원');
+INSERT INTO TBL_ENTRY_202106 VALUES ('0002', '이경연', '9801022000002', '2', '남원');
+INSERT INTO TBL_ENTRY_202106 VALUES ('0003', '박경연', '9701031000003', '3', '전주');
+INSERT INTO TBL_ENTRY_202106 VALUES ('0004', '조경연', '9601042000004', '4', '전주');
+INSERT INTO TBL_ENTRY_202106 VALUES ('0005', '하경연', '9501051000005', '1', '제주');
+INSERT INTO TBL_ENTRY_202106 VALUES ('0006', '황경연', '9401062000006', '2', '남원');
+INSERT INTO TBL_ENTRY_202106 VALUES ('0007', '봉경연', '9301071000007', '3', '울산');
+INSERT INTO TBL_ENTRY_202106 VALUES ('0008', '양경연', '9201082000008', '4', '울산');
+INSERT INTO TBL_ENTRY_202106 VALUES ('0009', '나경연', '9101091000009', '1', '제주');
+INSERT INTO TBL_ENTRY_202106 VALUES ('0010', '차경연', '9001102000010', '2', '전주');
+select * from TBL_ENTRY_202106;
+CREATE TABLE TBL_RECORD_202106 (
+    ENTRY_NO CHAR(4) NOT NULL,
+    SCORE1 NUMBER(3),
+    SCORE2 NUMBER(3),
+    SCORE3 NUMBER(3),
+    SCORE4 NUMBER(3),
+    SCORE5 NUMBER(3),
+    S_MAX NUMBER(3),
+    S_MIN NUMBER(3),
+    S_TOT NUMBER(4),
+    S_AVE NUMBER(6,2),
+    CONSTRAINT ENTRY_FK FOREIGN KEY (ENTRY_NO) REFERENCES TBL_ENTRY_202106 (ENTRY_NO)
+);
+INSERT INTO TBL_RECORD_202106 VALUES ('0001', 80, 80, 80, 70, 60, 80, 70, 230, 76.67);
+INSERT INTO TBL_RECORD_202106 VALUES ('0002', 90, 80, 90, 80, 90, 90, 80, 260, 86.67);
+INSERT INTO TBL_RECORD_202106 VALUES ('0003', 90, 80, 80, 80, 85, 90, 80, 245, 81.67);
+INSERT INTO TBL_RECORD_202106 VALUES ('0004', 75, 80, 80, 85, 70, 85, 70, 235, 78.33);
+INSERT INTO TBL_RECORD_202106 VALUES ('0005', 75, 75, 80, 65, 75, 80, 65, 225, 75);
+INSERT INTO TBL_RECORD_202106 VALUES ('0006', 85, 85, 90, 82, 90, 90, 80, 260, 86.67);
+INSERT INTO TBL_RECORD_202106 VALUES ('0007', 60, 70, 60, 60, 80, 80, 60, 190, 63.33);
+INSERT INTO TBL_RECORD_202106 VALUES ('0008', 70, 80, 70, 70, 60, 80, 60, 210, 70);
+INSERT INTO TBL_RECORD_202106 VALUES ('0009', 80, 90, 80, 80, 80, 90, 80, 240, 80);
+INSERT INTO TBL_RECORD_202106 VALUES ('0010', 90, 90, 90, 90, 90, 90, 90, 270, 90);
+SELECT * FROM tbl_record_202106;
+CREATE TABLE TBL_REFEREE_202106 (
+    RNAME1 VARCHAR2(10),
+    RNAME2 VARCHAR2(10),
+    RNAME3 VARCHAR2(10),
+    RNAME4 VARCHAR2(10),
+    RNAME5 VARCHAR2(10)
+);
+drop table TBL_REFEREE_202106;
+COMMIT;
+INSERT INTO TBL_REFEREE_202106 VALUES ('김심사', '이심사', '박심사', '황심사', '조심사');
+SELECT * FROM tbl_referee_202106;
+insert into tbl_record_202106 (entry_no, score1, score2, score3, score4, score5, s_max, s_min, s_tot, s_ave)
+values ('0011', 100, 100, 100, 100, 95, greatest(100, 100, 100, 100, 95), least(100, 100, 100, 100, 95), (100+100+100+100+95), (100+100+100+100+95)/5);
+--여러개의 컬럼 중 최대값, 최소값 구하기
+select greatest(score1, score2, score3, score4, score5) as max_val from tbl_record_202106;
+select least(score1, score2, score3, score4, score5) as min_val from tbl_record_202106;
+
+select et.entry_no, et.entry_name, et.entry_jumin, et.entry_type, et.entry_area, re.rname1, re.rname2, re.rname3, re.rname4, re.rname5, rc.score1, rc.score2, rc.score3, rc.score4, rc.score5, rc.s_tot, rc.s_ave
+from tbl_entry_202106 et, tbl_record_202106 rc, tbl_referee_202106 re
+where et.entry_no = rc.entry_no;
+
+select et.entry_no, et.entry_name, et.entry_jumin, et.entry_type, et.entry_area, rc.s_tot, rc.s_ave
+from tbl_entry_202106 et, tbl_record_202106 rc
+where et.entry_no = rc.entry_no
+order by s_tot desc, et.entry_no asc;
+select * from tbl_record_202106;
+delete from tbl_record_202106 where entry_no = '0010';
+commit;
+
+SELECT * FROM all_tables WHERE table_name = 'TBL_COMPANY_EMPLOYEE';
+
+select * from all_tables;
+drop table tbl_company_employee;
+create table tbl_company_employee (
+    e_no char(4) not null,
+    e_name varchar2(20) not null,
+    e_depart char(2) not null,
+    e_level char(2) not null,
+    e_work_place char(2),
+    performance char(1),
+    e_join_date char(8) not null,
+    constraint employee_pk primary key (e_no),
+    constraint employee_fk1 foreign key (e_depart) references tbl_company_depart (depart_code),
+    constraint employee_fk2 foreign key (e_level) references tbl_company_level (level_code),
+    constraint employee_fk3 foreign key (e_work_place) references tbl_company_work (work_place)
+);
+
+insert into tbl_company_employee values ('E001', '김태형', '01', '20', '31', 'C', '20200825');
+insert into tbl_company_employee values ('E002', '박지민', '02', '30', '32', 'C', '20210112');
+insert into tbl_company_employee values ('E003', '정호석', '02', '40', '32', 'D', '20210325');
+insert into tbl_company_employee values ('E004', '민윤기', '03', '50', '40', 'B', '20210814');
+select * from tbl_company_employee;
+commit;
+create table tbl_company_depart (
+    depart_code char(2) not null,
+    name varchar2(20),
+    constraint depart_pk primary key (depart_code)
+);
+insert into tbl_company_depart values ('01', '인사');
+insert into tbl_company_depart values ('02', '총무');
+insert into tbl_company_depart values ('03', '영업');
+insert into tbl_company_depart values ('04', '생산');
+select * from tbl_company_depart;
+commit;
+create table tbl_company_level (
+    level_code char(2) not null,
+    name varchar2(20),
+    salary number(8),
+    constraint level_pk primary key (level_code)
+);
+insert into tbl_company_level values ('10', '이사', 4500000);
+insert into tbl_company_level values ('20', '부장', 3500000);
+insert into tbl_company_level values ('30', '과장', 3000000);
+insert into tbl_company_level values ('40', '대리', 2500000);
+insert into tbl_company_level values ('50', '사원', 2000000);
+select * from tbl_company_level;
+commit;
+create table tbl_company_work (
+    work_place char(2) not null,
+    name varchar2(20),
+    constraint work_pk primary key (work_place)
+);
+insert into tbl_company_work values ('31', '대전영업소');
+insert into tbl_company_work values ('32', '청주영업소');
+insert into tbl_company_work values ('33', '공주영업소');
+insert into tbl_company_work values ('40', '충남본부');
+insert into tbl_company_work values ('50', '본사');
+select * from tbl_company_work;
+commit;
+
+select * from tbl_company_employee;
+desc tbl_company_employee;
+select * from tbl_company_depart;
+select * from tbl_company_level;
+select * from tbl_company_work;
+--오라클 조인
+-- select from where 세팅 > 결과 테이블 보고 사용하는 테이블 from에 작성 > 
+-- 테이블 보고 출력할 데이터 select에 작성 > 테이블 보고 where 절에서 조인
+
+-- 사원 목록 조회
+select e.e_no, e.e_name, d.name, l.name, w.name, e.performance, e.e_join_date
+from tbl_company_employee e, tbl_company_depart d, tbl_company_level l, tbl_company_work w
+where e.e_depart = d.depart_code and e.e_level = l.level_code and e.e_work_place = w.work_place
+order by e.e_no asc;
+
+-- 사원 급여 조회
+select e.e_no, e.e_name as ename, d.name as dname, l.name as lname, w.name as wname, e.performance,
+decode(e.performance, 'D', l.salary ,
+                      'C', l.salary + (l.salary * 0.05),
+                      'B', l.salary + (l.salary * 0.08),
+                      'A', l.salary + (l.salary * 0.1)) as salary
+from tbl_company_employee e, tbl_company_depart d, tbl_company_level l, tbl_company_work w
+where e.e_depart = d.depart_code and e.e_level = l.level_code and e.e_work_place = w.work_place
+order by e.e_level asc;
+
+--부서별 급여 조회
+select d.depart_code, d.name as dname, sum(decode(e.performance, 'D', l.salary,
+                                                             'C', l.salary + (l.salary * 0.05),
+                                                             'B', l.salary + (l.salary * 0.08),
+                                                             'A', l.salary + (l.salary * 0.1))) as sal
+from tbl_company_employee e, tbl_company_depart d, tbl_company_level l
+where e.e_depart = d.depart_code and e.e_level = l.level_code 
+group by d.depart_code, d.name
+order by d.depart_code;
+--지역별 급여 조회
+select w.work_place, w.name as wname, sum(decode(e.performance, 'D', l.salary,
+                                                             'C', l.salary + (l.salary * 0.05),
+                                                             'B', l.salary + (l.salary * 0.08),
+                                                             'A', l.salary + (l.salary * 0.1))) as sal
+from tbl_company_employee e, tbl_company_level l, tbl_company_work w
+where e.e_work_place = w.work_place and e.e_level = l.level_code 
+group by w.work_place, w.name
+order by w.work_place;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select * from tbl_company_employee;
+select * from tbl_company_depart;
+select * from tbl_company_level;
+select * from tbl_company_work;
+--사원목록조회
+select e.e_no, e.e_name, d.name as dname, l.name as lname, w.name as wname, e.performance, e.e_join_date
+from tbl_company_employee e, tbl_company_depart d, tbl_company_level l, tbl_company_work w
+where e.e_depart = d.depart_code and e.e_level = l.level_code and e.e_work_place = w.work_place
+order by e.e_no;
+--사원급여조회
+select e.e_no, e.e_name, d.name as dname, l.name as lname, w.name as wname, e.performance,
+decode(e.performance, 'A', l.salary + (l.salary * 0.1),
+                      'B', l.salary + (l.salary * 0.08),
+                      'C', l.salary + (l.salary * 0.05),
+                      'D', l.salary) as sal
+from tbl_company_employee e, tbl_company_depart d, tbl_company_level l, tbl_company_work w
+where e.e_depart = d.depart_code and e.e_level = l.level_code and e.e_work_place = w.work_place
+order by d.depart_code;
+--부서별급여조회
+select d.depart_code, d.name as dname,
+sum(decode(e.performance, 'A', l.salary + (l.salary * 0.1),
+                      'B', l.salary + (l.salary * 0.08),
+                      'C', l.salary + (l.salary * 0.05),
+                      'D', l.salary)) as sal
+from tbl_company_employee e, tbl_company_depart d, tbl_company_level l
+where e.e_depart = d.depart_code and e.e_level = l.level_code
+group by d.depart_code, d.name
+order by d.depart_code;
+--지역별급여조회
+select w.work_place, w.name as wname,
+sum(decode(e.performance, 'A', l.salary + (l.salary * 0.1),
+                      'B', l.salary + (l.salary * 0.08),
+                      'C', l.salary + (l.salary * 0.05),
+                      'D', l.salary)) as sal
+from tbl_company_employee e, tbl_company_level l, tbl_company_work w
+where e.e_work_place = w.work_place and e.e_level = l.level_code
+group by w.work_place, w.name
+order by w.work_place;
+commit;
+
+--ansi join
+select w.work_place, w.name as wname,
+        sum(decode(e.performance, 'A', l.salary + (l.salary * 0.1),
+                                  'B', l.salary + (l.salary * 0.08),
+                                  'C', l.salary + (l.salary * 0.05),
+                                  'D', l.salary)) as sal
+from tbl_company_employee e
+join tbl_company_work w -- inner 는 생략 가능
+on e.e_work_place = w.work_place
+inner join tbl_company_level l
+on e.e_level = l.level_code
+group by w.work_place, w.name
+order by w.work_place;
+
+--outer join
+--조인 조건이 null인 레코드를 검색할 때 사용
+select * from emp;
+select * from dept;
+
+select e.eno, e.ename, e.manager, e.commission, d.dname
+from emp e, dept d
+where e.dno = d.dno;
+
+select e.eno, e.ename, e.manager, e.commission, d.dname
+from emp e
+join dept d
+on e.dno = d.dno;
+
+--오라클 OUTER JOIN
+select e.eno, e.ename, e.job, e.manager, e.commission, d.dname
+from emp e, dept d
+where e.dno = d.dno(+) and e.job = 'MANAGER';
+
+--left outer join
+select e.eno, e.ename, e.job, e.manager, e.commission, d.dname
+from emp e
+left outer join dept d
+on e.dno = d.dno --조인 조건
+where e.job = 'MANAGER'; --검색 조건
+
+--self join
+--하나의 테이블에 있는 컬럼끼리 연결해야 하는 조인이 필요한 경우
+--사원의 직속 상관을 검색
+
+select a.eno, a.ename, a.job, b.ename
+from emp a 
+join emp b
+on a.manager = b.eno
+order by a.eno;
+
+select * from emp;
+
+create table tbl_cusinfo_202010 (
+    custno char(4) not null,
+    custname varchar2(20),
+    custjumin char(13),
+    custtel1 char(3),
+    custtel2 char(4),
+    custtel3 char(4),
+    constraint cust_pk primary key (custno)
+);
+insert into tbl_cusinfo_202010 values ('1001', '김고객', '9901011000001', '010', '1234', '0001');
+insert into tbl_cusinfo_202010 values ('1002', '이고객', '8901011000002', '010', '1234', '0002');
+insert into tbl_cusinfo_202010 values ('1003', '박고객', '7901011000003', '010', '1234', '0003');
+insert into tbl_cusinfo_202010 values ('1004', '조고객', '6901011000004', '010', '1234', '0004');
+insert into tbl_cusinfo_202010 values ('1005', '황고객', '5901011000005', '010', '1234', '0005');
+insert into tbl_cusinfo_202010 values ('1006', '홍고객', '9501011000006', '010', '1234', '0006');
+insert into tbl_cusinfo_202010 values ('1007', '최고객', '8701011000007', '010', '1234', '0007');
+commit;
+
+create table tbl_oilinfo_202010 (
+    oiltype char(1) not null,
+    oilname varchar2(20),
+    constraint oil_pk primary key (oiltype)
+);
+insert into tbl_oilinfo_202010 values ('1', '휘발유');
+insert into tbl_oilinfo_202010 values ('2', '고급휘발유');
+insert into tbl_oilinfo_202010 values ('3', '경유');
+insert into tbl_oilinfo_202010 values ('4', '등유');
+commit;
+
+drop table tbl_saleinfo_202010;
+create table tbl_saleinfo_202010 (
+    saleno char(4) not null,
+    oildate char(8),
+    oiltype char(1),
+    amount number(4),
+    paytype char(1),
+    custno char(4),
+    creditcart char(16),
+    oilcost number(7),
+    constraint sale_pk primary key (saleno),
+    constraint sale_fk1 foreign key (oiltype) references tbl_oilinfo_202010 (oiltype),
+    constraint sale_fk2 foreign key (custno) references tbl_cusinfo_202010 (custno)
+);
+
+insert into tbl_saleinfo_202010 values ('9001', '20211001', '1', 30, '2', '1001', '3001200130014001', 45000); 
+insert into tbl_saleinfo_202010 values ('9002', '20211001', '1', 40, '1', '1002', '', 56000); 
+insert into tbl_saleinfo_202010 values ('9003', '20211001', '2', 40, '2', '1003', '4001200130014003', 72000); 
+insert into tbl_saleinfo_202010 values ('9004', '20211002', '2', 60, '2', '1004', '5001200130014004', 102000); 
+insert into tbl_saleinfo_202010 values ('9005', '20211002', '3', 50, '1', '', '', 55000); 
+insert into tbl_saleinfo_202010 values ('9006', '20211002', '3', 50, '2', '', '3001200130014005', 55000); 
+commit;
+
+select * from tbl_saleinfo_202010;
+select * from tbl_oilinfo_202010;
+select * from tbl_cusinfo_202010;
+
+--전체매출조회
+select s.saleno, s.oildate, o.oilname, s.amount, s.paytype, c.custname, c.custno, c.custtel1, c.custtel2, c.custtel3, s.creditcart, s.oilcost
+from tbl_saleinfo_202010 s
+left outer join tbl_oilinfo_202010 o
+on s.oiltype = o.oiltype
+left outer join tbl_cusinfo_202010 c
+on s.custno = c.custno
+order by s.saleno;
+
+select s.saleno, 
+TO_CHAR(TO_DATE(s.oildate, 'YYYYMMDD'), 'YYYY"년"MM"월"DD"일"') as oildate, o.oilname, s.amount, s.paytype, c.custname, c.custno, 
+c.custtel1||'-'||c.custtel2||'-'||c.custtel3 as tel, s.creditcart, s.oilcost
+from tbl_saleinfo_202010 s
+left outer join tbl_oilinfo_202010 o
+on s.oiltype = o.oiltype
+left outer join tbl_cusinfo_202010 c
+on s.custno = c.custno
+order by s.saleno;
+
+--일 매출통계
+select s.oildate, o.oilname, count(s.oiltype) as count, sum(s.oilcost) as tot
+from tbl_saleinfo_202010 s, tbl_oilinfo_202010 o
+where s.oiltype = o.oiltype
+group by s.oildate, o.oilname
+order by s.oildate asc, o.oilname asc;
+
+select to_char(to_date(s.oildate,'yyyyMMdd'), 'yyyy"년"MM"월"dd"일"') as oildate, o.oilname, count(s.oiltype) as count, sum(s.oilcost) as tot
+from tbl_saleinfo_202010 s, tbl_oilinfo_202010 o
+where s.oiltype = o.oiltype
+group by s.oildate, o.oilname
+order by s.oildate asc, o.oilname asc;
+
+create table member_tbl_02 (
+    custno number(6) not null,
+    custname varchar2(20),
+    phone varchar(13),
+    address varchar2(60),
+    joindate date,
+    grade char(1),
+    city char(2),
+    constraint member_pk primary key (custno)
+);
+commit;
+drop table member_tbl_02;
+insert into member_tbl_02 values (100001, '김행복', '010-1111-2222', '서울 동대문구 휘경1동', '20151202', 'A', '01');
+insert into member_tbl_02 values (100002, '이축복', '010-1111-3333', '서울 동대문구 휘경2동', '20151206', 'B', '01');
+insert into member_tbl_02 values (100003, '장믿음', '010-1111-4444', '울릉군 울릉읍 독도1리', '20151001', 'B', '30');
+insert into member_tbl_02 values (100004, '최사랑', '010-1111-5555', '울릉군 울릉읍 독도2리', '20151113', 'A', '30');
+insert into member_tbl_02 values (100005, '진평화', '010-1111-6666', '제주도 제주시 외나무골', '20151225', 'B', '60');
+insert into member_tbl_02 values (100006, '차공단', '010-1111-7777', '제주도 제주시 외나무골', '20151211', 'C', '60');
+select * from member_tbl_02;
+
+create table money_tbl_02 (
+    custno number(6) not null,
+    saleno number(8) not null,
+    pcost number(8),
+    amount number(4),
+    price number(8),
+    pcode varchar2(4),
+    sdate date,
+    constraint money_fk foreign key (custno) references member_tbl_02 (custno),
+    constraint money_pk primary key (saleno)
+);
+
+insert into money_tbl_02 values (100001, 20160001, 500, 5, (500*5), 'A001', '20160101');
+insert into money_tbl_02 values (100001, 20160002, 1000, 4, (1000*4), 'A002', '20160101');
+insert into money_tbl_02 values (100001, 20160003, 500, 3, (500*3), 'A008', '20160101');
+insert into money_tbl_02 values (100002, 20160004, 2000, 1, (2000*1), 'A004', '20160102');
+insert into money_tbl_02 values (100002, 20160005, 500, 1, (500*1), 'A001', '20160103');
+insert into money_tbl_02 values (100003, 20160006, 1500, 2, (1500*2), 'A003', '20160103');
+insert into money_tbl_02 values (100004, 20160007, 500, 2, (500*2), 'A001', '20160104');
+insert into money_tbl_02 values (100004, 20160008, 300, 1, (300*1), 'A005', '20160104');
+insert into money_tbl_02 values (100004, 20160009, 600, 1, (600*1), 'A006', '20160104');
+insert into money_tbl_02 values (100004, 20160010, 3000, 1, (3000*1), 'A007', '20160106');
+select * from money_tbl_02;
+commit;
+
+select max(custno)+1 as custno
+from member_tbl_02;
+
+select *
+from member_tbl_02
+order by custno;
+
+select mem.custno, mem.custname, mem.grade, sum(mon.price) as totcost
+from member_tbl_02 mem, money_tbl_02 mon
+where mem.custno = mon.custno
+group by mem.custno, mem.custname, mem.grade
+order by sum(mon.price) desc;
