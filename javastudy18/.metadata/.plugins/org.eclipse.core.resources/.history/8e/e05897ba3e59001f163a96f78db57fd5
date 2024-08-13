@@ -1,0 +1,16 @@
+package javaJDBCsubquery;
+
+import java.sql.Connection;
+
+public class SubQueryMain {
+
+	public static void main(String[] args) {
+		
+		Connection conn = DBManager.getInstance().getDBManager();
+		if (conn != null) {
+			System.out.println("o");
+		}
+
+	}
+
+}

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javaObject.Score"/>
-<fullyQualifiedTypeName name="javaObject.ScoreMethod"/>
-<fullyQualifiedTypeName name="JavaInterface.ScoreMethod"/>
 <fullyQualifiedTypeName name="java.util.regex.Pattern"/>
 <fullyQualifiedTypeName name="java.util.regex.Matcher"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
@@ -42,14 +39,7 @@
 <fullyQualifiedTypeName name="javaJDBCshop.ShopDao"/>
 <fullyQualifiedTypeName name="javaJDBCshop.DBManager"/>
 <fullyQualifiedTypeName name="javaJDBCshop.ShopVo"/>
-<fullyQualifiedTypeName name="java.sql.DriverManager"/>
 <fullyQualifiedTypeName name="usedCar.DBManager"/>
-<fullyQualifiedTypeName name="java.util.Scanner"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
-<fullyQualifiedTypeName name="java.awt.List"/>
-<fullyQualifiedTypeName name="java.sql.Connection"/>
-<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-<fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="usedCar.UsedCarVo"/>
 <fullyQualifiedTypeName name="usedCar.UsedCarDao"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
@@ -58,6 +48,16 @@
 <fullyQualifiedTypeName name="javaRamda.add"/>
 <fullyQualifiedTypeName name="javaRamda.Addfunc"/>
 <fullyQualifiedTypeName name="javaRamda.Addable"/>
+<fullyQualifiedTypeName name="java.sql.DriverManager"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="javaJDBCsubquery.SubDao"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="javaJDBCsubquery.DBManager"/>
+<fullyQualifiedTypeName name="javaJDBCsubquery.SubVo"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
 </qualifiedTypeNameHistroy>

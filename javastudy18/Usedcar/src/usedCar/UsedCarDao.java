@@ -47,6 +47,8 @@ public class UsedCarDao {
 		
 		catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			DBManager.getInstance().close(conn, pstmt, rs);
 		}
 		
 		return list;

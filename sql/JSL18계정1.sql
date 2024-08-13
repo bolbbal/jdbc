@@ -844,3 +844,29 @@ select eno, ename, job, salary from emp where salary < any (select salary from e
 select ename from emp where manager is null;
 select ename from emp where eno in (select eno from emp where manager is null);
 select ename from emp where eno in (select eno from emp where manager is not null);
+
+--BLAKE와 동일한 부서에 속한 사원의 일므과 입사일을 표시
+select ename, hiredate from emp where dno = (select dno from emp where ename = 'BLAKE') and ename <> 'BLAKE';
+
+--급여가 평균 급여보다 많은 사원들의 사원번호와 이름을 표시하되 결과를 급여에 대해서 오름차순으로 정렬
+SELECT ENO, ENAME FROM EMP WHERE SALARY > (SELECT AVG(SALARY) FROM EMP) ORDER BY SALARY ASC;
+
+--이름에 K가 포함된 사원과 같은 부서에서 일하는 사원의 사원 번호와 이름
+SELECT ENO, ENAME FROM EMP WHERE DNO IN (SELECT DNO FROM EMP WHERE ENAME LIKE '%K%');
+
+select * from emp;
+--부서 위치가 dallas인 사원의 이름과 부서번호 및 담당업부
+select ename, dno, job from emp where dno = (select dno from dept where loc = 'DALLAS');
+
+--king에게 보고하는 모든 사원의 이름과 급여
+select ename, salary from emp where manager = (select eno from emp where ename = 'KING');
+
+--평균 급여보다 많은 급여를 받고 이름에 M이 포함된 사원과 같은 부서에서 근무하는 사원의 사원번호, 이름, 급여
+--select eno, ename, salary from emp where dno in (select dno from emp where salary > (select avg(salary) from emp) and ename like '%M%');
+select eno, ename, salary from emp where salary > (select avg(salary) from emp) and dno in (select dno from emp where ename like '%M%');
+
+--평균 급여가 가장 적은 업무를 찾아 직업, 평균 급여를 표시
+select job, avg(salary) from emp group by job having avg(salary) = (select min(avg(salary)) from emp group by job);
+
+--담당 업무가 MANAGER인 사원이 소속된 부서와 동일한 부서의 사원
+select ename from emp where dno in (select dno from emp where job = 'MANAGER');
