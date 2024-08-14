@@ -7,7 +7,6 @@ INDEX VERSION 1.131+C:\Users\jjhh1\OneDrive\Documents\GitHub\jdbc\javastudy18\.m
 1165219157.index
 1124295326.index
 973652023.index
-941806353.index
 1642536134.index
 2287467648.index
 4128909177.index
