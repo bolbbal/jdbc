@@ -1,0 +1,11 @@
+package javaThread;
+
+public class ThreadMain {
+
+	public static void main(String[] args) {
+		//Thread
+		//프로그램 내에서 독립적으로 실행하는 작업 단위
+		//프로세스(응용프로그램)의 한 부분
+	}
+
+}

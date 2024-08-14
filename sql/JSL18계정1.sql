@@ -870,3 +870,61 @@ select job, avg(salary) from emp group by job having avg(salary) = (select min(a
 
 --담당 업무가 MANAGER인 사원이 소속된 부서와 동일한 부서의 사원
 select ename from emp where dno in (select dno from emp where job = 'MANAGER');
+
+-- DML
+    -- select
+    -- insert
+    -- update
+    -- delete
+
+-- DDL(데이터 정의어)
+    -- create table 
+    -- drop table
+    -- alter table 
+    -- rename
+    -- truncate 
+
+-- TCL
+    -- commit, rollback
+    
+-- Data Dictionary
+-- 사용자와 데이터베이스 자원의 효율적인 관리를 위한 다양한 정보를 저장하는 시스템 테이블로, 자동으로 갱신된다.
+-- 접두어
+-- USER_ : 자신의 계정이 소유한 객체 등에 관한 정보 조회
+-- ALL_ : 자신의 계정을 소유하거나 권한을 부여 받은 객체 등에 관한 정보 조회
+-- DBA_ : 데이터베이스 관리자만 접근 가능한 객체 등의 정보 조회
+
+select table_name from user_tables;
+select sequence_name from user_sequences;
+select view_name from user_views;
+
+select owner, table_name from all_tables;
+select owner, table_name from dba_tables;
+
+--다른 테이블에서 데이터 복사하기
+select * from dept;
+
+create table dept_copy  as select * from dept;
+select * from dept_copy;
+
+--10번 부서의 지역명을 20번 부서의 지역명으로 변경하시오
+update dept_copy set loc = (select loc from dept_copy where dno = 20) where dno = 10;
+rollback;
+
+--여러개의 컬럼값을 동시에 변경
+update dept_copy set dname = (select dname from dept_copy where dno = 30), 
+                     loc = (select loc from dept_copy where dno = 30) 
+                 where dno = 10;
+select * from dept_copy;
+
+-- 다른 테이블을 기반으로 로우삭제
+create table emp_copy as select * from emp;
+select * from emp_copy;
+delete emp_copy where dno = (select dno from dept where dname = 'SALES');
+
+-- 트랜잭션 관리
+-- 여러개의 명령어 집합이 정상적으로 처리되면 정상 종료하고, 하나라도 잘못된다면 전체를 취소한다.
+-- DML 작업이 성공적으로 처리되었으면 commit을, 취소해야한다면 rollback을 실행
+-- commit은 트랜잭션 처리 과정을 반영하여 변경된 내용을 모두 영구 저장한다
+-- rollback은 트랜잭션 처리 과정 중 발생한 변경사항을 취소한다
+-- rollback을 실행하면 하나의 묶음 처리가 시작되기 이전 상태로 돌아간다
