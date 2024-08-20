@@ -928,3 +928,60 @@ delete emp_copy where dno = (select dno from dept where dname = 'SALES');
 -- commit은 트랜잭션 처리 과정을 반영하여 변경된 내용을 모두 영구 저장한다
 -- rollback은 트랜잭션 처리 과정 중 발생한 변경사항을 취소한다
 -- rollback을 실행하면 하나의 묶음 처리가 시작되기 이전 상태로 돌아간다
+
+-- 제약조건
+-- 테이블에 유효하지 않은 데이터가 입력되는 것을 방지하기 위해 태이블 생성 시 각 컬럼에 대해 정의하는 규칙
+-- not null : null 값을 포함하지 못하도록 지정
+-- unique : 모든 로우에 대해 유일한 값
+-- primary key : 각 행을 식별하기 위해 not null과 unique 조건을 결합
+-- foreign key : 참조되는 테이블에 컬럼값이 항상 존재해야 함
+-- check : 저장 가능한 데이터 값의 범위나 조건을 지정하여 설정한 값만 허용
+
+create table emp2 (
+    eno number(4) constraint emp2_pk primary key,
+    ename varchar2(10),
+    salary number constraint emp2_min check(salary > 0)
+);
+
+insert into emp2 values (11, 'aaa', -100);
+alter table emp2 add birth date default sysdate;
+
+-- 뷰(View) 테이블
+-- 물리적인 테이블을 근거한 논리적인 가상 테이블
+-- 디스크 저장 공간이 할당되지 않는다
+-- 단순 뷰 : 하나의 기본 테이블로 생성한 뷰
+-- 복합 뷰 : 두개 이상의 기본 테이블로 생성한 뷰
+-- 뷰를 사용하는 이유 : 보안과 사용의 편의성
+
+-- 보안을 위한 뷰활용
+create view v_emp_sample as
+    select eno, ename, job, manager, dno from emp;
+select * from v_emp_sample;
+
+-- 정보를 손쉽게 얻기 위해 뷰 활용
+create view v_emp_sample2 as
+    select e.eno, e.ename, e.salary, dno, d.dname, d.loc
+    from emp e natural join dept d;
+
+select * from v_emp_sample2;
+
+-- 뷰는 데이터를 저장하고 있지 않은 가상테이블이므로 실체가 없다.
+-- 뷰가 테이블처럼 사용될 수 있는 이유는 뷰를 정의할 때 create view 명령어 다음의 as절에 기술한 쿼리 문장 자체를 저장하고 있다가 이를 실행하기 때문이다.
+
+-- 뷰에 그룹함수 사용하기
+create view v_emp_salary
+    as
+    select dno, sum(salary) as "salsum", avg(salary) as "salavg"
+    from emp group by dno;
+-- 그룹 함수에 대해 컬럼 명칭을 사용할 것. 사용하지 않으면 오류
+-- 그룹함수를 가상 컬럼으로 갖는 뷰에 대해 dml문 사용 불가
+
+insert into v_emp_salary values (8000, 1000, 300); --에러
+
+-- 뷰 제거
+drop view v_emp_salary;
+
+-- 인덱스
+-- 검색 속도를 향상시키기 위해 사용
+-- 기본키나 유일한 키는 인덱스가 자동으로 생성된다.
+
