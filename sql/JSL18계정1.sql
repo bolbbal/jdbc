@@ -984,4 +984,6 @@ drop view v_emp_salary;
 -- 인덱스
 -- 검색 속도를 향상시키기 위해 사용
 -- 기본키나 유일한 키는 인덱스가 자동으로 생성된다.
-
+commit;
+select * from member_tbl_02;
+delete from member_tbl_02 where custno = 100007;

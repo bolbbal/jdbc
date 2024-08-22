@@ -1,24 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="Model.*" %>
-<%@ page import="java.util.*" %>
-<%@ page import="java.sql.*" %>
-<%@ page import="java.text.*" %>
+<%@ page import="Model.*"%>
+<%@ page import="java.util.*"%>
+<%@ page import="java.sql.*"%>
+<%@ page import="java.text.*"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>쇼핑몰 회원 관리</title>
-<style>
-* {
-	padding: 0;
-	margin: 0;
-}
-
+<title>쇼핑몰 회원관리</title>
+<style type="text/css">
 header {
 	background: #00f;
-	padding-top: 12px;
-	padding-bottom: 12px;
+	padding: 8px;
 }
 
 h1 {
@@ -26,34 +20,36 @@ h1 {
 	text-align: center;
 }
 
-a {
-	color: #fff;
-	display: inline-block;
-	padding: 6px 12px;
-	text-decoration: none;
-}
-
 nav {
 	background: #0cf;
+	padding: 4px;
+}
+
+a {
+	color: #fff;
+	text-decoration: none;
+	padding: 6px 12px;
 }
 
 section {
-	background: #ddd;
-	height: 500px
+	background: #ccc;
+	height: 600px;
+	padding:1px;
 }
 
 h2 {
-	text-align: center;
-}
-
-footer {
-	padding: 20px 0;
-	background: #0cd;
+	text-align:center;
 }
 
 footer p {
-	text-align: center;
-	color: #fff
+	text-align:center;
+	padding:12px;
+	color:#fff;
+}
+
+footer {
+	background:#0cf;
+	padding:2px;
 }
 </style>
 </head>
@@ -67,7 +63,7 @@ footer p {
 	</nav>
 	<section>
 		<h2>쇼핑몰 회원관리 프로그램</h2>
-		<p>쇼핑몰..</p>
+		<p>쇼핑몰 회원 정보와...</p>
 		<p>프로그램 작성 순서</p>
 		<p>1.</p>
 		<p>2.</p>
@@ -77,8 +73,7 @@ footer p {
 		<p>6.</p>
 	</section>
 	<footer>
-		<p>HRDKOREA Copyright&copy; 2016 All rights reserved. Human
-			Resources Development Service of Korea.</p>
+		<p>HRDKOREA Copyright&copy</p>
 	</footer>
 </body>
 </html>
