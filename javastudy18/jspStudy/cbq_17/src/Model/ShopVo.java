@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 public class ShopVo {
 	private int custno;
@@ -9,6 +9,7 @@ public class ShopVo {
 	private String grade;
 	private String city;
 	private int price;
+	
 	
 	public int getPrice() {
 		return price;

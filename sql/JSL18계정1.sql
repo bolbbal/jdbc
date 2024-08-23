@@ -987,3 +987,34 @@ drop view v_emp_salary;
 commit;
 select * from member_tbl_02;
 delete from member_tbl_02 where custno = 100007;
+
+select * from money_tbl_02;
+
+select mem.custno, mem.custname, mem.grade, sum(price) as price
+from member_tbl_02 mem, money_tbl_02 mon
+where mem.custno = mon.custno
+group by mem.custno, mem.custname, mem.grade
+order by price desc;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select * from member_tbl_02;
+
+select mem.custno, mem.custname, mem.grade, sum(mon.price) as price
+from member_tbl_02 mem, money_tbl_02 mon
+where mem.custno = mon.custno
+group by mem.custno, mem.custname, mem.grade
+order by price desc;
