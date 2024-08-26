@@ -996,21 +996,6 @@ where mem.custno = mon.custno
 group by mem.custno, mem.custname, mem.grade
 order by price desc;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 select * from member_tbl_02;
 
 select mem.custno, mem.custname, mem.grade, sum(mon.price) as price
@@ -1018,3 +1003,30 @@ from member_tbl_02 mem, money_tbl_02 mon
 where mem.custno = mon.custno
 group by mem.custno, mem.custname, mem.grade
 order by price desc;
+
+select * from tbl_student_201905;
+select * from tbl_score_201905;
+
+select std.syear, std.sclass, std.sno, std.sname, 
+decode(std.gender, 'M', '남',
+                   'F', '여') as gender, 
+sc.kor, sc.eng, sc.mat, sum(kor+eng+mat) as tot, 
+round(avg((kor+eng+mat)/3),1) as ave 
+from tbl_student_201905 std, tbl_score_201905 sc 
+where std.sno = sc.sno and std.sclass = sc.sclass
+group by std.syear, std.sclass, std.sno, std.sname, sc.kor, 
+sc.eng, sc.mat, decode(std.gender, 'M', '남', 'F', '여')
+order by sclass asc, sno asc;
+
+select sum(kor) as tkor, sum(eng) as teng, sum(mat) as tmat
+from tbl_score_201905;
+
+select avg(kor) as akor, avg(eng) as aeng, avg(mat) as amat
+from tbl_score_201905;
+
+select dept.syear, dept.sclass, dept.tname, 
+sum(kor) as tkor, sum(eng) as teng, sum(mat) as tmat,
+round(avg(kor),1) as akor, round(avg(eng),1) as aeng, round(avg(mat),1) as amat
+from tbl_dept_201905 dept, tbl_score_201905 score
+where dept.sclass = score.sclass
+group by dept.syear, dept.tname, dept.sclass;

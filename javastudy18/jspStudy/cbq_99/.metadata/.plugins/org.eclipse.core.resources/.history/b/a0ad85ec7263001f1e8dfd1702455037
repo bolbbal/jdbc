@@ -1,0 +1,15 @@
+package Model;
+
+public class ScoreVo {
+	private String syear;
+	private String sclass;
+	private String sno;
+	private String sname;
+	private String birth;
+	private String gender;
+	private String tel1;
+	private String tel2;
+	private String tel3;
+	
+	
+}

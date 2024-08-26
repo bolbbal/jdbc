@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="Model.*"%>
+<%@ page import="java.sql.*"%>
+<%@ page import="java.util.*"%>
+<%@ page import="java.text.*"%>
+<% 
+	request.setCharacterEncoding("utf-8");
+	ScoreDao dao = new ScoreDao();
+	String syear = request.getParameter("syear");
+	String sclass = request.getParameter("syear");
+	String sno = request.getParameter("syear");
+	String sname = request.getParameter("syear");
+	String birth = request.getParameter("syear");
+	String gender = request.getParameter("syear");
+	String tel1 = request.getParameter("syear");
+	String tel2 = request.getParameter("syear");
+	String tel3 = request.getParameter("syear");
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>
