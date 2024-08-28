@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+header {
+	background: #59c;
+	padding: 1px;
+}
+
+h1 {
+	color: #fff;
+	text-align: center;
+	padding: 6px
+}
+
+nav {
+	background: #D8D;
+	padding: 1px;
+}
+
+a {
+	text-decoration: none;
+	color: #25C;
+	display: inline-block;
+	padding: 2px 4px;
+}
+
+section {
+	padding: 1px;
+	background: #CCC;
+	height: 700px;
+}
+
+/*h2 {
+	text-align: center;
+	padding: 3px;
+}*/
+footer {
+	background: #59c;
+	padding: 1px;
+}
+
+footer p {
+	text-align: center;
+	padding: 2px;
+}
+
+/*tr, th, td {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #888;
+}
+
+table {
+	margin: 0 auto;
+	width:450px;
+}*/
+
+/*
+	class(.), id(#)를 이용해서 css 변경
+	class는 여러번 사용
+	id는 일회성
+	
+*/
+.border1 {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #888
+}
+
+.table-center {
+	margin: 0 auto;
+	width: 450px;
+}
+
+#title2 {
+	text-align: center;
+	color: #A00;
+	padding: 3px;
+}
+
+input {
+	border-radius: 3px;
+}
+
+.btn-submit {
+	background:#f1948a; padding:6px 12px; color:#fff;
+}
+.btn-reset {
+	background:#bb8fce; padding:6px 12px; color:#fff;
+}

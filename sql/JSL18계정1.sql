@@ -1030,3 +1030,5 @@ round(avg(kor),1) as akor, round(avg(eng),1) as aeng, round(avg(mat),1) as amat
 from tbl_dept_201905 dept, tbl_score_201905 score
 where dept.sclass = score.sclass
 group by dept.syear, dept.tname, dept.sclass;
+
+delete from tbl_student
