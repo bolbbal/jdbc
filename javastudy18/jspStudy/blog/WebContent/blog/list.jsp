@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>赤ちゃんのBlog</title>
-<link href = "css/common.css" rel = "stylesheet">
+<link href = "../css/common.css" rel = "stylesheet">
 </head>
 <body>
 	<div class = "header_box">
@@ -45,7 +45,7 @@
 	<div class = "container">
 		<div class = "inner">
 			<div class = "img100">
-				<img src="images/m_003.jpg" alt="">
+				<img src="../images/m_003.jpg" alt="">
 			</div>
 			<h3><a herf="blogview">あたしはめちゃ可愛い</a></h3>				
 			<p class = "content">
@@ -59,7 +59,7 @@
 		</div>
 		<div class = "inner">
 			<div class = "img100">
-				<img src="images/m_004.jpg" alt="">
+				<img src="../images/m_004.jpg" alt="">
 			</div>
 			<h3><a herf="blogview">あたしはめちゃ可愛い</a></h3>				
 			<p class = "content">
@@ -73,7 +73,7 @@
 		</div>
 		<div class = "inner">
 			<div class = "img100">
-				<img src="images/m_010.jpg" alt="">
+				<img src="../images/m_010.jpg" alt="">
 			</div>
 			<h3><a herf="blogview">あたしはめちゃ可愛い</a></h3>				
 			<p class = "content">
@@ -87,7 +87,7 @@
 		</div>
 		<div class = "inner">
 			<div class = "img100">
-				<img src="images/m_003.jpg" alt="">
+				<img src="../images/m_003.jpg" alt="">
 			</div>
 			<h3><a herf="blogview">あたしはめちゃ可愛い</a></h3>				
 			<p class = "content">
@@ -101,7 +101,7 @@
 		</div>
 		<div class = "inner">
 			<div class = "img100">
-				<img src="images/m_004.jpg" alt="">
+				<img src="../images/m_004.jpg" alt="">
 			</div>
 			<h3><a herf="blogview">あたしはめちゃ可愛い</a></h3>				
 			<p class = "content">
@@ -115,7 +115,7 @@
 		</div>
 		<div class = "inner">
 			<div class = "img100">
-				<img src="images/m_010.jpg" alt="">
+				<img src="../images/m_010.jpg" alt="">
 			</div>
 			<h3><a herf="blogview">あたしはめちゃ可愛い</a></h3>				
 			<p class = "content">
@@ -136,7 +136,7 @@
 			<a href="">5</a>
 			<a href="">></a>
 			<div class = "btn_write">
-				<a href="">글쓰기</a>
+				<a href="write">글쓰기</a>
 			</div>
 		</div>
 	</div>
