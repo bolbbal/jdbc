@@ -122,10 +122,9 @@ ul, li {
 .container .contain_left {
 	width:60%;
 	float:left;
-	padding:20px;
 }
 
-.container .contain_left .contain_left_contents img {
+.container .contain_left .contain_left_contents {
    width:100%;
 }
 
@@ -136,6 +135,7 @@ ul, li {
 .container .contain_left .contain_left_contents p {
 	color:#666;
 	padding-bottom:40px;
+	line-height:180%;
 }
 
 .container .contain_left .contain_left_contents .wleft{
@@ -356,4 +356,66 @@ button[type='button']{
 	padding:5px 10px;
 	border:1px solid #ccc;
 	background:#eee;	
+}
+
+/*about css*/
+.container .about_contain {
+	padding:30px 0;
+	height:auto;
+	overflow:hidden;
+	background:#f8f9fa;
+}
+
+.container .about_contain .about_contain_left {
+	width:55%;
+	float:left;
+	height:610px;
+	background: url(../images/m_012.jpg) no-repeat center center;
+	background-size:cover;
+	padding:30px 30px;
+	margin-left:20px;
+}
+
+.container .about_contain .about_contain_right {
+	width:30%;
+	float:left;
+	text-align:center;
+}
+
+.container .about_contain .about_contain_right h2 {
+	font-size:22px;
+	color:#333;
+	padding: 12px 0;
+}
+
+.container .about_contain .about_contain_right .about_right_content p {
+	color:#888;
+	
+}
+
+/*concat css*/
+.container .concat_left {
+	float:left;
+	width:50%;
+	background:#f8f9fa;
+	height:460px;
+	padding : 15px 15px;
+}
+
+.container .concat_left table {
+	width:100%;
+}
+
+.container .concat_right {
+	float:left;
+	
+	width:46%;
+	background:#00f;
+	height:600px;
+}
+
+.container:after {
+	content:"";
+	display:block;
+	clear:both;
 }

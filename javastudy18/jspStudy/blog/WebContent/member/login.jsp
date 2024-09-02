@@ -42,28 +42,22 @@
 		<h2>Blog</h2>
 	</div>
 	
-	<div class = "container">
+	<div class = "container" style = "width : 600px">
 		<div class = "write_inner">
-			<form name = "blog" method="post" enctype = "multipart/form-data" action="blogwrite">
-			<!-- 첨부파일 처리는 enctype="multipart/form-data" 반드시 있어야함 -->
+			<form name = "member" method="post" action="">
 				<table class = "blog_table">
 					<tr>
-						<th>title</th>
-						<td><input type="text" name="title"></td>
+						<th>아이디</th>
+						<td><input type="text" name="id"></td>
 					</tr>
 					<tr>
-						<th>contents</th>
-						<td><textarea name="contents" style = "height:200px"></textarea></td>
-					</tr>
-					<tr>
-						<th>attach</th>
-						<td><input type = "file" name = "photo"></td>
+						<th>패스워드</th>
+						<td><input type = "text" name="pw"></td>
 					</tr>
 					<tr>
 						<td colspan="2" class = "txtcenter">
-							<button type="submit">save</button>
-							<button type="reset">reset</button>
-							<button type="button">list</button>
+							<button type="button">login</button>
+							<button type="button" onclick = "javascript:location.href='/blog/index.jsp'">cancel</button>
 						</td>
 					</tr>
 				</table>

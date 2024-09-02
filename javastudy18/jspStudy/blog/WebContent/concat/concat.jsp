@@ -36,41 +36,46 @@
 			</div>	
 		</header>
 	</div>
-<!-- header end -->
+<!-- header -->
 
-	<div class="sub_title">
-		<h2>Blog</h2>
-	</div>
+<!-- main visual -->
 	
 	<div class = "container">
-		<div class = "write_inner">
-			<form name = "blog" method="post" enctype = "multipart/form-data" action="blogwrite">
-			<!-- 첨부파일 처리는 enctype="multipart/form-data" 반드시 있어야함 -->
-				<table class = "blog_table">
+		<div class="concat_left">
+			<form name = "concat" method = "post" action="">
+				<table>
 					<tr>
-						<th>title</th>
-						<td><input type="text" name="title"></td>
+						<td>
+							<input type = "text" name = "mail" placeholder="메일주소를 입력하세요">
+						</td>
 					</tr>
 					<tr>
-						<th>contents</th>
-						<td><textarea name="contents" style = "height:200px"></textarea></td>
+						<td>
+							<input type = "text" name = "name" placeholder="이름을 입력하세요">
+						</td>
 					</tr>
 					<tr>
-						<th>attach</th>
-						<td><input type = "file" name = "photo"></td>
+						<td>
+							<input type = "text" name = "title" placeholder="제목을 입력하세요">
+						</td>
 					</tr>
 					<tr>
-						<td colspan="2" class = "txtcenter">
-							<button type="submit">save</button>
-							<button type="reset">reset</button>
-							<button type="button">list</button>
+						<td>
+							<textarea name = "content" style="height:300px;" placeholder="내용을 입력하세요"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button type = "submit" style = "txtcenter">send message</button>
 						</td>
 					</tr>
 				</table>
 			</form>
 		</div>
-	</div> <!-- container end -->
-	
+		<div class="concat_right">
+
+		</div>
+	</div>
 	
 	
 <!-- footer -->
