@@ -398,20 +398,32 @@ button[type='button']{
 	float:left;
 	width:50%;
 	background:#f8f9fa;
-	height:460px;
+	height:500px;
 	padding : 15px 15px;
 }
 
 .container .concat_left table {
-	width:100%;
+	width:98%;
+}
+
+.container .concat_left table tr td{
+	padding-bottom:10px;
 }
 
 .container .concat_right {
 	float:left;
-	
 	width:46%;
-	background:#00f;
 	height:600px;
+}
+
+.container .concat_left  .btn-primary {
+	background:#1eafed;
+	border:1px solid #1eafed;
+	color:#fff;
+	border-radius:30px;
+	cursor:pointer;
+	width:120px;
+	height:40px;
 }
 
 .container:after {
