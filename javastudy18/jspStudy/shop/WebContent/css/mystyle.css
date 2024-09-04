@@ -27,3 +27,49 @@ a:hover {
 	font-size:25px;
 	font-weight:bold;
 }
+
+.container-fluid .container .carousel .size .item img {
+	width : 100%;
+	height : 400px;
+}
+
+.main h2 {
+	color:#fe980f;
+	font-size: 18px;
+	margin:0 auto 30px;/*상 좌우 하*/
+	text-align:center;
+	text-transform: uppercase;/*소문자-대문자로*/
+	font-weight: 300;
+}
+
+.main-right img {
+	width:250px;
+	height:190px;
+}
+
+/*product detail css*/
+.imgw100 {width:100%;}
+
+.product-right .price {
+	font-size : 30px;
+	font-weight: bold;
+	color : #ff0038;
+}
+
+/*footer css*/
+.footer {
+	background:#f0f0e9;
+	padding:30px 0;
+	text-align:center;
+}
+
+.footer img {
+	width : 100%;
+}
+
+.footer p {
+	color:#b3b3ad;
+	font-size:12px;
+	font-weight:300;
+}
+
