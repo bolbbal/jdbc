@@ -125,6 +125,16 @@ a:hover {
 	border-radius: 0 0 0 0;
 }
 
+/**membership css*/
+.membership h2 {
+	color:#fe980f;
+	font-size: 18px;
+	margin:0 auto 30px;/*상 좌우 하*/
+	text-align:center;
+	text-transform: uppercase;/*소문자-대문자로*/
+	font-weight: 300;
+}
+
 /*footer css*/
 .footer {
 	background:#f0f0e9;
