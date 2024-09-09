@@ -1,22 +1,144 @@
 @charset "UTF-8";
 
-.header-index .row {
-	height:200px;
+/*header css*/
+.header-index {
+	margin-bottom:10px;
+	height:100px;
 }
 
 .header-index .row img{
-	width:100%;
-	height:200px;
+	height:100px;
+	margin-top:20px;
 }
 
 .header-index .site-search {
-	padding-top:70px;
+	padding-top:50px;
 }
 
-.header-index .member {
-	padding-top:78px;
+.header-index .member a{
+	text-decoration: none;
+	color : #333;
+}
+
+.header-index .member span{
+	padding:65px 10px 0;
+}
+
+.header-index .member .login:hover {
+	
 }
 
 .header-index .form-control {
-	width:400px;
+	width:350px;
+}
+
+.navbar-left {
+	padding-left:0px;
+}
+
+/*main visual css*/
+.main-visual {
+	margin-bottom:30px;
+}
+
+.main-visual .item img{
+	height:300px;
+	width:100%;
+}
+
+/*contents css*/
+.navbar-right {
+	padding-right:30px;
+}
+.contents {
+	margin-bottom: 30px;
+}
+
+.new {
+	border:1px solid #ccc;
+}
+
+.new h4 {
+	font-size: 20px;
+	padding-left:15px;
+}
+
+.new .moveall {
+	margin-bottom:15px;
+}
+
+.moveall a{
+	color:#ccc;
+}
+
+.new .thumbnail img {
+	width : 100%;
+	height : 200px;
+}
+
+.movepost:hover {
+	text-decoration: none;
+}
+
+.popular h3 {
+	margin-top:0px;
+}
+
+.popular .singer-img {
+	width: 100px;
+	margin-right:15px;
+}
+
+/*post nav css*/
+.dropdown {
+	margin-top:8px;
+	margin-right:15px;
+}
+
+.post {
+	border-bottom:1px solid #ccc;
+	margin-bottom:20px;
+}
+.post a, .post p{
+	color : #ccc;	
+}
+
+.post h3 {
+	color : #333;
+}
+
+.music-thumbnail {
+	width:100%;
+	height:160px;
+	
+	text-align:center;
+}
+
+.member-img {
+	width:160px;
+	height:160px;
+	text-align:center;
+}
+
+.writer {
+	margin-top:30px;
+	color : #777;
+}
+
+/*footer css*/
+.footer {
+	height:100px;
+	background:#DCDCDC;
+}
+
+.footer a {
+	border-right: 1px solid #ccc;
+	text-decoration:none;
+	color:#333;
+	padding:0 10px;
+	margin:10px 0;
+}
+
+.footer p {
+	color:#333;
 }
