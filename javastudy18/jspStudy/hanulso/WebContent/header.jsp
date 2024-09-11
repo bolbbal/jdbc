@@ -9,9 +9,9 @@
   <meta name="Keywords" content="반응형홈페이지,  JAVA, JSP, PHP, 대전직업전문학교, 대전국비지원, 국비무료">
   <meta name="Description" content="응용SW개발자를 위한 반응형 홈페이지">
   <title>JSL인재개발원</title>
-  <link href="css/font-awesome.min.css" rel="stylesheet">
-  <link href="css/common.css" rel="stylesheet">
-  <link href="css/layout.css" rel='stylesheet'>
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/css/common.css" rel="stylesheet">
+  <link href="/css/layout.css" rel='stylesheet'>
   
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
   <script src="js/jquery-3.3.1.min.js"></script>
@@ -29,7 +29,7 @@
 		<header class="header">
 			<nav class="top_left">
 			  <ul>
-			  	<li class="first"><a href="index.html">HOME</a></li>
+			  	<li class="first"><a href="/">HOME</a></li>
 				<li><a href="">모집안내</a></li>
 				<li><a href="">입학상담</a></li>
 				<li><a href="">교육신청</a></li>
@@ -77,7 +77,7 @@
 						</li> -->
 						<li><a href="notice.html">커뮤니티</a>
 							<ul class="nav_2depth">
-								<li><a href="notice/notice.html">공지사항</a></li>
+								<li><a href="notice/list.do">공지사항</a></li>
 								<li><a href="qna/qa.html">질문과답변</a></li>
 								<li><a href="faq/faq.html">FAQ</a></li>
 								<li><a href="pds/pds.html">자료실</a></li>
