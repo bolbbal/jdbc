@@ -7,11 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/np/*")
-public class NoticeController extends HttpServlet {
+@WebServlet("/port/*")
+public class PortfolioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-     
-    public NoticeController() {
+   
+    public PortfolioController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -20,7 +20,7 @@ public class NoticeController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		doAction(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		doAction(request, response);
@@ -31,20 +31,14 @@ public class NoticeController extends HttpServlet {
 		String page = null;
 		
 		switch(action) {
-		case "/list.do":
-			page="/notice/list.jsp";
+		case "/list.do" :
+			page = "/portfolio/list.jsp";
 			break;
-		
-		case "/write.do":
-			page="/notice/write.jsp";
+		case "/view.do" :
+			page = "/portfolio/view.jsp";
 			break;
-			
-		case "/modify.do":
-			page="/notice/modify.jsp";
-			break;
-			
-		case "/view.do":
-			page="/notice/view.jsp";
+		case "/write.do" :
+			page = "/portfolio/write.jsp";
 			break;
 		}
 		

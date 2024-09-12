@@ -120,12 +120,12 @@ ul, li {
 }
 
 .container .contain_left {
-	width:60%;
+	width:50%;
 	float:left;
 }
 
 .container .contain_left .contain_left_contents {
-   width:100%;
+   width:80%;
 }
 
 .container .contain_left .contain_left_contents h2 {

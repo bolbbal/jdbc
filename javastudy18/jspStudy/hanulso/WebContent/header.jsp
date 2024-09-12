@@ -20,10 +20,6 @@
  </head>
  <body>
 
-	<div class="sr-only">
-		<p><a href="#contents">본문 바로가기</a></p>
-	</div>
-
 	<div class="top_navigation">
 	
 		<header class="header">
@@ -64,9 +60,9 @@
 								<li><a href="#">스마트웹콘텐츠개발과정</a></li>
 							</ul>
 						</li> -->
-						<li><a href="portfolio.html">포트폴리오</a>
+						<li><a href="/port/list.do">포트폴리오</a>
 							<ul class="nav_2depth">
-								<li><a href="portfolio/portfolio.html">포트폴리오</a></li>
+								<li><a href="/port/list.do">포트폴리오</a></li>
 							</ul>
 						</li>
 						<!-- <li><a href="online.html">온라인접수</a>
@@ -77,7 +73,7 @@
 						</li> -->
 						<li><a href="notice.html">커뮤니티</a>
 							<ul class="nav_2depth">
-								<li><a href="notice/list.do">공지사항</a></li>
+								<li><a href="np/list.do">공지사항</a></li>
 								<li><a href="qna/qa.html">질문과답변</a></li>
 								<li><a href="faq/faq.html">FAQ</a></li>
 								<li><a href="pds/pds.html">자료실</a></li>

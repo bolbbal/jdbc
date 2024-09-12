@@ -71,21 +71,21 @@
 			<tbody>
 				<tr>
 					<td>8</td>
-					<td class="title"><a href="notice_view.html">입학절차에 대하여 알고 싶어요</a></td>
+					<td class="title"><a href="/np/view.do">입학절차에 대하여 알고 싶어요</a></td>
 					<td>관리자</td>
 					<td>18-10-16</td>
 					<td>187</td>
 				</tr>
 				<tr>
 					<td>7</td>
-					<td class="title"><a href="notice_view.html">무엇이 궁금한가요?</a></td>
+					<td class="title"><a href="/np/view.do">무엇이 궁금한가요?</a></td>
 					<td>관리자</td>
 					<td>18-10-16</td>
 					<td>187</td>
 				</tr>
 				<tr>
 					<td>6</td>
-					<td class="title"><a href="notice_view.html">궁굼한내용제목입니다</a></td>
+					<td class="title"><a href="/np/view.do">궁굼한내용제목입니다</a></td>
 					<td>관리자</td>
 					<td>18-10-16</td>
 					<td>187</td>
@@ -102,7 +102,7 @@
 			<a href="">5</a>
 			<a href=""><i class="fa fa-angle-right"></i></a>
 			<a href=""><i class="fa  fa-angle-double-right"></i></a>
-			<a href="notice_write.html" class="btn_write">글쓰기</a>
+			<a href="/np/write.do" class="btn_write">글쓰기</a>
 		</div>
 	  </div>
 	</div>
