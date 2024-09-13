@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.notice.NoticeInsert;
+import service.notice.NoticeSelect;
+
 @WebServlet("/np/*")
 public class NoticeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,6 +35,7 @@ public class NoticeController extends HttpServlet {
 		
 		switch(action) {
 		case "/list.do":
+			new NoticeSelect().command(request, response);
 			page="/notice/list.jsp";
 			break;
 		
@@ -45,6 +49,11 @@ public class NoticeController extends HttpServlet {
 			
 		case "/view.do":
 			page="/notice/view.jsp";
+			break;
+		case "/writepro.do":
+			new NoticeInsert().command(request, response);
+			page=null;
+			response.sendRedirect("/np/list.do");
 			break;
 		}
 		

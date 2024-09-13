@@ -69,27 +69,15 @@
 				</tr>
 			</thead>
 			<tbody>
+				<c:forEach var="list" items="${list}">
 				<tr>
-					<td>8</td>
-					<td class="title"><a href="/np/view.do">입학절차에 대하여 알고 싶어요</a></td>
-					<td>관리자</td>
-					<td>18-10-16</td>
-					<td>187</td>
+					<td>${list.getIdx() }</td>
+					<td class="title"><a href="/np/view.do">${list.getTitle() }</a></td>
+					<td>${list.getWriter() }</td>
+					<td>${list.getRegdate() }</td>
+					<td>${list.getViewcount() }</td>
 				</tr>
-				<tr>
-					<td>7</td>
-					<td class="title"><a href="/np/view.do">무엇이 궁금한가요?</a></td>
-					<td>관리자</td>
-					<td>18-10-16</td>
-					<td>187</td>
-				</tr>
-				<tr>
-					<td>6</td>
-					<td class="title"><a href="/np/view.do">궁굼한내용제목입니다</a></td>
-					<td>관리자</td>
-					<td>18-10-16</td>
-					<td>187</td>
-				</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 		<div class="paging">

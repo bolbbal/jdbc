@@ -1031,4 +1031,18 @@ from tbl_dept_201905 dept, tbl_score_201905 score
 where dept.sclass = score.sclass
 group by dept.syear, dept.tname, dept.sclass;
 
-delete from tbl_student
+delete from tbl_student;
+
+create table notice (
+    idx number(4) not null,
+    title varchar2(200) not null,
+    content varchar2(4000) not null,
+    writer varchar2(20) not null,
+    regdate date default sysdate,
+    viewcount number(4) default 0,
+    constraint notice_pk primary key (idx)
+);
+
+create sequence notice_seq;
+
+select * from notice order by idx desc;

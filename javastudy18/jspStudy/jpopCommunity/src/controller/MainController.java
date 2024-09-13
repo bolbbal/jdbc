@@ -7,30 +7,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class AboutController
- */
-@WebServlet("/ab/*")
-public class AboutController extends HttpServlet {
+@WebServlet("/jpat")
+public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-    public AboutController() {
+    public MainController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		doAction(request,response);
+		doAction(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		doAction(request,response);
+		doAction(request, response);
 	}
 	
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher().forward(request, response);
+		request.setCharacterEncoding("utf-8");
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 }

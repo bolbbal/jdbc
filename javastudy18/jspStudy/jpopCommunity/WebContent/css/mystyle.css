@@ -125,6 +125,25 @@
 	color : #777;
 }
 
+/*postDetail css*/
+.post {
+	padding : 20px 0;
+	margin-bottom:20px;
+}
+
+.post-title {
+	border-bottom: 1px solid #777;
+	margin-bottom:20px;
+}
+
+.post-detail {
+	margin-bottom:20px;
+}
+
+.post-like {
+	margin-bottom:20px;
+}
+
 /*footer css*/
 .footer {
 	height:100px;

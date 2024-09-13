@@ -36,7 +36,7 @@
 	<div class="container">
 	  <div class="write_wrap">
 	  <h2 class="sr-only">공지사항 글쓰기</h2>
-	  <form name="notice" method="post" action="notice_insert.html" onsubmit="return check()">
+	  <form name="notice" method="post" action="/np/writepro.do" onsubmit="return check()">
 	  <!-- action을 처리하기전에 check()사용자 함수를 실행하고 되돌아 와라-->
 			<table class="bord_table">
 				<caption class="sr-only">공지사항 입력 표</caption>
@@ -55,7 +55,7 @@
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><textarea name="contents"></textarea></td>
+						<td><textarea name="content"></textarea></td>
 					</tr>
 					<tr>
 						<th>첨부</th>
@@ -83,11 +83,12 @@
 				notice.title.focus();
 				return false;
 			}
-			if(notice.contents.value=="") {
+			if(notice.content.value=="") {
 				alert("내용을 입력");
 				notice.contents.focus();
 				return false;
 			}
+			alert("글이 등록됐습니다.");
 			return true;
 		}
 	</script>
