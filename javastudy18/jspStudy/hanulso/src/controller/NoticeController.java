@@ -7,8 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import service.notice.NoticeInsert;
-import service.notice.NoticeSelect;
+import service.notice.*;
 
 @WebServlet("/np/*")
 public class NoticeController extends HttpServlet {
@@ -30,6 +29,8 @@ public class NoticeController extends HttpServlet {
 	}
 	
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
 		String action = request.getPathInfo();
 		String page = null;
 		
@@ -48,10 +49,18 @@ public class NoticeController extends HttpServlet {
 			break;
 			
 		case "/view.do":
+			new NoticeDetail().command(request, response);
 			page="/notice/view.jsp";
 			break;
+			
 		case "/writepro.do":
 			new NoticeInsert().command(request, response);
+			page=null;
+			response.sendRedirect("/np/list.do");
+			break;
+		
+		case "/delete.do":
+			new NoticeDelete().command(request, response);
 			page=null;
 			response.sendRedirect("/np/list.do");
 			break;

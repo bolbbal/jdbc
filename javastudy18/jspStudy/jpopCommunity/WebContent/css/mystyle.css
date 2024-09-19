@@ -47,6 +47,17 @@
 }
 
 /*contents css*/
+.post-type {
+	border-bottom:1px solid #ccc;
+	padding-bottom:20px;
+	margin-bottom:10px;
+}
+.post-type h3 {
+	display:inline-block;
+}
+.dropdown-style {
+	padding-top:10px;
+}
 .navbar-right {
 	padding-right:30px;
 }

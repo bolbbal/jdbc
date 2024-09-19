@@ -20,8 +20,10 @@ public class NoticeSelect implements Action {
 		request.setCharacterEncoding("utf-8");
 		
 		List<NoticeVo> list = NoticeDao.getInstance().noticeSelect();
+		int count = NoticeDao.getInstance().selectPostCount();
 		
 		request.setAttribute("list", list);
+		request.setAttribute("count", count);
 		
 	}
 

@@ -6,22 +6,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.NoticeVo;
 import mapper.NoticeDao;
 import service.Action;
 
-public class NoticeInsert implements Action {
+public class NoticeDelete implements Action {
 
 	@Override
 	public void command(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		NoticeVo vo = new NoticeVo();
-		vo.setWriter(request.getParameter("writer"));
-		vo.setContent(request.getParameter("content"));
-		vo.setTitle(request.getParameter("title"));
+		int idx = Integer.parseInt(request.getParameter("idx"));
 		
-		NoticeDao.getInstance().noticeInsert(vo);
+		NoticeDao.getInstance().deleteNoticeIdx(idx);
 	}
 
 }

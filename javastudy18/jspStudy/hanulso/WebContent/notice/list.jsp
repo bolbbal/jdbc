@@ -32,11 +32,12 @@
 		  </div>
 		</div><!-- container end -->
 	</div>
-
+	
+	<c:set var="num" value="${count}"/>
 	<div class="container">
 	  <div class="search_wrap">
 		<div class="record_group">
-			<p>총게시글<span><?=$count?></span>건</p>
+			<p>총게시글<span>${count}</span>건</p>
 		</div>
 		<div class="search_group">
 			<form name="myform" method="get" action="notice.html">
@@ -70,13 +71,14 @@
 			</thead>
 			<tbody>
 				<c:forEach var="list" items="${list}">
-				<tr>
-					<td>${list.getIdx() }</td>
-					<td class="title"><a href="/np/view.do">${list.getTitle() }</a></td>
-					<td>${list.getWriter() }</td>
-					<td>${list.getRegdate() }</td>
-					<td>${list.getViewcount() }</td>
-				</tr>
+					<tr>
+						<td>${num}</td>
+						<td class="title"><a href="/np/view.do?idx=${list.getIdx() }">${list.getTitle() }</a></td>
+						<td>${list.getWriter() }</td>
+						<td>${list.getRegdate() }</td>
+						<td>${list.getViewcount() }</td>
+					</tr>
+					<c:set var="num" value="${num-1}"/>
 				</c:forEach>
 			</tbody>
 		</table>

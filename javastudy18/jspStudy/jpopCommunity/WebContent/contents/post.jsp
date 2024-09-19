@@ -69,7 +69,18 @@
 			        <li><a href="#">歌手</a></li>
 			      </ul>
 			    </div>
-			    <div class="nav navbar-nav navbar-right">
+			    
+			    </div><!-- /.navbar-collapse -->
+			  </div><!-- /.container-fluid -->
+			</nav>
+			
+    	</div> <!-- header nav end -->
+    </header> <!-- header end -->
+    
+    <!-- contents start -->
+    <div class = "container post-type">
+    	<h3>新着</h3>
+    	<div class="nav navbar-nav navbar-right dropdown-style">
 			      <div class="dropdown">
 					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 					    sort option
@@ -87,17 +98,10 @@
 					  </ul>
 					</div>
 			      </div>
-			    </div><!-- /.navbar-collapse -->
-			  </div><!-- /.container-fluid -->
-			</nav>
-			
-    	</div> <!-- header nav end -->
-    </header> <!-- header end -->
-    
-    <!-- contents start -->
+    </div>
     <div class = "container">
 	    <div class="row post">
-	    	<a href="#">
+	    	<a href="/postDetail.jsp">
 		  		<div class="col-md-3">
 		      		<img src="../images/shutter.png" alt="" class="thumbnail music-thumbnail">
 		      	</div>
@@ -163,6 +167,7 @@
 		    </a>
 		  </div>
 	</div> <!-- contents end -->
+	
 	
 	<!-- footer start -->
 	<footer>

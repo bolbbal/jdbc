@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="header.jsp" %>
+<%@ include file="/header.jsp" %>
     
     <!-- main visual start -->
     <div class = "container-fluid main-visual">
@@ -18,31 +18,31 @@
 			  <!-- Wrapper for slides -->
 			  <div class="carousel-inner" role="listbox">
 			    <div class="item active">
-			      <img src="images/slide1.jpg" alt="">
+			      <img src="/images/slide1.jpg" alt="">
 			      <div class="carousel-caption">
 			       
 			      </div>
 			    </div>
 			    <div class="item">
-			      <img src="images/slide2.jpg" alt="">
+			      <img src="/images/slide2.jpg" alt="">
 			      <div class="carousel-caption">
 			       
 			      </div>
 			    </div>
 			    <div class="item">
-			      <img src="images/slide3.jpg" alt="">
+			      <img src="/images/slide3.jpg" alt="">
 			      <div class="carousel-caption">
 			       
 			      </div>
 			    </div>
 			    <div class="item">
-			      <img src="images/slide4.jpg" alt="">
+			      <img src="/images/slide4.jpg" alt="">
 			      <div class="carousel-caption">
 			       
 			      </div>
 			    </div>
 			    <div class="item">
-			      <img src="images/slide5.jpg" alt="">
+			      <img src="/images/slide5.jpg" alt="">
 			      <div class="carousel-caption">
 			       
 			      </div>
@@ -71,7 +71,7 @@
 				  <div class="col-md-6">
 				    <div class="thumbnail">
 				    	<a href="#" class="movepost list-group-item">
-					      <img src="images/bansanka.png" alt="">
+					      <img src="/images/bansanka.png" alt="">
 					      <div class="caption">
 					        <h3>晩餐歌</h3>
 					        <h3>tuki.</h3>
@@ -87,7 +87,7 @@
 				  <div class="col-md-6">
 				    <div class="thumbnail">
 				    	<a href="#" class="movepost list-group-item">
-					      <img src="images/bokunokoto.png" alt="">
+					      <img src="/images/bokunokoto.png" alt="">
 					      <div class="caption">
 					        <h3>僕のこと</h3>
 					        <h3>Mrs. GREEN APPLE</h3>
@@ -101,18 +101,18 @@
 				    </div>
 				  </div>
 				  <div class="text-right moveall">
-					<a href="contents/postList.jsp" >概要欄 ></a>
+					<a href="/content/list.do" >概要欄 ></a>
 				  </div>
 			  </div>
 		  </div>
 		  <div class="col-md-4">
 		    <div class="list-group popular">
 				<h3 class = "list-group-item text-center">今まで多い探された歌手</h3>
-				<a href="#" class="list-group-item"><img src = "images/greenapple.png" alt="" class = "img-circle singer-img">Mrs. GREEN APPLE</a>
-				<a href="#" class="list-group-item"><img src = "images/tuki.png" alt="" class = "img-circle singer-img">tuki.</a>
-				<a href="#" class="list-group-item"><img src = "images/kinggnu.png" alt="" class = "img-circle singer-img">King Gnu</a>
+				<a href="#" class="list-group-item"><img src = "/images/greenapple.png" alt="" class = "img-circle singer-img">Mrs. GREEN APPLE</a>
+				<a href="#" class="list-group-item"><img src = "/images/tuki.png" alt="" class = "img-circle singer-img">tuki.</a>
+				<a href="#" class="list-group-item"><img src = "/images/kinggnu.png" alt="" class = "img-circle singer-img">King Gnu</a>
 			</div>
 		  </div>
 		</div>
 	</div> <!-- contents end -->
-<%@ include file="footer.jsp" %>
+<%@ include file="/footer.jsp" %>

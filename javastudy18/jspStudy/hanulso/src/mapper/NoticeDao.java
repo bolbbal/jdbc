@@ -77,6 +77,9 @@ public class NoticeDao {
 			e.printStackTrace();
 		} finally {
 			try {
+				if (rs != null) {
+					rs.close();
+				}
 				if (pstmt != null) {
 					pstmt.close();
 				}
@@ -90,5 +93,122 @@ public class NoticeDao {
 		}
 		
 		return list;
+	}
+	
+	public NoticeVo getSelectIdx(int idx) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select * from notice where idx = ?";
+		
+		NoticeVo vo = null;
+
+		try {
+			conn = DBManager.getInstance().getDBManager();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new NoticeVo();
+				vo.setIdx(idx);
+				vo.setTitle(rs.getString("title"));
+				vo.setContent(rs.getString("content"));
+				vo.setRegdate(rs.getString("regdate").substring(0,10));
+				vo.setWriter(rs.getString("writer"));
+				vo.setViewcount(rs.getInt("viewcount"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+		return vo;
+	}
+	
+	public void deleteNoticeIdx(int idx) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "delete from notice where idx = ?";
+		
+		NoticeVo vo = null;
+		
+		try {
+			conn = DBManager.getInstance().getDBManager();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
+	
+	public int selectPostCount() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select count(*) as count from notice where idx is not null";
+		
+		int count = 0;
+		
+		try {
+			conn = DBManager.getInstance().getDBManager();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+		return count;
 	}
 }

@@ -7,15 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/")
-public class MainController extends HttpServlet {
+@WebServlet("/content/*")
+public class ContentsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-    public MainController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doAction(request, response);
 	}
@@ -26,7 +21,25 @@ public class MainController extends HttpServlet {
 	
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		
+		String action = request.getPathInfo();
+		String page = null;
+		
+		System.out.println(action);
+		switch(action) {
+		case "/list.do" :
+			page="/contents/postList.jsp";
+			break;
+		
+		case "/detail.do" :
+			page="/contents/postDetail.jsp";
+			break;
+		}
+		
+		System.out.println(page);
+		if(page!=null) {
+			request.getRequestDispatcher(page).forward(request, response);
+		}
 	}
 
 }

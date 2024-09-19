@@ -1046,3 +1046,5 @@ create table notice (
 create sequence notice_seq;
 
 select * from notice order by idx desc;
+select count(*) as count from notice where idx is not null;
+commit;
