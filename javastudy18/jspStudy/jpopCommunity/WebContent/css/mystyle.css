@@ -155,6 +155,16 @@
 	margin-bottom:20px;
 }
 
+/*postWrite css*/
+.post-write td{
+	padding:20px 0;
+	margin:20px 0;
+}
+
+.post-write-contents {
+	height:400px;
+}
+
 /*footer css*/
 .footer {
 	height:100px;

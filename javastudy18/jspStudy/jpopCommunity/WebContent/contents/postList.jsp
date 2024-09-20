@@ -1,4 +1,6 @@
-<%@ include file="../header.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="/header.jsp" %>
     
     <!-- contents start -->
     <div class = "container post-type">
@@ -90,8 +92,11 @@
 		    </a>
 		  </div>
 	</div>
+	<div class="container text-right">
+		<a href="/content/write.do"><button class="btn btn-default text-right" type="submit">書き</button></a>
+	</div>
 	<div class="container text-center">
-		<nav aria-label="Page navigation">
+		<nav aria-label="Page navigation" style="display: inline-block">
 		  <ul class="pagination">
 		    <li>
 		      <a href="#" aria-label="Previous">
@@ -113,7 +118,7 @@
 	</div>
 	<!-- contents end -->
 	
-<%@ include file="../footer.jsp" %>
+<%@ include file="/footer.jsp" %>
     
 
     

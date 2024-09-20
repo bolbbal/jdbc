@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/content/*")
-public class ContentsController extends HttpServlet {
+@WebServlet("/mem/*")
+public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,16 +27,12 @@ public class ContentsController extends HttpServlet {
 		
 		System.out.println(action);
 		switch(action) {
-		case "/list.do" :
-			page="/contents/postList.jsp";
+		case "/login.do" :
+			page="/member/login.jsp";
 			break;
 		
-		case "/detail.do" :
-			page="/contents/postDetail.jsp";
-			break;
-			
-		case "/write.do" :
-			page="/contents/postWrite.jsp";
+		case "/signup.do" :
+			page="/member/signup.jsp";
 			break;
 		}
 		
