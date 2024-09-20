@@ -10,7 +10,7 @@ import domain.NoticeVo;
 import mapper.NoticeDao;
 import service.Action;
 
-public class NoticeDetail implements Action {
+public class NoticeModify implements Action {
 
 	@Override
 	public void command(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -18,14 +18,9 @@ public class NoticeDetail implements Action {
 		
 		int idx = Integer.parseInt(request.getParameter("idx"));
 		
-		NoticeDao.getInstance().increaseCountUpdate(idx);
 		NoticeVo vo = NoticeDao.getInstance().getSelectIdx(idx);
-		NoticeVo pervVo = NoticeDao.getInstance().noticePrevTitleSelect(idx);
-		NoticeVo nextVo = NoticeDao.getInstance().noticeNextTitleSelect(idx);
 		
-		request.setAttribute("view", vo);
-		request.setAttribute("prev", pervVo);
-		request.setAttribute("next", nextVo);
+		request.setAttribute("mvo", vo);
 	}
 
 }

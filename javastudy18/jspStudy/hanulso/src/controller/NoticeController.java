@@ -45,6 +45,7 @@ public class NoticeController extends HttpServlet {
 			break;
 			
 		case "/modify.do":
+			new NoticeModify().command(request, response);
 			page="/notice/modify.jsp";
 			break;
 			
@@ -61,6 +62,12 @@ public class NoticeController extends HttpServlet {
 		
 		case "/delete.do":
 			new NoticeDelete().command(request, response);
+			page=null;
+			response.sendRedirect("/np/list.do");
+			break;
+			
+		case "/modifypro.do":
+			new NoticeUpdate().command(request, response);
 			page=null;
 			response.sendRedirect("/np/list.do");
 			break;

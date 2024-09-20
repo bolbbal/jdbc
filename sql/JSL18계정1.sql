@@ -1048,3 +1048,10 @@ create sequence notice_seq;
 select * from notice order by idx desc;
 select count(*) as count from notice where idx is not null;
 commit;
+
+update notice set viewcount = viewcount+1 where idx = 1;
+
+update notice set title='수정', content='함', writer='내가' where idx = 22;
+
+select title, idx from notice where idx = (select max(idx) from notice where idx < 4);
+select title from notice where idx = (select min(idx) from notice where idx > 4);
