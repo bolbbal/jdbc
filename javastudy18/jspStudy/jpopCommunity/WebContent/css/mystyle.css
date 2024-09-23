@@ -136,7 +136,7 @@
 	color : #777;
 }
 
-/*postDetail css*/
+/*postView css*/
 .post {
 	padding : 20px 0;
 	margin-bottom:20px;
@@ -147,22 +147,43 @@
 	margin-bottom:20px;
 }
 
+.writer-date {
+	float:left;
+}
+
+.popular {
+	float:right;
+}
+
 .post-detail {
 	margin-bottom:20px;
 }
 
 .post-like {
 	margin-bottom:20px;
+	border-bottom:1px soild #777;
 }
 
 /*postWrite css*/
-.post-write td{
-	padding:20px 0;
-	margin:20px 0;
+.post-write th, .post-write td {
+    padding: 10px;
+    vertical-align: top;
+    width: auto;
 }
 
-.post-write-contents {
-	height:400px;
+.writer-info {
+    width: 250px; 
+    height: 30px;
+}
+
+.write-title {
+    width: 95%; 
+    height: 30px;
+}
+
+.write-contents {
+    width: 95%; 
+    height: 400px;
 }
 
 /*footer css*/

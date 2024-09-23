@@ -101,7 +101,7 @@
 				    </div>
 				  </div>
 				  <div class="text-right moveall">
-					<a href="/content/list.do" >概要欄 ></a>
+					<a href="/posts/list.do" >概要欄 ></a>
 				  </div>
 			  </div>
 		  </div>
