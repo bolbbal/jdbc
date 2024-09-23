@@ -41,31 +41,45 @@
 				${view.getContent()}
 			</div>
 			<div class="prev_next">
+			<c:if test="${prev.getIdx() != null }">
 				<a href="/np/view.do?idx=${prev.getIdx()}" class="btn_prev"><i class="fa fa-angle-left"></i>
-				<span class="prev_wrap">
-					<strong>이전글</strong>
-					<span>
-						<c:choose>
-							<c:when test="${prev.getIdx() != null }">${prev.getTitle()}</c:when>
-							<c:when test="${prev.getIdx() == null }">이전 글이 없습니다.</c:when>
-						</c:choose>
+					<span class="prev_wrap">
+						<strong>이전글</strong>
+						<span>${prev.getTitle()}</span>
 					</span>
-				</span>
 				</a>
+			</c:if>
+			<c:if test="${prev.getIdx() == null }">
+				<a href="" class="btn_prev"><i class="fa fa-angle-left"></i>
+					<span class="prev_wrap">
+						<strong>이전글</strong>
+						<span>이전 글이 없습니다.</span>
+					</span>
+				</a>
+			</c:if>
 				<div class="btn_3wrap">
 					<a href="/np/list.do">목록</a> 
 					<a href="/np/modify.do?idx=${view.getIdx() }">수정</a> 
 					<a href="/np/delete.do?idx=${view.getIdx()}" onClick="return confirm('삭제하시겠어요?')">삭제</a>
 				</div>
-				<a href="/np/view.do?idx=${next.getIdx()}" class="btn_next">
-				<span class="next_wrap">
-					<strong>다음글</strong>
-						<c:choose>
-							<c:when test="${next.getIdx() != null }"><span>${next.getTitle()}</span></c:when>
-							<c:when test="${next.getIdx() == null }"><span onClick="return alert('다음 글이 없습니다.')">다음 글이 없습니다.</span></c:when>
-						</c:choose>
-				</span>
-				<i class="fa fa-angle-right"></i></a>
+				<c:if test="${next.getIdx() != null }">
+					<a href="/np/view.do?idx=${next.getIdx()}" class="btn_next">
+						<span class="next_wrap">
+							<strong>다음글</strong>
+							<span>${next.getTitle()}</span>
+						</span>
+						<i class="fa fa-angle-right"></i>
+					</a>
+				</c:if>
+				<c:if test="${next.getIdx() == null }">
+					<a href="" class="btn_next">
+						<span class="next_wrap">
+							<strong>다음글</strong>
+							<span>다음 글이 없습니다.</span>
+						</span>
+						<i class="fa fa-angle-right"></i>
+					</a>
+				</c:if>
 			</div>
 		</div>
 	</div>

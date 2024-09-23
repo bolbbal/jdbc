@@ -3,6 +3,7 @@ package service.notice;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ public class NoticeSelect implements Action {
 		request.setCharacterEncoding("utf-8");
 		
 		List<NoticeVo> list = NoticeDao.getInstance().noticeSelect();
+		//List<Map<String, Object>> list = NoticeDao.getInstance().noticeMapSelect();
 		int count = NoticeDao.getInstance().selectPostCount();
 		
 		request.setAttribute("list", list);

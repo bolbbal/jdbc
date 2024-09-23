@@ -1055,3 +1055,29 @@ update notice set title='수정', content='함', writer='내가' where idx = 22;
 
 select title, idx from notice where idx = (select max(idx) from notice where idx < 4);
 select title from notice where idx = (select min(idx) from notice where idx > 4);
+
+select * from notice where title like '%구하%';
+
+--페이징처리
+--order by 보다는 index
+-- select /*+ */ 풀 힌트
+-- 풀 힌트 내부의 에러가 있어도 select문은 실행됨
+
+select * from notice where idx > 0 order by idx desc;
+select /*+ index_desc(notice notice_pk) */ * from notice where idx > 0;
+
+-- rownum 과 인라인 뷰
+-- 페이지 처리를 하기 위해 데이터의 순번을 붙이고 rownum 이라는 키워드 사용
+-- mysql은 limit 키워드 사용
+select /*+ index_asc (notice notice_pk)*/ rownum rn, idx, title from notice;
+select /*+ index_desc (notice notice_pk)*/ rownum rn, idx, title from notice;
+
+select * from notice;
+
+select /*+ index_desc (notice notice_pk)*/ rownum rn, idx, title from notice where rownum <= 3;
+--논리상으로 맞는거 같지만 실제로는 결과가 안나옴
+select /*+ index_desc (notice notice_pk)*/ rownum rn, idx, title from notice where 0 < rownum and rownum <= 10;
+insert into notice (idx, title, content, writer) values (notice_seq.nextval, '정상화의 신', '나는 찬양할 수 밖에 없어', '신창섭');
+commit;
+-- rownum을 이용한 페이지 검색 방법
+select /*+ index_desc (notice notice_pl)*/;

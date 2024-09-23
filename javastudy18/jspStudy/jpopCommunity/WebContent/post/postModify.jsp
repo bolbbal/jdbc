@@ -7,7 +7,7 @@
     	<h3>書き</h3>
     </div>
     <div class = "container">
-    	<form name="post" method="post" action="/posts/Modifypro.do" onsubmit="return check()">
+    	<form name="modify" method="post" action="/posts/Modifypro.do" onsubmit="return check()">
     		<input type="hidden" name="idx" value="${modify.getIdx() }">
     		<table class="col-md-12 post-write">
     			 <tr>

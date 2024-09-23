@@ -38,6 +38,7 @@ public class NoticeController extends HttpServlet {
 		case "/list.do":
 			new NoticeSelect().command(request, response);
 			page="/notice/list.jsp";
+			//page="/notice/listMap.jsp";
 			break;
 		
 		case "/write.do":

@@ -2,7 +2,9 @@ package mapper;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import domain.NoticeVo;
 import util.DBManager;
@@ -351,5 +353,54 @@ public class NoticeDao {
 		}
 		
 		return vo;
+	}
+	
+	public List<Map<String, Object>> noticeMapSelect() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select * from notice order by idx desc";
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+
+		try {
+			conn = DBManager.getInstance().getDBManager();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				
+				map.put("idx", rs.getInt("idx"));
+				map.put("title", rs.getString("title"));
+				map.put("content", rs.getString("content"));
+				map.put("regdate", rs.getString("regdate").substring(0,10));
+				map.put("writer", rs.getString("writer"));
+				map.put("viewcount", rs.getInt("viewcount"));
+				
+				list.add(map);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+		return list;
 	}
 }

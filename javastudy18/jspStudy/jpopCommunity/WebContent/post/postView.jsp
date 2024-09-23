@@ -34,7 +34,10 @@
 				<span class="material-symbols-outlined">thumb_down</span><span>${view.getHatecount()}</span>
 			</button>
 		</div>
-		<div class="form-group text-right">
+		<div class="form-group">
+			<div class="text-left">
+				<a href="/posts/list.do"><button type="button" class="btn btn-default">목록</button></a>
+			</div>
 			<div class="text-right">
 				<a href="/posts/modify.do?idx=${view.getIdx() }"><button type="button" class="btn btn-default">수청</button></a>
 				<a href="/posts/delete.do"><button type="button" class="btn btn-default">삭제</button></a>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import service.post.PostInsert;
 import service.post.PostSelect;
+import service.post.PostUpdate;
 import service.post.PostView;
 import service.post.PostModify;
 
@@ -55,6 +56,12 @@ public class PostController extends HttpServlet {
 		case "/modify.do" :
 			new PostModify().command(request, response);
 			page="/post/postModify.jsp";
+			break;
+			
+		case "/modifypro.do" :
+			new PostUpdate().command(request, response);
+			page=null;
+			response.sendRedirect("/posts/list.do");
 			break;
 		}
 		
