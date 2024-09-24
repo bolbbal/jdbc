@@ -1,51 +1,52 @@
+<%@page import="mapper.NoticeDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file = "../header.jsp"%>
-<!-- sub contents -->
-	<div class="sub_title">
-		<h2>공지사항</h2>
-		<div class="container">
-		  <div class="location">
-			<ul>
-				<li class="btn_home">
-					<a href="index.html"><i class="fa fa-home btn_plus"></i></a>
-				</li>
-				<li class="dropdown">
-					<a href="">커뮤니티<i class="fa fa-plus btn_plus"></i></a>
-					<div class="dropdown_menu">
-						<a href="gratings.html">공지사항</a>
-						<a href="allclass.html">학과및모집안내</a>
-						<a href="portfolio.html">포트폴리오</a>
-						<a href="online.html">온라인접수</a>
-						<a href="notice.html">커뮤니티</a>
-					</div>
-				</li>
-				<li class="dropdown">
-					<a href="">공지사항<i class="fa fa-plus btn_plus"></i></a>
-					<div class="dropdown_menu">
-						<a href="notice.html">공지사항</a>
-						<a href="qa.html">질문과답변</a>
-						<a href="faq.html">FAQ</a>
-					</div>
-				</li>
-			</ul>
-		  </div>
-		</div><!-- container end -->
-	</div>
-	
-	<c:set var="num" value="${count}"/>
+<%@ include file="/header.jsp" %>
+   <!-- sub contents -->
+   <div class="sub_title">
+      <h2>공지사항</h2>
+      <div class="container">
+        <div class="location">
+         <ul>
+            <li class="btn_home">
+               <a href="/np/"><i class="fa fa-home btn_plus"></i></a>
+            </li>
+            <li class="dropdown">
+               <a href="">커뮤니티<i class="fa fa-plus btn_plus"></i></a>
+               <div class="dropdown_menu">
+                  <a href="/np/list.do">공지사항</a>
+                  <a href="allclass.html">학과및모집안내</a>
+                  <a href="portfolio.html">포트폴리오</a>
+                  <a href="online.html">온라인접수</a>
+                  <a href="notice.html">커뮤니티</a>
+               </div>
+            </li>
+            <li class="dropdown">
+               <a href="/np/list.do">공지사항<i class="fa fa-plus btn_plus"></i></a>
+               <div class="dropdown_menu">
+                  <a href="/np/list.do">공지사항</a>
+                  <a href="qa.html">질문과답변</a>
+                  <a href="faq.html">FAQ</a>
+               </div>
+            </li>
+         </ul>
+        </div>
+      </div><!-- container end -->
+   </div>
+
+   <c:set var="num" value="${count-(page.cri.pageNum-1)*5}"/>
 	<div class="container">
 	  <div class="search_wrap">
 		<div class="record_group">
 			<p>총게시글<span>${count}</span>건</p>
 		</div>
 		<div class="search_group">
-			<form name="myform" method="get" action="notice.html">
-				<select name="sel" class="select">
-					<option value="1">제목</option>
-					<option value="2">내용</option>
+			<form name="myform" method="get" action="/np/list.do" onsubmit="return check();">
+				<select name="type" class="select">
+					<option value="title">제목</option>
+					<option value="content">내용</option>
 				</select>
-				<input type="text" name="search" class="search_word">
+				<input type="text" name="keyword" class="search_word">
 				<button class="btn_search" type="submit"><i class="fa fa-search"></i><span class="sr-only">검색버튼</span></button>
 			</form>
 		</div>
@@ -83,32 +84,59 @@
 			</tbody>
 		</table>
 		<div class="paging">
-			<a href=""><i class="fa  fa-angle-double-left"></i></a>
-			<a href=""><i class="fa fa-angle-left"></i></a>
-			<a href="" class="active">1</a>
-			<a href="">2</a>
-			<a href="">3</a>
-			<a href="">4</a>
-			<a href="">5</a>
-			<a href=""><i class="fa fa-angle-right"></i></a>
-			<a href=""><i class="fa  fa-angle-double-right"></i></a>
+			<c:if test="${page.prev }">
+				<a href="?pageNum=1"><i class="fa  fa-angle-double-left"></i></a>
+			</c:if>
+			<c:if test="${page.cri.pageNum!=1 }">
+				<a href="?pageNum=${page.cri.pageNum-1}"><i class="fa fa-angle-left"></i></a>
+			</c:if>
+			<c:forEach var="pageNum" begin="${page.startPage }" end="${page.endPage }">
+				<a href="?pageNum=${pageNum }" class="${page.cri.pageNum==pageNum?'active':''}">${pageNum}</a>
+			</c:forEach>
+			<c:if test="${page.cri.pageNum!=page.realEnd }">
+				<a href="?pageNum=${page.cri.pageNum+1 }"><i class="fa fa-angle-right"></i></a>
+			</c:if>
+			<c:if test="${page.next }">
+				<a href="?pageNum=${page.realEnd}"><i class="fa  fa-angle-double-right"></i></a>
+			</c:if>
 			<a href="/np/write.do" class="btn_write">글쓰기</a>
 		</div>
 	  </div>
 	</div>
-	<!-- end contents -->
-	
-	<script>
-		$(function() {
-			$(".location  .dropdown > a").on("click",function(e) {
-				e.preventDefault();
-				if($(this).next().is(":visible")) {
-					$(".location  .dropdown > a").next().hide();
-				} else {
-					$(".location  .dropdown > a").next().hide();
-					$(this).next().show();
-				}
-			});
-		});
-	</script>
-<%@ include file = "../footer.jsp"%>
+   <!-- end contents -->
+   
+   <script>
+   function check() {
+      if(myform.keyword.value.length == 0) {
+         myform.keyword.focus();
+      alert("검색 키워드가 없습니다!");
+         return false;
+      }
+      return true;
+   }
+   
+   
+      $(function() {
+         $(".location  .dropdown > a").on("click",function(e) {
+            e.preventDefault();
+            if($(this).next().is(":visible")) { // is(":visible")
+               $(".location  .dropdown > a").next().hide();
+            } else {
+               $(".location  .dropdown > a").next().hide();
+               $(this).next().show();
+            }
+         });
+      });
+   </script>
+   
+
+<%@ include file="/footer.jsp" %>
+
+
+
+
+
+
+
+
+

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import domain.NoticeVo;
 import mapper.NoticeDao;
 import service.Action;
+import util.Criteria;
+import util.PageVo;
 
 public class NoticeSelect implements Action {
 
@@ -20,10 +22,26 @@ public class NoticeSelect implements Action {
 
 		request.setCharacterEncoding("utf-8");
 		
-		List<NoticeVo> list = NoticeDao.getInstance().noticeSelect();
+		Criteria cri = new Criteria();
+		
+		int pageNum = 1;
+		
+		if(request.getParameter("pageNum")!=null) {
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		}
+		
+		cri.setPageNum(pageNum);
+		
+		//List<NoticeVo> list = NoticeDao.getInstance().noticeSelect();
 		//List<Map<String, Object>> list = NoticeDao.getInstance().noticeMapSelect();
+		
+		List<NoticeVo> list = NoticeDao.getInstance().noticeSelectWithPage(cri);
+		
 		int count = NoticeDao.getInstance().selectPostCount();
 		
+		PageVo pvo = new PageVo(cri, count);
+		
+		request.setAttribute("page", pvo);
 		request.setAttribute("list", list);
 		request.setAttribute("count", count);
 		

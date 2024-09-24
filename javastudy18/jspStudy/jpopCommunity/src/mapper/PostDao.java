@@ -114,7 +114,6 @@ public class PostDao {
 				vo.setRegdate(rs.getNString("regdate").substring(0, 10));
 				vo.setViewcount(rs.getInt("viewcount"));
 				vo.setLikecount(rs.getInt("likecount"));
-				vo.setHatecount(rs.getInt("hatecount"));
 				vo.setReplycount(rs.getInt("replycount"));
 
 				list.add(vo);
@@ -153,7 +152,7 @@ public class PostDao {
 				vo.setRegdate(rs.getNString("regdate").substring(0, 10));
 				vo.setViewcount(rs.getInt("viewcount"));
 				vo.setLikecount(rs.getInt("likecount"));
-				vo.setHatecount(rs.getInt("hatecount"));
+//				vo.setHatecount(rs.getInt("hatecount"));qt
 				vo.setReplycount(rs.getInt("replycount"));
 
 			}

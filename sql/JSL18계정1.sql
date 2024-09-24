@@ -1079,5 +1079,10 @@ select /*+ index_desc (notice notice_pk)*/ rownum rn, idx, title from notice whe
 select /*+ index_desc (notice notice_pk)*/ rownum rn, idx, title from notice where 0 < rownum and rownum <= 10;
 insert into notice (idx, title, content, writer) values (notice_seq.nextval, '정상화의 신', '나는 찬양할 수 밖에 없어', '신창섭');
 commit;
--- rownum을 이용한 페이지 검색 방법
-select /*+ index_desc (notice notice_pl)*/;
+-- rownum을 이용한 페이지 검색 방법(inline view)
+select * from (
+    select /*+ index_desc (notice notice_pk)*/ 
+    rownum rn, idx, title, content, writer, regdate, viewcount
+    from notice
+    where rownum <= 20)
+where rn > 10;
