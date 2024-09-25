@@ -9,6 +9,7 @@ import java.util.Map;
 import domain.NoticeVo;
 import util.Criteria;
 import util.DBManager;
+import util.SearchVo;
 
 public class NoticeDao {
 
@@ -51,64 +52,63 @@ public class NoticeDao {
 		}
 	}
 	
-	public List<NoticeVo> noticeSelectWithPage(Criteria cri) {
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		
-		
-		String sql = "select * from (\r\n" + 
-				"    select /*+ index_desc (notice notice_pk)*/ \r\n" + 
-				"    rownum rn, idx, title, content, writer, regdate, viewcount\r\n" + 
-				"    from notice\r\n" + 
-				"    where rownum <= (?*?))\r\n" + 
-				"where rn > ((?-1)*?)";
-		
-		List<NoticeVo> list = new ArrayList<NoticeVo>();
-
-		try {
-			conn = DBManager.getInstance().getDBManager();
-			pstmt = conn.prepareStatement(sql);
+	public List<NoticeVo> noticeSelectWithPage(Criteria cri, String query) {
 			
-			pstmt.setInt(1, cri.getPageNum());
-			pstmt.setInt(2, cri.getAmount());
-			pstmt.setInt(3, cri.getPageNum());
-			pstmt.setInt(4, cri.getAmount());
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
 			
-			rs = pstmt.executeQuery();
+			String sql = "";
 			
-			while(rs.next()) {
-				NoticeVo vo = new NoticeVo();
-				vo.setIdx(rs.getInt("idx"));
-				vo.setTitle(rs.getString("title"));
-				vo.setContent(rs.getString("content"));
-				vo.setRegdate(rs.getString("regdate").substring(0,10));
-				vo.setWriter(rs.getString("writer"));
-				vo.setViewcount(rs.getInt("viewcount"));
-				list.add(vo);
+			if(query=="") {
+				sql = "select * from (select /*+ index_desc (notice notice_pk)*/ rownum rn, idx, title, content, writer, regdate, viewcount from notice where rownum <= (? * ?)) where rn > ((?-1)*?)";
+			} else {
+				sql = "select * from (select /*+ index_desc (notice notice_pk)*/ rownum rn, idx, title, content, writer, regdate, viewcount from notice where ("+query+") and rownum <= (? * ?)) where rn > ((?-1)*?)";
 			}
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
+			List<NoticeVo> list = new ArrayList<NoticeVo>();
+	
 			try {
-				if (rs != null) {
-					rs.close();
+				conn = DBManager.getInstance().getDBManager();
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, cri.getPageNum());
+				pstmt.setInt(2, cri.getAmount());
+				pstmt.setInt(3, cri.getPageNum());
+				pstmt.setInt(4, cri.getAmount());
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					NoticeVo vo = new NoticeVo();
+					vo.setIdx(rs.getInt("idx"));
+					vo.setTitle(rs.getString("title"));
+					vo.setContent(rs.getString("content"));
+					vo.setRegdate(rs.getString("regdate").substring(0,10));
+					vo.setWriter(rs.getString("writer"));
+					vo.setViewcount(rs.getInt("viewcount"));
+					list.add(vo);
 				}
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
+				
 			} catch (Exception e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (rs != null) {
+						rs.close();
+					}
+					if (pstmt != null) {
+						pstmt.close();
+					}
+					if (conn != null) {
+						conn.close();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+	
 			}
-
-		}
-		
+			
 		return list;
 	}
 	
@@ -237,12 +237,18 @@ public class NoticeDao {
 		}
 	}
 	
-	public int selectPostCount() {
+	public int selectPostCount(String query) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select count(*) as count from notice where idx is not null";
+		String sql = "";
+		
+		if(query!="") {
+			sql = "select count(*) as count from notice where " + query;
+		} else {
+			sql = "select count(*) as count from notice";
+		}
 		
 		int count = 0;
 		

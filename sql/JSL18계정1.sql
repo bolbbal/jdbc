@@ -1078,6 +1078,8 @@ select /*+ index_desc (notice notice_pk)*/ rownum rn, idx, title from notice whe
 --논리상으로 맞는거 같지만 실제로는 결과가 안나옴
 select /*+ index_desc (notice notice_pk)*/ rownum rn, idx, title from notice where 0 < rownum and rownum <= 10;
 insert into notice (idx, title, content, writer) values (notice_seq.nextval, '정상화의 신', '나는 찬양할 수 밖에 없어', '신창섭');
+insert into notice (idx, title, content, writer) values (notice_seq.nextval, '인장주작은 뭐야', '씨발년', '신창섭');
+insert into notice (idx, title, content, writer) values (notice_seq.nextval, '다 해줬잖아', '그냥 씨발 다 해줬잖아', '신창섭');
 commit;
 -- rownum을 이용한 페이지 검색 방법(inline view)
 select * from (
@@ -1086,3 +1088,11 @@ select * from (
     from notice
     where rownum <= 20)
 where rn > 10;
+
+select * from (
+    select /*+ index_desc (notice notice_pk)*/
+    rownum rn, idx, title, content, writer, regdate, viewcount
+    from notice
+    where rownum <= 20 and title like '%정상화%')
+where rn > 10;
+select count(*) as count from notice;

@@ -14,6 +14,7 @@ import mapper.NoticeDao;
 import service.Action;
 import util.Criteria;
 import util.PageVo;
+import util.SearchVo;
 
 public class NoticeSelect implements Action {
 
@@ -30,14 +31,28 @@ public class NoticeSelect implements Action {
 			pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		}
 		
+		String type = "";
+		String keyword = "";
+		String query = "";
+		
+		if(request.getParameter("type")!=null && !request.getParameter("keyword").equals("")) {
+			
+			type = request.getParameter("type");
+			keyword = request.getParameter("keyword");
+			
+			query = type + " like '%"+keyword+"%'";
+		}
+		
 		cri.setPageNum(pageNum);
+		cri.setType(type);
+		cri.setKeyword(keyword);
 		
 		//List<NoticeVo> list = NoticeDao.getInstance().noticeSelect();
 		//List<Map<String, Object>> list = NoticeDao.getInstance().noticeMapSelect();
 		
-		List<NoticeVo> list = NoticeDao.getInstance().noticeSelectWithPage(cri);
+		List<NoticeVo> list = NoticeDao.getInstance().noticeSelectWithPage(cri, query);
 		
-		int count = NoticeDao.getInstance().selectPostCount();
+		int count = NoticeDao.getInstance().selectPostCount(query);
 		
 		PageVo pvo = new PageVo(cri, count);
 		

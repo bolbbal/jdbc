@@ -7,7 +7,7 @@ public class PageVo {
 	private boolean prev, next;
 	private int total; 
 	private Criteria cri; //pageNum, amount, type, keyword
-	private int realEnd;
+	private int lastPage;
 	
 	public PageVo(Criteria cri, int total) {
 		
@@ -16,7 +16,7 @@ public class PageVo {
 		this.endPage = (int) Math.ceil(cri.getPageNum()/10.0) * 10;
 		this.startPage = endPage - 9;
 		
-		this.realEnd = (int) (Math.ceil((total*1.0) / cri.getAmount()));
+		int realEnd = (int) (Math.ceil((total*1.0) / cri.getAmount()));
 		
 		if(realEnd < this.endPage) {
 			endPage = realEnd;
@@ -26,17 +26,6 @@ public class PageVo {
 		
 		this.next = this.endPage < realEnd;
 	}
-
-	
-	public int getRealEnd() {
-		return realEnd;
-	}
-
-
-	public void setRealEnd(int realEnd) {
-		this.realEnd = realEnd;
-	}
-
 
 	public int getStartPage() {
 		return startPage;
