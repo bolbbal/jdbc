@@ -1096,3 +1096,16 @@ select * from (
     where rownum <= 20 and title like '%정상화%')
 where rn > 10;
 select count(*) as count from notice;
+
+--포트폴리오 테이블
+create table portfolio (
+    idx number not null primary key,
+    regdate date default sysdate,
+    title varchar2(200) not null,
+    content varchar2(4000) not null,
+    writer varchar2(20) not null,
+    viewcount number default 0,
+    imgurl varchar2(200) not null
+);
+
+create sequence portfolio_seq;

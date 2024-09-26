@@ -25,75 +25,30 @@
 			      </div>
     </div>
     <div class = "container">
-	    <div class="row post">
-	    	<a href="/content/detail.do">
-		  		<div class="col-md-3">
-		      		<img src="../images/shutter.png" alt="" class="thumbnail music-thumbnail">
-		      	</div>
-		      	<div class="col-md-5">
-		      		<h3>Shutter | 優里</h3>
-		      		<p>君と見るずだった花火が<br>
-		      		夜の隙間を埋めてく<br>
-		      		感傷にひたっちまうから<br>
-		      		Twitterは閉じた</p>
-		      	</div>
-		      	<div class="col-md-2">
-		      		<img src="../images/maple.png" alt="" class="img-circle member-img">
-		      	</div>
-		      	<div class="col-md-2 writer">
-		      		<p>maplelove</p>
-		      		<p>2024-09.08<br><br><br></p>
-		      		<p class="text-right">173 / 7</p>
-		      	</div>
-		    </a>
-		  </div>
-		  <div class="row post">
-	    	<a href="#">
-		  		<div class="col-md-3">
-		      		<img src="../images/115man.png" alt="" class="thumbnail music-thumbnail">
-		      	</div>
-		      	<div class="col-md-5">
-		      		<h3>115万キロのｈフィルム | Official髭男dism</h3>
-		      		<p>これから歌う曲の内容は<br>
-		      		僕の頭の中のこと<br>
-		      		主演はもちろん君で<br>
-		      		僕は助演で監督でカメラマン</p>
-		      	</div>
-		      	<div class="col-md-2 singer-img" style="display:inline-block;">
-		      		<img src="" alt="" class="img-circle member-img">
-		      	</div>
-		      	<div class="col-md-2 writer">
-		      		<p>ww</p>
-		      		<p>2024-09.08<br><br><br></p>
-		      		<p class="text-right">219 / 8</p>
-		      	</div>
-		    </a>
-		  </div>
-		  <div class="row post">
-	    	<a href="#">
-		  		<div class="col-md-3">
-		      		<img src="../images/tsukimisou.png" alt="" class="thumbnail music-thumbnail">
-		      	</div>
-		      	<div class="col-md-5">
-		      		<h3>ツキミソウ | Novelbright</h3>
-		      		<p>出会いと別れ繰り返す度<br>
-		      		心をすり減らす<br>
-		      		記憶をかき分けた先に<br>
-		      		滲んだ思い出が待つ</p>
-		      	</div>
-		      	<div class="col-md-2 singer-img" style="display:inline-block;">
-		      		<img src="../images/dog.png" alt="" class="img-circle member-img">
-		      	</div>
-		      	<div class="col-md-2 writer">
-		      		<p>赤ちゃん</p>
-		      		<p>2024-09.07<br><br><br></p>
-		      		<p class="text-right">253 / 11</p>
-		      	</div>
-		    </a>
-		  </div>
+    	<c:forEach var="list" items="${list}">
+		    <div class="row post">
+			    	<a href="/posts/view.do?idx=${list.idx }">
+				  		<div class="col-md-3">
+				      		<img src="../images/shutter.png" alt="" class="thumbnail music-thumbnail">
+				      	</div>
+				      	<div class="col-md-5">
+				      		<h3>${list.title}<c:if test="${list.singer != null}">${list.singer }</c:if></h3>
+				      		<p>${list.contents }</p>
+				      	</div>
+				      	<div class="col-md-2">
+				      		<img src="../images/maple.png" alt="" class="img-circle member-img">
+				      	</div>
+				      	<div class="col-md-2 writer">
+				      		<p>${list.nickname }</p>
+				      		<p>${list.regdate }<br><br><br></p>
+				      		<p class="text-right">${list.viewcount} / ${list.likecount }</p>
+				      	</div>
+				    </a>
+			  </div>
+		  </c:forEach>
 	</div>
 	<div class="container text-right">
-		<a href="/content/write.do"><button class="btn btn-default text-right" type="submit">書き</button></a>
+		<a href="/posts/write.do"><button class="btn btn-default text-right" type="submit">書き込み</button></a>
 	</div>
 	<div class="container text-center">
 		<nav aria-label="Page navigation" style="display: inline-block">
@@ -119,10 +74,3 @@
 	<!-- contents end -->
 	
 <%@ include file="/footer.jsp" %>
-    
-
-    
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-  </body>
-</html>

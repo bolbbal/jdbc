@@ -9,8 +9,14 @@ public class Criteria {
 	public Criteria() {
 		this(1);
 	}
+	
 	public Criteria(int pageNum) {
 		this.pageNum = pageNum;
+	}
+	
+	public Criteria(int pageNum, int amount) {
+		this.pageNum = pageNum;
+		this.amount = amount;
 	}
 	
 	public int getPageNum() {

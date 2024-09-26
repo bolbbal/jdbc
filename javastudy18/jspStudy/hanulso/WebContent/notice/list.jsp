@@ -73,7 +73,7 @@
 			</thead>
 			
 			<tbody>
-				<c:if test="${list.isEmpty()}">
+				<c:if test="${list.isEmpty() || list == null}">
 					<tr>
 						<td colspan="5">검색 결과가 존재하지 않습니다.</td>
 					</tr>

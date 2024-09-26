@@ -4,7 +4,7 @@
     
     <!-- contents start -->
     <div class = "container post-type">
-    	<h3>新着 - 書き</h3>
+    	<h3>書き込み</h3>
     </div>
     <div class = "container">
     	<form>
