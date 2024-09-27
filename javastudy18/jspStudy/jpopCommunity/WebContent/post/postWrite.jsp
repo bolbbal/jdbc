@@ -70,7 +70,7 @@
 	        document.post.contents.focus();
 	        return false;
 	    }
-
+		
 	    alert("글이 등록되었습니다.");
 	    return true;  // 폼 제출 허용
 	}

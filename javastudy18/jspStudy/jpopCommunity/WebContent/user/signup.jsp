@@ -8,11 +8,11 @@
     		<div class = "col-md-2"></div>
     		<div class = "col-md-8">
     			<h3 class = "text-center">新規登録</h3>
-    			<form class="form-horizontal">
+    			<form class="form-horizontal signup">
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">ID</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="inputEmail3" placeholder="ID" style="width:88%; display:inline-block;">
+				      <input type="text" class="form-control" id="inputEmail3" placeholder="ID" style="display:inline-block;">
 				      <button type="button" class="btn btn-default">Check</button>
 				    </div>
 				  </div>
@@ -31,9 +31,14 @@
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">Nickname</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="inputEmail3" placeholder="Nickname" style="width:88%; display:inline-block;">
+				      <input type="text" class="form-control" id="inputEmail3" placeholder="Nickname" style="display:inline-block;">
 				      <button type="button" class="btn btn-default">Check</button>
 				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">Email address</label>
+				    <input type="email" class="form-control" id="inputEmail3" placeholder="Email" style="display:inline-block;">
+				    <button type="button" class="btn btn-default">Check</button>
 				  </div>
 				  <div class="form-group text-center">
 				    <div class="text-center">

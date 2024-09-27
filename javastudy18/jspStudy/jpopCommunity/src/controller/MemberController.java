@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/mem/*")
+@WebServlet("/users/*")
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -28,11 +28,11 @@ public class MemberController extends HttpServlet {
 		System.out.println(action);
 		switch(action) {
 		case "/login.do" :
-			page="/member/login.jsp";
+			page="/user/login.jsp";
 			break;
 		
 		case "/signup.do" :
-			page="/member/signup.jsp";
+			page="/user/signup.jsp";
 			break;
 		}
 		

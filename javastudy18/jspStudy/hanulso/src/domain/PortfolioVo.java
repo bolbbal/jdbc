@@ -1,6 +1,6 @@
 package domain;
 
-public class PortpolioVo {
+public class PortfolioVo {
 	private int idx;
 	private String regdate;
 	private String title;
@@ -8,6 +8,7 @@ public class PortpolioVo {
 	private String writer;
 	private int viewcount;
 	private String imgurl;
+	
 	public int getIdx() {
 		return idx;
 	}

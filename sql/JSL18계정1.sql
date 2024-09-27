@@ -1099,13 +1099,20 @@ select count(*) as count from notice;
 
 --포트폴리오 테이블
 create table portfolio (
-    idx number not null primary key,
+    idx number not null,
     regdate date default sysdate,
     title varchar2(200) not null,
     content varchar2(4000) not null,
     writer varchar2(20) not null,
     viewcount number default 0,
-    imgurl varchar2(200) not null
+    imgurl varchar2(200),
+    constraint portfolio_pk primary key (idx)
 );
 
 create sequence portfolio_seq;
+select /*+ index_desc (portfolio portfolio_pk)*/ * from portfolio;
+select * from (select /*+ index_desc (portfolio portfolio_pk)*/
+            rownum rn, idx, regdate, title, content, writer, viewcount, imgurl
+            from portfolio 
+            where rownum <= (1 * 5))
+where rn > ((1 - 1) * 5);

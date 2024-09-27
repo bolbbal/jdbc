@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.portfolio.*;
+
 @WebServlet("/port/*")
 public class PortfolioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,15 +33,34 @@ public class PortfolioController extends HttpServlet {
 		String page = null;
 		
 		switch(action) {
+		
 		case "/list.do" :
+			new PortfolioList().command(request, response);
 			page = "/portfolio/list.jsp";
 			break;
+			
 		case "/view.do" :
+			new PortfolioView().command(request, response);
 			page = "/portfolio/view.jsp";
 			break;
+			
 		case "/write.do" :
 			page = "/portfolio/write.jsp";
 			break;
+			
+		case "/save.do" :
+			new PortfolioSave().command(request, response);
+			page = null;
+			response.sendRedirect("/port/list.do");
+			break;
+			
+		case "/modify.do" :
+			new PortfolioModifyView().command(request, response);
+			page = "portfolio.modify.jsp";
+			break;
+			
+		case "/modifypro.do" :
+			
 		}
 		
 		if(page!=null) {

@@ -39,8 +39,8 @@
 						</form>
     				</div>
     				<div class = "col-md-3 member text-right">
-    					<a href="/mem/login.do" class = "login"><span class="material-symbols-outlined">login</span></a>
-    					<a href="/mem/signup.do" class = "signup"><span class="material-symbols-outlined">person_add</span></a>
+    					<a href="/users/login.do" class = "login"><span class="material-symbols-outlined">login</span></a>
+    					<a href="/users/signup.do" class = "signup"><span class="material-symbols-outlined">person_add</span></a>
     				</div>
     			</div>
     		</div>

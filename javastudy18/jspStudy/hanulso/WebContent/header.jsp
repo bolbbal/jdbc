@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!doctype html>
 <html lang="ko">
  <head>
@@ -72,9 +73,9 @@
 								<li><a href="#">취업성공패키지</a></li>
 							</ul>
 						</li> -->
-						<li><a href="notice.html">커뮤니티</a>
+						<li><a href="/np/list.do">커뮤니티</a>
 							<ul class="nav_2depth">
-								<li><a href="np/list.do">공지사항</a></li>
+								<li><a href="/np/list.do">공지사항</a></li>
 								<li><a href="qna/qa.html">질문과답변</a></li>
 								<li><a href="faq/faq.html">FAQ</a></li>
 								<li><a href="pds/pds.html">자료실</a></li>

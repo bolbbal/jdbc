@@ -186,6 +186,11 @@
     height: 400px;
 }
 
+/*member signup css*/
+.signup > input {
+	width:70%;
+}
+
 /*footer css*/
 .footer {
 	height:100px;
