@@ -9,8 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <title>JPAT</title>
-        
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="/js/jquery-3.7.1.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 	<link href="/css/mystyle.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -66,7 +68,7 @@
 			      <ul class="nav navbar-nav">
 			        <li><a href="/posts/list.do">新着 <span class="sr-only">(current)</span></a></li>
 			        <li><a href="#">人気</a></li>
-			        <li><a href="#">歌</a></li>
+			        <li><a href="#">おすすめ</a></li>
 			        <li><a href="#">歌手</a></li>
 			      </ul>
 			    </div><!-- /.navbar-collapse -->

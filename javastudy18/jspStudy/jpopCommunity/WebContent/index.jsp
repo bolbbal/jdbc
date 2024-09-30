@@ -3,65 +3,28 @@
 <%@ include file="/header.jsp" %>
     
     <!-- main visual start -->
-    <div class = "container-fluid main-visual">
-    	<div class = "container">
-    		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-			  <!-- Indicators -->
-			  <ol class="carousel-indicators">
-			    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-			    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-			    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-			    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-			    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
-			  </ol>
-			
-			  <!-- Wrapper for slides -->
-			  <div class="carousel-inner" role="listbox">
-			    <div class="item active">
-			      <img src="/images/slide1.jpg" alt="">
-			      <div class="carousel-caption">
-			       
-			      </div>
-			    </div>
-			    <div class="item">
-			      <img src="/images/slide2.jpg" alt="">
-			      <div class="carousel-caption">
-			       
-			      </div>
-			    </div>
-			    <div class="item">
-			      <img src="/images/slide3.jpg" alt="">
-			      <div class="carousel-caption">
-			       
-			      </div>
-			    </div>
-			    <div class="item">
-			      <img src="/images/slide4.jpg" alt="">
-			      <div class="carousel-caption">
-			       
-			      </div>
-			    </div>
-			    <div class="item">
-			      <img src="/images/slide5.jpg" alt="">
-			      <div class="carousel-caption">
-			       
-			      </div>
-			    </div>
-			  </div>
-			
-			  <!-- Controls -->
-			  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-			    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			    <span class="sr-only">Previous</span>
-			  </a>
-			  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-			    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			    <span class="sr-only">Next</span>
-			  </a>
-			</div>
-    	</div>
-    </div> <!-- main visual end -->
-    
+   <div class="container main-visual">
+    <div class="carousel-wrapper">
+	  <a class="left carousel-control" href="#" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+	  
+	  <div class="carousel">
+	    <div class="carousel-item left-far" data-index="3">Card 4</div>
+	    <div class="carousel-item left" data-index="4">Card 5</div>
+	    <div class="carousel-item selected" data-index="0">Card 1</div>
+	    <div class="carousel-item right" data-index="1">Card 2</div>
+	    <div class="carousel-item right-far" data-index="2">Card 3</div>
+	  </div>
+	  
+	  <a class="right carousel-control" href="#" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+	</div>
+   </div> <!-- main visual end -->
+   
     <!-- contents start -->
     <div class = "container contents">
 	    <div class="row">
@@ -115,4 +78,46 @@
 		  </div>
 		</div>
 	</div> <!-- contents end -->
+	<script>
+		$(document).ready(function () {
+		  let currentIndex = 0; // 초기 강조 카드 인덱스 (Card 1)
+		  const totalItems = 5;
+		
+		  function updateCarousel(newIndex) {
+		    const items = $(".carousel-item");
+		    currentIndex = (newIndex + totalItems) % totalItems;
+		
+		    items.removeClass("selected left right left-far right-far");
+		
+		    // 업데이트된 인덱스를 기준으로 클래스 할당
+		    items.each(function () {
+		      const index = parseInt($(this).attr("data-index"));
+		
+		      if (index === currentIndex) {
+		        $(this).addClass("selected");
+		      } else if (index === (currentIndex + 1) % totalItems) {
+		        $(this).addClass("right");
+		      } else if (index === (currentIndex + 2) % totalItems) {
+		        $(this).addClass("right-far");
+		      } else if (index === (currentIndex - 1 + totalItems) % totalItems) {
+		        $(this).addClass("left");
+		      } else if (index === (currentIndex - 2 + totalItems) % totalItems) {
+		        $(this).addClass("left-far");
+		      }
+		    });
+		  }
+		
+		  $(".carousel-control.left").click(function (e) {
+		    e.preventDefault();
+		    updateCarousel(currentIndex - 1); // 왼쪽 클릭 시 이전 카드로 이동
+		  });
+		
+		  $(".carousel-control.right").click(function (e) {
+		    e.preventDefault();
+		    updateCarousel(currentIndex + 1); // 오른쪽 클릭 시 다음 카드로 이동
+		  });
+		
+		  updateCarousel(currentIndex); // 초기 상태 업데이트
+		});
+	</script>
 <%@ include file="/footer.jsp" %>

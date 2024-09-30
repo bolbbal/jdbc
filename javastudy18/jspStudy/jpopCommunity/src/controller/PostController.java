@@ -34,12 +34,12 @@ public class PostController extends HttpServlet {
 		
 		switch(action) {
 		case "/list.do" :
-			new PostSelect().command(request, response);
-			page="/post/postList.jsp";
+			//new PostSelect().command(request, response);
+			page="/post/post.jsp";
 			break;
 		
 		case "/view.do" :
-			new PostView().command(request, response);
+			//new PostView().command(request, response);
 			page="/post/postView.jsp";
 			break;
 			
@@ -48,18 +48,18 @@ public class PostController extends HttpServlet {
 			break;
 			
 		case "/writepro.do" :
-			new PostInsert().command(request, response);
+			//new PostInsert().command(request, response);
 			page=null;
 			response.sendRedirect("/posts/list.do");
 			break;
 			
 		case "/modify.do" :
-			new PostModify().command(request, response);
+			//new PostModify().command(request, response);
 			page="/post/postModify.jsp";
 			break;
 			
 		case "/modifypro.do" :
-			new PostUpdate().command(request, response);
+			//new PostUpdate().command(request, response);
 			page=null;
 			response.sendRedirect("/posts/list.do");
 			break;
