@@ -232,4 +232,9 @@ public class PortfolioDao {
 			close();
 		}
 	}
+	
+	public void deletePortfolio(int idx) {
+		
+		String sql = "delete from portfolio where idx = ?";
+	}
 }

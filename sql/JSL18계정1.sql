@@ -1116,3 +1116,7 @@ select * from (select /*+ index_desc (portfolio portfolio_pk)*/
             from portfolio 
             where rownum <= (1 * 5))
 where rn > ((1 - 1) * 5);
+
+select /*+ index_desc (portfolio portfolio_pk)*/ *
+from portfolio;
+ 

@@ -36,7 +36,7 @@ public class PortfolioSave implements Action {
 		
 		vo.setWriter(multi.getParameter("writer"));
 		vo.setTitle(multi.getParameter("title"));
-		vo.setContent(multi.getParameter("content"));
+		vo.setContent(multi.getParameter("content").replace("\r\n", "<br>"));
 		vo.setImgurl(multi.getFilesystemName("imgurl")); //실제 서버에 업로드된 파일명을 구한다
 		
 		PortfolioDao.getInstance().insertPortfolio(vo);
