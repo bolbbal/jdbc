@@ -23,45 +23,21 @@
 			<a href="" class="btn-border">READ MORE</a>
 		</div>
 		<ul class="news_list">
-			<li>
-				<a href="">
-					<img src="./images/news01.jpg" alt="식품경진대회 우수상 사진" class="w100">
-					<strong>식품경진대회 우수상 수상</strong>
-					<p>2017년 식품안전분야 공공데이터 활용 경진대회 우수상을 또 수상하였습니다.</p>
-					<span>2018.09.20</span>
-					<div class="over">
-						<strong>식품경진대회 우수상 수상</strong>
-						<p>2017년 식품안전분야 공공데이터 활용 경진대회 우수상을 또 수상하였습니다.</p>
-						<span>2018.09.20</span>
-					</div>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<img src="./images/news02.jpg" alt="식품경진대회 우수상 사진" class="w100">
-					<strong>식품경진대회 우수상 수상</strong>
-					<p>2017년 식품안전분야 공공데이터 활용 경진대회 우수상을 또 수상하였습니다.</p>
-					<span>2018.09.20</span>
-					<div class="over">
-						<strong>식품경진대회 우수상 수상</strong>
-						<p>2017년 식품안전분야 공공데이터 활용 경진대회 우수상을 또 수상하였습니다.</p>
-						<span>2018.09.20</span>
-					</div>
-				</a>
-			</li>
-			<li class="news_end">
-				<a href="">
-					<img src="./images/news03.jpg" alt="식품경진대회 우수상 사진" class="w100">
-					<strong>식품경진대회 우수상 수상</strong>
-					<p>2017년 식품안전분야 공공데이터 활용 경진대회 우수상을 또 수상하였습니다.</p>
-					<span>2018.09.20</span>
-					<div class="over">
-						<strong>식품경진대회 우수상 수상</strong>
-						<p>2017년 식품안전분야 공공데이터 활용 경진대회 우수상을 또 수상하였습니다.</p>
-						<span>2018.09.20</span>
-					</div>
-				</a>
-			</li>
+			<c:forEach var="main" items="${mainList }">
+				<li>
+					<a href="/port/view.do?idx=${main.idx }">
+						<img src="/upload/${main.imgurl}" alt="식품경진대회 우수상 사진" class="w100">
+						<strong>${main.title }</strong>
+						<p>${main.content }</p>
+						<span>${main.regdate }</span>
+						<div class="over">
+							<strong>${main.title }</strong>
+							<p>${main.content }</p>
+							<span>${main.regdate }</span>
+						</div>
+					</a>
+				</li>
+			</c:forEach>
 		</ul>
 	</section>
 	<section class="main_content">
@@ -96,20 +72,26 @@
 					</ul>
 				</nav>
 				<div class="noticelist clearfix active taball" id="tabview1">
-					<div class="recently">
-						<p class="title">
-							<a class="title" href="">빅데이터응용SW개발 양성과정 모집</a>
-							<span class="date">2018-09-27</span>
-						</p>
-						<p class="text">
-							빅데이터처리, JAVA, JSP, PHP, DB을 이용한 응용소프트웨어 개발자를 모집중입니다...
-						</p>
-					</div>
 					<ul>
-						<li><a href="">HCI기반 UI/UX전문가양성과종 훈련생 모집</a><span class="date">201-09-27</span></li>
-						<li><a href="">품질경영전문가 훈련생 모집</a><span class="date">201-09-27</span></li>
-						<li><a href="">대전디자인경진대회 공지</a><span class="date">201-09-27</span></li>
-						<li><a href="">국비전액무료교육생 모집</a><span class="date">201-09-27</span></li>
+						<c:forEach var="nList" items="${nList}" varStatus="status">
+						<!-- jsp책 363페이지 -->
+							<c:choose>
+								<c:when test="${status.first }">
+									<li class="recently" style="padding-bottom:100px;">
+										<p class="title">
+											<a class="title" href="/np/view.do?idx=${nList.idx}">${nList.title }</a>
+											<span class="date">${nList.regdate }</span>
+										</p>
+										<p class="text">
+											${nList.content}
+										</p>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="/np/view.do?idx=${nList.idx}">${nList.title}</a><span class="date">${nList.regdate}</span></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
 					</ul>
 				</div>
 				<div class="graduation  clearfix taball" id="tabview2">
