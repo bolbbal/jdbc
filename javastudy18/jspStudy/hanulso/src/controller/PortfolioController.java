@@ -56,11 +56,20 @@ public class PortfolioController extends HttpServlet {
 			
 		case "/modify.do" :
 			new PortfolioModifyView().command(request, response);
-			page = "portfolio.modify.jsp";
+			page = "/portfolio/modify.jsp";
 			break;
 			
 		case "/modifypro.do" :
-			
+			new PortfolioUpdate().command(request, response);
+			page = null;
+			response.sendRedirect("/port/list.do");
+			break;
+		
+		case "/delete.do" :
+			new PortfolioDelete().command(request, response);
+			page = null;
+			response.sendRedirect("/port/list.do");
+			break;
 		}
 		
 		if(page!=null) {

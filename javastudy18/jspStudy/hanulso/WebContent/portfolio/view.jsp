@@ -45,8 +45,8 @@
 				</a>
 				<div class="btn_3wrap">
 					<a href="/port/list.do">목록</a> 
-					<a href="/port/modify.do?idx="${view.idx}">수정</a> 
-					<a href="portfolio_delete.html" onClick="return confirm('삭제하시겠어요?')">삭제</a>
+					<a href="/port/modify.do?idx=${view.idx}">수정</a> 
+					<a href="/port/delete.do?idx=${view.idx}" onClick="return confirm('삭제하시겠어요?')">삭제</a>
 				</div>
 				<a href="" class="btn_next">
 				<span class="next_wrap">

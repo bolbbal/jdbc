@@ -1,5 +1,6 @@
 package mapper;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -180,6 +181,7 @@ public class PortfolioDao {
 				vo.setImgurl(rs.getNString("imgurl"));
 				vo.setRegdate(rs.getNString("regdate").substring(0, 10));
 				vo.setViewcount(rs.getInt("viewcount"));
+				vo.setIdx(rs.getInt("idx"));
 				
 			}
 		} catch (Exception e) {
@@ -193,7 +195,7 @@ public class PortfolioDao {
 	
 	public void updatePortfolio(PortfolioVo vo) {
 		
-		String sql = "update set portfolio title = ?, content = ?, imgurl = ? where idx = ?";
+		String sql = "update portfolio set title = ?, content = ?, imgurl = ? where idx = ?";
 		
 		try {
 			
@@ -206,6 +208,7 @@ public class PortfolioDao {
 			pstmt.setInt(4, vo.getIdx());
 			
 			pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -233,8 +236,30 @@ public class PortfolioDao {
 		}
 	}
 	
-	public void deletePortfolio(int idx) {
+	public void deletePortfolio(PortfolioVo vo, String path) {
 		
 		String sql = "delete from portfolio where idx = ?";
+		
+		try {
+			
+			conn = DBManager.getInstance().getDBManager();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, vo.getIdx()); 
+			
+			String deleteFile = path+"/"+vo.getImgurl();
+			
+			pstmt.executeUpdate();
+			
+			if(deleteFile != null) {
+				File file = new File(deleteFile);
+				file.delete();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
 	}
 }
