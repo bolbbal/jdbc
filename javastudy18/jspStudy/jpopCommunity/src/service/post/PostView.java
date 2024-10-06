@@ -1,12 +1,13 @@
 package service.post;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.PostVo;
 import mapper.PostDao;
 import service.Action;
 
@@ -17,12 +18,13 @@ public class PostView implements Action {
 		
 		request.setCharacterEncoding("utf-8");
 		
-		int idx = Integer.parseInt(request.getParameter("idx"));
+		int post_idx = Integer.parseInt(request.getParameter("post_idx"));
 		
-		PostDao.getInstance().UpdateViewcount(idx);
-		PostVo vo = PostDao.getInstance().getPostSelect(idx);
+		PostDao.getInstance().UpdateViewcount(post_idx);
 		
-		request.setAttribute("view", vo);
+		List<Object> list = PostDao.getInstance().getPostSelect(post_idx);
+		
+		request.setAttribute("list", list);
 	}
 
 }
