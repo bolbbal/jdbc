@@ -53,7 +53,10 @@
 				<li>
 					<span class="date"><em><fmt:formatDate value="${regdate }" pattern="dd"/></em><fmt:formatDate value="${regdate }" pattern="yyyy.MM"/></span>
 					<div class="text_wrap">
-						<div class="img_wrap">
+						<div class="img_wrap" style="position: relative;">
+							<c:if test="${list.imgurl != null}">
+								<a href="/port/download.do?file=${list.imgurl }" style="position: absolute;top: 0%; right: 0%; background:#ccc; padding:12px 16px;">Download</a>
+							</c:if>
 							<img src="${pageContext.request.contextPath}/upload/${list.imgurl != null ? list.imgurl : 'noImage.png' }" alt="">
 						</div>
 						<span class="info">
@@ -67,7 +70,9 @@
 						<span class="text">
 							${list.content }
 						</span>
+						
 					</div>
+					
 				</li>
 				<c:set var="num" value="${num-1 }"/>
 			</c:forEach>

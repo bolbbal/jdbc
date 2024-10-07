@@ -40,11 +40,11 @@ public class PortfolioUpdate implements Action {
 		vo.setTitle(multi.getParameter("title"));
 		vo.setContent(multi.getParameter("content").replace("\r\n", "<br>"));
 		
-		if(multi.getParameter("imgurl").equals(null)) {
-			vo.setImgurl(oldVo.getImgurl());
-		} else {
+//		if(multi.getParameter("imgurl").equals(null)) {
+//			vo.setImgurl(oldVo.getImgurl());
+//		} else {
 			vo.setImgurl(multi.getFilesystemName("imgurl"));
-		}
+//		}
 		
 		PortfolioDao.getInstance().updatePortfolio(vo);
 	}

@@ -2,6 +2,7 @@ drop table post;
 drop table post_suggest;
 drop table post_type;
 drop table users;
+drop SEQUENCE post_seq;
 
 create table post_type (
     post_type_idx number(2) not null,
@@ -14,7 +15,7 @@ insert into post_type values (2, 'suggest');
 
 create table post (
     post_idx number(4) not null,
-    post_type_idx number not null,
+    post_type_idx number default 1,
     title varchar2(50) not null,
     contents varchar2(4000) not null,
     nickname varchar2(50) not null,
@@ -29,6 +30,8 @@ create table post (
     constraint post_fk foreign key (post_type_idx) references post_type (post_type_idx),
     constraint post_pk primary key (post_idx)
 );
+
+CREATE SEQUENCE post_seq;
 
 create table post_suggest (
     post_type_idx number not null,
@@ -50,7 +53,7 @@ create table users (
     constraint user_pk primary key (user_idx)
 );
 
-CREATE SEQUENCE post_seq;
+
 
 select * from post order by idx desc;
 

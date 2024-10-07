@@ -70,6 +70,11 @@ public class PortfolioController extends HttpServlet {
 			page = null;
 			response.sendRedirect("/port/list.do");
 			break;
+		
+		case "/download.do" :
+			new Download().command(request, response);
+			page = null;
+			break;
 		}
 		
 		if(page!=null) {

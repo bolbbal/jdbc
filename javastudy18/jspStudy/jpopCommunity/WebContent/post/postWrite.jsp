@@ -12,8 +12,8 @@
         	<tr>
                 <th>추천</th>
                 <td colspan="3">
-                    <label><input type="radio" name="recommendation" value="normal" checked onclick="toggleExtraInputs()"> 일반</label>
-                    <label><input type="radio" name="recommendation" value="recommended" onclick="toggleExtraInputs()"> 추천</label>
+                    <label><input type="radio" name="post_type_idx" value="1" checked onclick="toggleExtraInputs()"> 일반</label>
+                    <label><input type="radio" name="post_type_idx" value="2" onclick="toggleExtraInputs()"> 추천</label>
                 </td>
             </tr>
             <tr>
@@ -33,17 +33,17 @@
                 <td colspan="3"><textarea name="contents" class="write-contents"></textarea></td>
             </tr>
             <tr>
-                <th>File</th>
-                <td><input type="file" name="file"></td>
+                <th>Image</th>
+                <td><input type="file" name="image"></td>
             </tr>
             
-            <tr id="extra-inputs" style="display: none;">
+            <tr id="song-title" style="display: none;">
                 <th>제목</th>
-                <td colspan="3"><input type="text" name="extra1" class="recommend-info" placeholder="추가 입력 1"></td>
+                <td colspan="3"><input type="text" name="song_title" class="recommend-info"></td>
             </tr>
-            <tr id="extra-inputs-2" style="display: none;">
+            <tr id="singer" style="display: none;">
                 <th>가수</th>
-                <td colspan="3"><input type="text" name="extra2" class="recommend-info" placeholder="추가 입력 2"></td>
+                <td colspan="3"><input type="text" name="singer" class="recommend-info"></td>
             </tr>
         </table>
         <div class="form-group text-right">
@@ -58,54 +58,44 @@
 <script>
     // 라디오 버튼 상태에 따라 추가 입력 필드 표시
     function toggleExtraInputs() {
-        var recommendedRadio = document.querySelector('input[name="recommendation"][value="recommended"]');
-        var extraInputs = document.getElementById('extra-inputs');
-        var extraInputs2 = document.getElementById('extra-inputs-2');
+        var recommendedRadio = document.querySelector('input[name="post_type_idx"][value="2"]');
+        var songTitle = document.getElementById('song-title');
+        var singer = document.getElementById('singer');
 
         if (recommendedRadio.checked) {
-            extraInputs.style.display = 'table-row';
-            extraInputs2.style.display = 'table-row';
+        	songTitle.style.display = 'table-row';
+        	singer.style.display = 'table-row';
         } else {
-            extraInputs.style.display = 'none';
-            extraInputs2.style.display = 'none';
+        	songTitle.style.display = 'none';
+        	singer.style.display = 'none';
         }
     }
 
-    // 기존 check 함수
     function check() {
-        var titleField = document.getElementsByName('title')[0].value;
-        var parts = titleField.split('|');
-
-        if (parts.length === 2) {
-            var title = parts[0].trim();
-            var singer = parts[1].trim();
-            document.getElementsByName('title')[0].value = title;  // title 값을 설정
-            document.getElementsByName('singer')[0].value = singer;  // singer 값을 설정
-        }
-
-        if (document.post.nickname.value === "") {
+    	
+        if (post.nickname.value == "") {
             alert("닉네임을 입력하세요.");
-            document.post.nickname.focus();
+            post.nickname.focus();
             return false;
         }
-        if (document.post.password.value === "") {
+        if (post.password.value == "") {
             alert("비밀번호를 입력하세요.");
-            document.post.password.focus();
+            post.password.focus();
             return false;
         }
-        if (document.post.title.value === "") {
+        if (post.title.value == "") {
             alert("제목을 입력하세요.");
-            document.post.title.focus();
+            post.title.focus();
             return false;
         }
-        if (document.post.contents.value === "") {
+        if (post.contents.value == "") {
             alert("내용을 입력하세요.");
-            document.post.contents.focus();
+            post.contents.focus();
             return false;
         }
-
+		
         alert("글이 등록되었습니다.");
-        return true;  // 폼 제출 허용
+        return true;
     }
 </script>
 

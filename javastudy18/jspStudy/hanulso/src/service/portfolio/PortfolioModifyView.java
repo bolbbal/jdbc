@@ -21,6 +21,8 @@ public class PortfolioModifyView implements Action {
 		
 		PortfolioVo vo = PortfolioDao.getInstance().selectPortfolioIdx(idx);
 		
+		vo.setContent(vo.getContent().replace("<br>", "\r\n"));
+		
 		request.setAttribute("modify", vo);
 	}
 	
