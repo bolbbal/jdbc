@@ -24,6 +24,7 @@
 		</div>
     </div>
     
+    <c:set var = "num" value="${count-(page.cri.pageNum-1)*15 }"/>
     <div class = "container">
     	<table class = "post-list">
     		<colgroup>
@@ -47,24 +48,26 @@
     			</tr>
     		</thead>
     		<tbody>
-    			<tr>
-    				<td>2</td>
-    				<td>일반</td>
-    				<td class="title"><a href="/posts/view.do">글 제목을 누르면 내용이 보여요</a></td>
-    				<td>관리자</td>
-    				<td>24.09.27</td>
-    				<td>0</td>
-    				<td>0</td>
-    			</tr>
-    			<tr>
-    				<td>1</td>
-    				<td>추천</td>
-    				<td><a href="/postDetail.jsp">노래 추천이에요</a></td>
-    				<td>maplelove</td>
-    				<td>24.09.27</td>
-    				<td>0</td>
-    				<td>0</td>
-    			</tr>
+    			<c:if test="${list.isEmpty() || list == null} ">
+    				<tr>
+    					<td colspan = "7">검색결과가 없습니다.</td>
+    				</tr>
+    			</c:if>
+    			<c:forEach var="list" items="${list }">
+	    			<tr>
+	    				<td>${num }</td>
+	    				<td>${list.post_type_idx}</td>
+	    				<td class="title"><a href="/posts/view.do?post_idx=${list.post_idx }">${list.title} <c:if test="${list.replycount} != null">[${list.replycount}]</c:if></a></td>
+	    				<td>${list.nickname}</td>
+	    				<td>
+	    					<c:if test = "${list.modifydate == null}">${list.regdate}</c:if>
+	    					<c:if test = "${list.modifydate} != null">${list.modifydate}</c:if>
+	    				</td>
+	    				<td>${list.viewcount}</td>
+	    				<td>${list.likecount}</td>
+	    			</tr>
+	    			<c:set var = "num" value="${num-1 }"/>
+    			</c:forEach>
     		</tbody>
     	</table>
 	</div> 
@@ -74,21 +77,37 @@
 	<div class="container text-center">
 		<nav aria-label="Page navigation" style="display: inline-block">
 		  <ul class="pagination">
+		  	<c:if test="${page.prev }">
 		    <li>
 		      <a href="#" aria-label="Previous">
-		        <span aria-hidden="true">&laquo;</span>
+		        <span class="material-symbols-outlined">keyboard_double_arrow_left</span>
 		      </a>
 		    </li>
-		    <li><a href="#">1</a></li>
-		    <li><a href="#">2</a></li>
-		    <li><a href="#">3</a></li>
-		    <li><a href="#">4</a></li>
-		    <li><a href="#">5</a></li>
+		    </c:if>
+		    <c:if test="${page.cri.pageNum != 1 }">
+		    <li>
+		      <a href="#" aria-label="Previous">
+		        <span class="material-symbols-outlined">keyboard_arrow_left</span>
+		      </a>
+		    </li>
+		    </c:if>
+		    <c:forEach var = "pageNum" begin = "${page.startPage }" end = "${page.endPage}">
+		    	<li><a href="?pageNum=${pageNum }">${pageNum }</a></li>
+		    </c:forEach>
+		    <c:if test="${page.cri.pageNum != page.endPage}">
 		    <li>
 		      <a href="#" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span>
+		        <span class="material-symbols-outlined">keyboard_arrow_right</span>
 		      </a>
 		    </li>
+		    </c:if>
+		    <c:if test="${page.next}">
+		    <li>
+		      <a href="#" aria-label="Next">
+		        <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
+		      </a>
+		    </li>
+		    </c:if>
 		  </ul>
 		</nav>
 	</div>

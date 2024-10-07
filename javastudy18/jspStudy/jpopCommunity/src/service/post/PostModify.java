@@ -1,6 +1,7 @@
 package service.post;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +18,11 @@ public class PostModify implements Action {
 		
 		request.setCharacterEncoding("utf-8");
 		
-		int idx = Integer.parseInt(request.getParameter("idx"));
+		int post_idx = Integer.parseInt(request.getParameter("post_idx"));
 		
-		PostVo vo = PostDao.getInstance().getPostSelect(idx);
+		List<Object> list = PostDao.getInstance().getPostSelect(post_idx);
 		
-		request.setAttribute("modify", vo);
+		request.setAttribute("modify", list);
 	}
 
 }

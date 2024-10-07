@@ -1,18 +1,53 @@
 package domain;
 
 public class PostVo {
-	private int idx;
+	private int post_idx;
+	private int post_type_idx;
+	private String post_type;
 	private String title;
-	private String singer;
 	private String contents;
 	private String nickname;
-	private String regdate;
 	private String password;
+	private String regdate;
+	private String modifydate;
 	private int viewcount;
 	private int likecount;
 	private int replycount;
 	private int hatecount;
+	private String imgurl;
 	
+	
+	
+	public int getPost_idx() {
+		return post_idx;
+	}
+	public void setPost_idx(int post_idx) {
+		this.post_idx = post_idx;
+	}
+	public String getPost_type() {
+		return post_type;
+	}
+	public void setPost_type(String post_type) {
+		this.post_type = post_type;
+	}
+	public String getImgurl() {
+		return imgurl;
+	}
+	public void setImgurl(String imgurl) {
+		this.imgurl = imgurl;
+	}
+	public int getPost_type_idx() {
+		return post_type_idx;
+	}
+	public void setPost_type_idx(int post_type_idx) {
+		this.post_type_idx = post_type_idx;
+	}
+	public String getModifydate() {
+		return modifydate;
+	}
+	public void setModifydate(String modifydate) {
+		this.modifydate = modifydate;
+	}
 	public String getPassword() {
 		return password;
 	}
@@ -31,23 +66,11 @@ public class PostVo {
 	public void setReplycount(int replycount) {
 		this.replycount = replycount;
 	}
-	public int getIdx() {
-		return idx;
-	}
-	public void setIdx(int idx) {
-		this.idx = idx;
-	}
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getSinger() {
-		return singer;
-	}
-	public void setSinger(String singer) {
-		this.singer = singer;
 	}
 	public String getContents() {
 		return contents;
