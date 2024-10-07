@@ -36,8 +36,8 @@
 			<nav class="top_right">
 				<ul>
 
-					<li class="first"><a href="login/login.html">로그인</a></li>
-					<li><a href="member/member.html">회원가입</a></li>
+					<li class="first"><a href="/mem/login.do">로그인</a></li>
+					<li><a href="/mem/terms.do">회원가입</a></li>
 					<!--<li class="first"><a href="">로그아웃</a></li>
 					<li><a href="">마이페이지</a></li> -->
 				</ul>

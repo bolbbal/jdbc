@@ -34,6 +34,7 @@
 	  <h2 class="sr-only">포트폴리오 글쓰기</h2>
 	  <form name="portfolio" method="post" enctype = "multipart/form-data" action="/port/modifypro.do?idx=${modify.idx}" onsubmit="return check()">
 	  <!-- action을 처리하기전에 check()사용자 함수를 실행하고 되돌아 와라-->
+	  	<input type="hidden" name = "imgurl" value="${modify.imgurl }">
 			<table class="bord_table">
 				<caption class="sr-only">포트폴리오 입력 표</caption>
 				<colgroup>
@@ -55,8 +56,8 @@
 					</tr>
 					<tr>
 						<th>첨부</th>
-						<td><input type="file" name="imgurl">
-						<img src="/upload/${modify.imgurl}"></td>
+						<td><input type="file" name="image">
+						<img src="/upload/${modify.imgurl}" style = "width:100px;"></td>
 					</tr>
 				</tbody>
 			</table>

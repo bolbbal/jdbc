@@ -2,13 +2,9 @@ drop table post_suggest;
 drop table post;
 drop table post_type;
 drop table users;
-<<<<<<< HEAD
-drop SEQUENCE post_seq;
-=======
 drop table music;
 drop table singer;
 drop sequence post_idx_seq;
->>>>>>> a4a0a91ee6cacdf63fa45d5c3aea68d265c8a595
 
 create table post_type (
     post_type_idx number(2) not null,
@@ -37,11 +33,7 @@ create table post (
     constraint post_pk primary key (post_idx)
 );
 
-<<<<<<< HEAD
-CREATE SEQUENCE post_seq;
-=======
 CREATE SEQUENCE post_idx_seq;
->>>>>>> a4a0a91ee6cacdf63fa45d5c3aea68d265c8a595
 
 create table post_suggest (
     post_type_idx number default 2,
@@ -101,13 +93,7 @@ create table users (
     constraint user_pk primary key (user_idx)
 );
 
-<<<<<<< HEAD
-
-
-select * from post order by idx desc;
-=======
 CREATE SEQUENCE users_seq;
->>>>>>> a4a0a91ee6cacdf63fa45d5c3aea68d265c8a595
 
 insert into post (idx, title, singer, contents, nickname, password) values (post_seq.nextval, '1', '2', '3', '4', '5');
 
