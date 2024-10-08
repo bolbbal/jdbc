@@ -1,35 +1,47 @@
 package domain;
 
 public class MemberVo {
+	private int memberIdx;
 	private String id;
-	private String pw;
-	private String[] language;
-	private String answer;
+	private String password;
+	private String name;
+	private String phone;
+	private String email;
 	
+	public int getMemberIdx() {
+		return memberIdx;
+	}
+	public void setMemberIdx(int memberIdx) {
+		this.memberIdx = memberIdx;
+	}
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getPw() {
-		return pw;
+	public String getPassword() {
+		return password;
 	}
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public String[] getLanguage() {
-		return language;
+	public String getName() {
+		return name;
 	}
-	public void setLanguage(String[] language) {
-		this.language = language;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getAnswer() {
-		return answer;
+	public String getPhone() {
+		return phone;
 	}
-	public void setAnswer(String answer) {
-		this.answer = answer;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
-	
-	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}	
 }

@@ -1120,3 +1120,18 @@ where rn > ((1 - 1) * 5);
 select /*+ index_desc (portfolio portfolio_pk)*/ *
 from portfolio;
 
+create table hanulso (
+    member_idx number not null,
+    name varchar2(30) not null,
+    id varchar2(50) not null,
+    password varchar2(500) not null,
+    phone varchar2(15) not null,
+    email varchar2(50) not null,
+    constraint hanulso_pk primary key (member_idx)
+);
+
+create sequence hanulso_seq;
+
+insert into hanulso values (1, '°ü¸®ÀÚ', 'system', '1234', '0212345678', 'dyddnr25@gmail.com');
+
+commit;

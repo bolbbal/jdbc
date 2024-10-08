@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.member.IDCheck;
+import service.member.MemberInsert;
 import service.notice.NoticeDelete;
 import service.notice.NoticeDetail;
 import service.notice.NoticeInsert;
@@ -39,8 +41,21 @@ public class MemberController extends HttpServlet {
 		
 		switch(action) {
 		case "/terms.do":
-			
 			page="/member/memberTerms.jsp";
+			break;
+		
+		case "/member.do":
+			page="/member/member.jsp";
+			break;
+		
+		case "/idcheck.do":
+			new IDCheck().command(request, response);
+			break;
+			
+		case "/memberpro.do":
+			new MemberInsert().command(request, response);
+			page = null;
+			response.sendRedirect("/");
 			break;
 		}
 		
