@@ -15,6 +15,17 @@ create table post_type (
 insert into post_type values (1, 'μιΪυ');
 insert into post_type values (2, 'ͺͺ?ͺα');
 
+select * from post order by viewcount desc;
+
+SELECT *
+FROM (
+    SELECT *
+    FROM post
+    join post_suggest on post.post_idx = post_suggest.post_idx
+    ORDER BY (post.viewcount + (post.likecount * 2)) DESC
+)
+WHERE ROWNUM <= 5;
+
 create table post (
     post_idx number(4) not null,
     post_type_idx number default 1,
@@ -48,10 +59,12 @@ create table post_suggest (
 );
 
 create table singer (
+    post_idx number(4) not null,
     singer_idx number not null,
     singer varchar2(50) not null,
     singer_img varchar2(1000),
-    constraint singer_pk primary key (singer_idx)
+    constraint singer_pk primary key (singer_idx),
+    constraint singer_fk foreign key (post_idx) references post (post_idx)
 );
 
 create sequence singer_seq;
@@ -63,11 +76,14 @@ from singer
 where singer like '%VAUNDY%';
 
 create table music (
+    post_idx number(4) not null,
     music_idx number not null,
     singer_idx number not null,
     music varchar(50) not null,
+    lyrics varchar2(4000) not null,
     constraint music_pk primary key (music_idx),
-    constraint music_fk foreign key (singer_idx) references singer (singer_idx)
+    constraint music_fk1 foreign key (singer_idx) references singer (singer_idx),
+    constraint music_fk2 foreign key (post_idx) references post (post_idx)
 );
 
 create sequence music_seq;
@@ -98,8 +114,11 @@ CREATE SEQUENCE users_seq;
 insert into post (idx, title, singer, contents, nickname, password) values (post_seq.nextval, '1', '2', '3', '4', '5');
 
 select *
-from post
-order by post_idx desc;
+from post_suggest;
+
+select * from singer;
+
+select * from music;
 
 update post set viewcount = viewcount+1 where idx = 3;
 
@@ -120,18 +139,3 @@ WHERE rn > ((1 - 1) * 5);
 
 commit;
 
-SELECT * FROM (
-    SELECT p.post_idx, p.imgurl, p.contents, 
-           SUM(likecount) AS total_likes, 
-           SUM(viewcount) AS total_views,
-           CASE 
-               WHEN SUM(viewcount) > 0 THEN (SUM(likecount) / SUM(viewcount)) 
-               ELSE 0 
-           END AS like_view_ratio
-    FROM post p
-    join post_suggest ps on p.post_idx = ps.post_idx
-    WHERE regdate >= SYSDATE - INTERVAL '1' DAY
-    GROUP BY post_idx
-    ORDER BY like_view_ratio DESC
-)
-WHERE ROWNUM <= 5;

@@ -35,6 +35,8 @@ public class PostUpdate implements Action {
 		PostVo postVo = new PostVo();
 		PostSuggestVo suggestVo = null;
 		
+		postVo.setPost_idx(Integer.parseInt(multi.getParameter("post_idx")));
+		postVo.setPost_type_idx(Integer.parseInt(multi.getParameter("post_type_idx")));
 		postVo.setNickname(multi.getParameter("nickname"));
 		postVo.setPassword(multi.getParameter("password"));
 		postVo.setTitle(multi.getParameter("title"));
@@ -42,13 +44,16 @@ public class PostUpdate implements Action {
 		postVo.setImgurl(multi.getFilesystemName("imgurl"));
 		
 		if(multi.getParameter("post_type_idx").equals(2)) {
+			suggestVo = new PostSuggestVo();
+			
+			suggestVo.setPost_idx(Integer.parseInt(multi.getParameter("post_idx")));
 			suggestVo.setSinger(multi.getParameter("singer"));
 			suggestVo.setMusic(multi.getParameter("music"));
 			suggestVo.setYoutube_url(multi.getParameter("youtube_url"));
 			suggestVo.setThumnail(multi.getFilesystemName("thumnail"));
 		}
 		
-		PostDao.getInstance().insertPost(postVo, suggestVo);
+		PostDao.getInstance().PostUpdate(postVo, suggestVo);
 	}
 
 }

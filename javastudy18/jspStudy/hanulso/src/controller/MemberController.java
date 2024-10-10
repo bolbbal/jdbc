@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.member.EmailSend;
 import service.member.IDCheck;
 import service.member.MemberInsert;
 import service.notice.NoticeDelete;
@@ -56,6 +57,10 @@ public class MemberController extends HttpServlet {
 			new MemberInsert().command(request, response);
 			page = null;
 			response.sendRedirect("/");
+			break;
+			
+		case "/emailsend.do":
+			new EmailSend().command(request, response);
 			break;
 		}
 		

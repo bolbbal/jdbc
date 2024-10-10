@@ -79,14 +79,14 @@
 		  <ul class="pagination">
 		  	<c:if test="${page.prev }">
 		    <li>
-		      <a href="#" aria-label="Previous">
+		      <a href="?pageNum=1" aria-label="Previous">
 		        <span class="material-symbols-outlined">keyboard_double_arrow_left</span>
 		      </a>
 		    </li>
 		    </c:if>
 		    <c:if test="${page.cri.pageNum != 1 }">
 		    <li>
-		      <a href="#" aria-label="Previous">
+		      <a href="?pageNum=${page.cri.pageNum-1 }" aria-label="Previous">
 		        <span class="material-symbols-outlined">keyboard_arrow_left</span>
 		      </a>
 		    </li>
@@ -96,14 +96,14 @@
 		    </c:forEach>
 		    <c:if test="${page.cri.pageNum != page.endPage}">
 		    <li>
-		      <a href="#" aria-label="Next">
+		      <a href="?pageNum=${page.cri.pageNum+1 }" aria-label="Next">
 		        <span class="material-symbols-outlined">keyboard_arrow_right</span>
 		      </a>
 		    </li>
 		    </c:if>
 		    <c:if test="${page.next}">
 		    <li>
-		      <a href="#" aria-label="Next">
+		      <a href="?pageNum=${page.realEnd }" aria-label="Next">
 		        <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
 		      </a>
 		    </li>

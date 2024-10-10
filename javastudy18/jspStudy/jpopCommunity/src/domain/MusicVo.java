@@ -4,7 +4,14 @@ public class MusicVo {
 	private int music_idx;
 	private int singer_idx;
 	private String music;
+	private String lyrics;
 	
+	public String getLyrics() {
+		return lyrics;
+	}
+	public void setLyrics(String lyrics) {
+		this.lyrics = lyrics;
+	}
 	public int getMusic_idx() {
 		return music_idx;
 	}

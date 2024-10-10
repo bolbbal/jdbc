@@ -20,8 +20,9 @@ public class IDCheck implements Action {
 		
 		String result = MemberDao.getInstance().selectID(id);
 
-		response.setContentType("application/json");
-		
+		//write()는 문자열 형식으로 쓰는 메소드
+		//int 타입으로 받았다면
+		//String.valueOf(result) 사용했어도 됨
 		response.getWriter().write(result);
 	}
 

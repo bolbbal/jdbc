@@ -1,14 +1,14 @@
 package service.post;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import javax.servlet.http.Part;
 
 import domain.PostSuggestVo;
 import domain.PostVo;
@@ -23,32 +23,55 @@ public class PostInsert implements Action {
 		request.setCharacterEncoding("utf-8");
 		
 		String savepath = "/upload";
-		int maxSize = 20*1024*1024;
-		String enctype = "utf-8";
 		
 		ServletContext context = request.getServletContext();
 		
 		String path = context.getRealPath(savepath);
-		
-		MultipartRequest multi = new MultipartRequest(request, path, maxSize, enctype, new DefaultFileRenamePolicy());
-		
 		PostVo postVo = new PostVo();
 		PostSuggestVo suggestVo = null;
 		
-		postVo.setNickname(multi.getParameter("nickname"));
-		postVo.setPassword(multi.getParameter("password"));
-		postVo.setTitle(multi.getParameter("title"));
-		postVo.setContents(multi.getParameter("contents").replace("\r\n", "<br>"));
-		postVo.setImgurl(multi.getFilesystemName("imgurl"));
+		Part imgurl = request.getPart("imgurl");
+		String imgName = imgurl.getSubmittedFileName();
 		
-		if(Integer.parseInt(multi.getParameter("post_type_idx")) == 2 ) {
+		if(imgName != null && !imgName.isEmpty()) {
+			String realPath = imgName.substring(0, imgName.lastIndexOf("."));
+			String ext = imgName.substring(imgName.lastIndexOf("."));
+			String uuid = UUID.randomUUID().toString();
+			
+			imgName = realPath + "_" + uuid + ext;
+			
+			imgurl.write(path + File.separator + imgName);
+		}
+		
+		postVo.setNickname(request.getParameter("nickname"));
+		postVo.setPassword(request.getParameter("password"));
+		postVo.setTitle(request.getParameter("title"));
+		postVo.setContents(request.getParameter("contents").replace("\r\n", "<br>"));
+		postVo.setPost_type_idx(Integer.parseInt(request.getParameter("post_type_idx")));
+		postVo.setImgurl(imgName);
+		
+		if(Integer.parseInt(request.getParameter("post_type_idx")) == 2 ) {
 			suggestVo = new PostSuggestVo();
 			
-			suggestVo.setSinger(multi.getParameter("singer"));
-			suggestVo.setMusic(multi.getParameter("music"));
-			suggestVo.setYoutube_url(multi.getParameter("youtube_url"));
-			suggestVo.setThumnail(multi.getFilesystemName("thumnail"));
-			suggestVo.setLyrics(multi.getParameter("lyrics").replace("\r\n", "<br>"));
+			suggestVo.setSinger(request.getParameter("singer"));
+			suggestVo.setMusic(request.getParameter("music"));
+			suggestVo.setYoutube_url(request.getParameter("youtube_url"));
+			suggestVo.setLyrics(request.getParameter("lyrics").replace("\r\n", "<br>"));
+			suggestVo.setThumnail(request.getParameter("thumnail"));
+//			Part thumnail = request.getPart("thumnail");
+//			String thumName = thumnail.getSubmittedFileName();
+//			
+//			if(thumName != null && !thumName.isEmpty()) {
+//				String realPath = thumName.substring(0, thumName.lastIndexOf("."));
+//				String ext = thumName.substring(thumName.lastIndexOf("."));
+//				String uuid = UUID.randomUUID().toString();
+//				
+//				thumName = realPath + "_" + uuid + ext;
+//				
+//				imgurl.write(path + File.separator + thumName);
+//			}
+//			System.out.println(thumName);
+//			suggestVo.setThumnail(thumName);
 		}
 		
 		PostDao.getInstance().insertPost(postVo, suggestVo);

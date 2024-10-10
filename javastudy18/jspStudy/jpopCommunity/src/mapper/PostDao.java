@@ -34,9 +34,7 @@ public class PostDao {
 
 	private static PostDao instance = new PostDao();
 
-	private PostDao() {
-
-	}
+	private PostDao() {}
 
 	public static PostDao getInstance() {
 		return instance;
@@ -44,73 +42,121 @@ public class PostDao {
 
 	public void insertPost(PostVo postVo, PostSuggestVo suggestVo) {
 
-		String postSql = null;
-		String suggestSql = null;
-		String singerSql = null;
-		String musicSql = null;
-		
+		String sql = null;
+
 		if (suggestVo != null) {
 			
-			postSql = "insert into post (post_idx, post_type_idx, title, contents, nickname, password, imgurl) values (post_idx_seq.nextval, ?, ?, ?, ?, ?, ?)";
-			suggestSql = "insert into postSuggest (post_idx, youtube_url, thumnail, music, singer) values (post_idx_seq, ?, ?, ?, ?)";
+			sql = "insert into post (post_idx, post_type_idx, title, contents, nickname, password, imgurl) values (post_idx_seq.nextval, ?, ?, ?, ?, ?, ?)";
+			
+			try {
+				conn = DBManager.getInstance().getConnection();
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setInt(1, postVo.getPost_type_idx());
+				pstmt.setNString(2, postVo.getTitle());
+				pstmt.setNString(3, postVo.getContents());
+				pstmt.setNString(4, postVo.getNickname());
+				pstmt.setNString(5, postVo.getPassword());
+				pstmt.setNString(6, postVo.getImgurl());
+
+				pstmt.executeUpdate();
+				
+				sql = "SELECT post_idx_seq.currval FROM dual";
+		        pstmt = conn.prepareStatement(sql);
+		        ResultSet rs = pstmt.executeQuery();
+		        
+		        int currentPostIdx = 0;
+		        if (rs.next()) {
+		            currentPostIdx = rs.getInt(1);
+		            // 현재 시퀀스 값을 사용하여 추가 작업 수행
+		            System.out.println("Current Post Index: " + currentPostIdx);
+		        }
+		        
+		        insertPostSuggest(suggestVo, currentPostIdx);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
 			
 		} else {
-			postSql = "insert into post (post_idx, title, contents, nickname, password, imgurl) values (post_idx_seq.nextval, ?, ?, ?, ?, ?)";
+			
+			sql = "insert into post (post_idx, title, contents, nickname, password, imgurl) values (post_idx_seq.nextval, ?, ?, ?, ?, ?)";
+			
+			try {
+				conn = DBManager.getInstance().getConnection();
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setNString(1, postVo.getTitle());
+				pstmt.setNString(2, postVo.getContents());
+				pstmt.setNString(3, postVo.getNickname());
+				pstmt.setNString(4, postVo.getPassword());
+				pstmt.setNString(5, postVo.getImgurl());
+
+				pstmt.executeUpdate();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			} finally {
+				close();
+			}
 		}
-
+	}
+	
+	public void insertPostSuggest(PostSuggestVo suggestVo, int currentPostIdx) {
+		
+		String sql = "";
+		
 		try {
-			conn = DBManager.getInstance().getConnection();
-			pstmt = conn.prepareStatement(postSql);
 
-			pstmt.setInt(1, postVo.getPost_type_idx());
-			pstmt.setNString(2, postVo.getTitle());
-			pstmt.setNString(3, postVo.getContents());
-			pstmt.setNString(4, postVo.getNickname());
-			pstmt.setNString(5, postVo.getPassword());
-			pstmt.setNString(6, postVo.getImgurl());
+			conn = DBManager.getInstance().getConnection();
+		
+	        sql = "insert into post_suggest (post_idx, youtube_url, thumnail, music, singer, lyrics) values (?, ?, ?, ?, ?, ?)";
+	        
+			pstmt = conn.prepareStatement(sql);
+			System.out.println(suggestVo.getThumnail());
+			pstmt.setInt(1, currentPostIdx);
+			pstmt.setNString(2, suggestVo.getYoutube_url());
+			pstmt.setNString(3, suggestVo.getThumnail());
+			pstmt.setNString(4, suggestVo.getMusic());
+			pstmt.setNString(5, suggestVo.getSinger());
+			pstmt.setNString(6, suggestVo.getLyrics());
 
 			pstmt.executeUpdate();
-
-			if (suggestVo != null) {
-				insertPostSuggest(suggestVo, suggestSql);
-			}
-
+			
+			checkSingerInfo(suggestVo, currentPostIdx);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-
-		} finally {
-			close();
 		}
 
 	}
 	
-	public SingerVo getSingerInfo(PostSuggestVo suggestVo) {
+	public void checkSingerInfo(PostSuggestVo suggestVo, int currentPostIdx) {
 		
 		String sql = "select * \r\n" + 
 				"from singer\r\n" + 
 				"where singer like ?";
 		
-		SingerVo vo = null;
-		
 		try {
 			
 			conn = DBManager.getInstance().getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setNString(1, "%"+suggestVo.getSinger()+"%");
+			pstmt.setNString(1, "'%"+suggestVo.getSinger()+"%'");
 			
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				
-				vo = new SingerVo();
+				int singer_idx = rs.getInt("singer_idx");
 				
-				vo.setSinger_idx(rs.getInt("singer_idx"));
-				vo.setSinger(rs.getNString("singer"));
-				vo.setSinger_img(rs.getNString("singer_img"));
+				insertMusicInfo(suggestVo, singer_idx, currentPostIdx);
 				
 			} else {
 				
-				insertSingerInfo(suggestVo);
+				insertSingerInfo(suggestVo, currentPostIdx);
 				
 			}
 			
@@ -120,20 +166,33 @@ public class PostDao {
 			close();
 		}
 		
-		return vo;
 	}
 	
-	public void insertSingerInfo(PostSuggestVo suggestVo) {
+	public void insertSingerInfo(PostSuggestVo suggestVo, int currentPostIdx) {
 		
-		String sql = "insert into singer (singer_idx, singer) value (singer_seq.nextval, ?)";
+		String sql = "insert into singer (singer_idx, post_idx, singer) values (singer_seq.nextval, ?, ?)";
 		
 		try {
 			
 			conn = DBManager.getInstance().getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setNString(1, "%"+suggestVo.getSinger()+"%");
+			pstmt.setInt(1, currentPostIdx);
+			pstmt.setNString(2, suggestVo.getSinger());
 			
 			pstmt.executeUpdate();
+			
+			sql = "SELECT singer_seq.currval FROM dual";
+	        pstmt = conn.prepareStatement(sql);
+	        ResultSet rs = pstmt.executeQuery();
+	        
+	        int currentSingerIdx = 0;
+	        if (rs.next()) {
+	        	currentSingerIdx = rs.getInt(1);
+	            // 현재 시퀀스 값을 사용하여 추가 작업 수행
+	            System.out.println("Current singer Index: " + currentSingerIdx);
+	        }
+	        
+	        insertMusicInfo(suggestVo, currentSingerIdx, currentPostIdx);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -143,28 +202,25 @@ public class PostDao {
 		
 	}
 	
-	public void insertMusicInfo() {
+	public void insertMusicInfo(PostSuggestVo suggestVo, int currentSingerIdx, int currentPostIdx) {
 		
-	}
-
-	public void insertPostSuggest(PostSuggestVo suggestVo, String suggestSql) {
-
+		String sql = "insert into music (post_idx, singer_idx, music_idx, music, lyrics) values (?, ?, music_seq.nextval, ?, ?)";
+		
 		try {
-
+			
 			conn = DBManager.getInstance().getConnection();
-			pstmt = conn.prepareStatement(suggestSql);
-
-			pstmt.setNString(1, suggestVo.getYoutube_url());
-			pstmt.setNString(2, suggestVo.getThumnail());
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, currentPostIdx);
+			pstmt.setInt(2, currentSingerIdx);
 			pstmt.setNString(3, suggestVo.getMusic());
-			pstmt.setNString(4, suggestVo.getSinger());
-
+			pstmt.setNString(4, suggestVo.getLyrics());
+			
 			pstmt.executeUpdate();
-
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			close();
 		}
-
 	}
 
 	public int getPostCount(String query) {
@@ -187,6 +243,7 @@ public class PostDao {
 			if (rs.next()) {
 				count = rs.getInt("count");
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -351,6 +408,7 @@ public class PostDao {
 					
 					suggestVo = new PostSuggestVo();
 					
+					suggestVo.setPost_idx(rs.getInt("post_idx"));
 					suggestVo.setYoutube_url(rs.getNString("youtube_url"));
 					suggestVo.setThumnail(rs.getNString("thumnail"));
 					suggestVo.setMusic(rs.getNString("music"));
@@ -453,52 +511,97 @@ public class PostDao {
 
 	public void PostUpdate(PostVo vo, PostSuggestVo suggestVo) {
 
-		String postSql = null;
-		String suggestSql = null;
-
-		if (suggestVo != null) {
-
-			postSql = "update post set title = ?, contents = ?, imgurl = ?, modifydate = sysdate where post_idx = ?";
-			suggestSql = "update post_suggest set music = ?, singer = ?, youtube_url = ?, thumnail = ? where post_idx = ?";
-
-		}
-
+		String sql = "update post set title = ?, contents = ?, imgurl = ?, modifydate = sysdate, post_type_idx = ? where post_idx = ?";
+			
 		try {
 			conn = DBManager.getInstance().getConnection();
-			pstmt = conn.prepareStatement(postSql);
+			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setNString(1, vo.getTitle());
 			pstmt.setNString(2, vo.getContents());
 			pstmt.setNString(3, vo.getImgurl());
-			pstmt.setInt(4, vo.getPost_idx());
+			pstmt.setInt(4, vo.getPost_type_idx());
+			pstmt.setInt(5, vo.getPost_idx());
 
 			pstmt.executeUpdate();
-
-			if (suggestVo != null) {
-				SuggestUpdate(suggestVo, suggestSql);
+				
+			if(suggestVo != null) {
+	
+				SuggestUpdate(suggestVo);
 			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
 
+	} 
+
+	public void SuggestUpdate(PostSuggestVo suggestVo) {
+		
+		String sql = "update post_suggest set music = ?, singer = ?, youtube_url = ?, thumnail = ? where post_idx = ?";
+		
+		try {
+			
+			conn = DBManager.getInstance().getConnection();
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setNString(1, suggestVo.getMusic());
+			pstmt.setNString(2, suggestVo.getSinger());
+			pstmt.setNString(3, suggestVo.getYoutube_url());
+			pstmt.setNString(4, suggestVo.getThumnail());
+			pstmt.setInt(5, suggestVo.getPost_idx());
+
+			pstmt.executeUpdate();
+			
+			SingerUpdate(suggestVo);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close();
 		}
 	}
-
-	public void SuggestUpdate(PostSuggestVo suggestVo, String suggestSql) {
-
+	
+	public void SingerUpdate(PostSuggestVo suggestVo) {
+		
+		String sql = "update singer set singer = ? where post_idx = ?";
+		
 		try {
+			
 			conn = DBManager.getInstance().getConnection();
-			pstmt = conn.prepareStatement(suggestSql);
-
-			pstmt.setNString(1, suggestVo.getMusic());
-			pstmt.setNString(2, suggestVo.getSinger());
-			pstmt.setNString(3, suggestVo.getYoutube_url());
-			pstmt.setNString(4, suggestVo.getThumnail());
-
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setNString(1, suggestVo.getSinger());
+			pstmt.setInt(2, suggestVo.getPost_idx());
+			
 			pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			close();
+		}
+	}
+	
+	public void MusicUpdate(PostSuggestVo suggestVo) {
+		
+		String sql = "update music set music = ?, lyrics = ? where post_idx = ?";
+		
+		try {
+			
+			conn = DBManager.getInstance().getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setNString(1, suggestVo.getMusic());
+			pstmt.setNString(2, suggestVo.getLyrics());
+			pstmt.setInt(3, suggestVo.getPost_idx());
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
 		}
 	}
 }

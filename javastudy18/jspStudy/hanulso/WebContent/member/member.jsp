@@ -101,11 +101,11 @@
                         <th><label for="email">메일인증<span class="must"><b>필수입력</b></span></label></th>
                         <td>
                             <input type="email" name="email" id="email" class="w300" placeholder="이메일 입력">
-                            <input type="button" id="btn_email" value="메일전송" style="width:10%;" class="btn_round"><br><br>
-                            <p id="emailmsg"></p>
+                            <input type="button" id="btn_email" value="메일전송" style="width:10%;" class="btn_round"><br>
+                            <p id="emailmsg"></p><br>
                             <input type="text" name="certinumber" id="certinumber" class="w300" placeholder="인증번호 입력">
-                    		<input type="button" value="확인" style="width:10%;" class="btn_round">
-                            <p id="certinumbermsg"></p>
+                    		<input type="button" id="certichk" value="확인" style="width:10%;" class="btn_round">
+                            <p id="certimsg"></p>
                         </td>
                     </tr>
                	</tbody>
@@ -178,11 +178,39 @@
 			})
 			
 			$("#pw2").blur(function() {
+				let pw1 = $("#pw1").val();
+				let pw2 = $("#pw2").val();
 				if(!$("#pw2").val()) {
 					$("#pw2msg").html("<span style='color:#f00;'>비밀번호입력</span>");
 				} else {
 					$("#pw2msg").html("");
 				}
+				if(pw1 != pw2) {
+					$("#pw2msg").html("<span style='color:#f00;'>비밀번호가 같지 않습니다.</span>")
+					$("#pw1").focus();
+				} else if(pw1 == pw2) {
+					$("#pw2msg").html("")
+				}
+				
+			})
+			
+			$("#btn_email").on("click", function () {
+				var email = $("#email").val();
+				if(email == "") {
+					$("#emailmsg").html("<span style = 'color:#f00;'>이메일 주소를 입력하세요.</span>")
+					return false;
+				}
+				$.ajax({
+					type:'post',
+					url:'/mem/emailsend.do',
+					data:{email:$('#email').val()},
+					dataType:'json', //리턴받는 데이터 형식
+					success:function(data) {
+						alert(data.msg);
+					}, error:function() {
+						alert("통신 실패");
+					}
+				})
 			})
 			
 		});

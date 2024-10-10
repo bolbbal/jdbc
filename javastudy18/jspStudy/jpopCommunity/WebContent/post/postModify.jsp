@@ -11,6 +11,7 @@
     <div class = "container">
     	<form name="modify" method="post" action="/posts/Modifypro.do" onsubmit="return check()">
     		<input type="hidden" name="post_idx" value="${postModify.post_idx }">
+    		<input type="hidden" name="old_post_type" value="${postModify.post_type_idx }">
     		<table class="col-md-12 post-write">
     			<tr>
 	                <th>추천</th>

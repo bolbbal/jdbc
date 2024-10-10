@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,11 @@ import service.post.PostView;
 import service.post.PostModify;
 
 @WebServlet("/posts/*")
+@MultipartConfig(
+		fileSizeThreshold = 1024*1024*2, //2MB 이상일 때 임시 디스크에 저장
+		maxFileSize = 1024*1024*20, //최대 파일 크기 20MB
+		maxRequestSize = 1024*1024*100 //최대 요청 크기 100MB
+)
 public class PostController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

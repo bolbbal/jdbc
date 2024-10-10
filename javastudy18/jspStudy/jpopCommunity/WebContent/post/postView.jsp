@@ -25,7 +25,7 @@
 		<c:if test="${suggest != null }">
 			<div class = "container video">
 				<div class="embed-responsive embed-responsive-16by9">
-					<p>${suggest.youtube_url }</p>
+					<iframe width="560" height="315" src="${suggest.youtube_url }" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 				</div>
 			</div>
 			<div class = "container text-center post-detail">
