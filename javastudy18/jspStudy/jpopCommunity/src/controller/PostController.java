@@ -8,10 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.post.BestPost;
+import service.post.LikeButton;
 import service.post.PostInsert;
 import service.post.PostList;
 import service.post.PostUpdate;
 import service.post.PostView;
+import service.post.HateButton;
 import service.post.PostModify;
 
 @WebServlet("/posts/*")
@@ -69,6 +72,23 @@ public class PostController extends HttpServlet {
 			page=null;
 			response.sendRedirect("/posts/list.do");
 			break;
+			
+		case "/best.do" :
+			new BestPost().command(request, response);
+			page = "/post/BestPost.jsp";
+			break;
+		
+		case "/like.do" :
+			new LikeButton().command(request, response);
+			break;
+			
+		case "/hate.do" :
+			new HateButton().command(request, response);
+			break;
+			
+//		case "/reply.do" :
+//			new replyButton().command(request, response);
+//			break;
 		}
 		
 		if(page!=null) {

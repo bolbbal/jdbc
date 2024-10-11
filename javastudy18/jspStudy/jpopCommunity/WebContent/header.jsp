@@ -67,7 +67,7 @@
 			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float: left; justify-content: flex-start;">
 			      <ul class="nav navbar-nav">
 			        <li><a href="/posts/list.do">新着 <span class="sr-only">(current)</span></a></li>
-			        <li><a href="#">人気</a></li>
+			        <li><a href="/posts/best.do">人気</a></li>
 			        <li><a href="#">おすすめ</a></li>
 			        <li><a href="#">歌手</a></li>
 			      </ul>

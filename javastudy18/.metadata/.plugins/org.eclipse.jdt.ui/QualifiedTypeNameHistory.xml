@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.lang.Exception"/>
-<fullyQualifiedTypeName name="javaJDBC.ScoreVo"/>
-<fullyQualifiedTypeName name="javaJDBCTest.DBmanager"/>
-<fullyQualifiedTypeName name="javaJDBC.DBmanager"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="javaJDBCOdition.OditionDao"/>
-<fullyQualifiedTypeName name="javaJDBCentry.DBManager"/>
-<fullyQualifiedTypeName name="javaJDBCdepart.DBManager"/>
-<fullyQualifiedTypeName name="java.text.DecimalFormat"/>
-<fullyQualifiedTypeName name="java.text.DateFormat"/>
-<fullyQualifiedTypeName name="javaJDBCoil.OilDao"/>
-<fullyQualifiedTypeName name="javaJDBCoil.DBManager"/>
-<fullyQualifiedTypeName name="javaJDBCshop.ShopDao"/>
-<fullyQualifiedTypeName name="javaJDBCshop.DBManager"/>
-<fullyQualifiedTypeName name="javaJDBCshop.ShopVo"/>
-<fullyQualifiedTypeName name="usedCar.DBManager"/>
-<fullyQualifiedTypeName name="usedCar.UsedCarVo"/>
 <fullyQualifiedTypeName name="usedCar.UsedCarDao"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
@@ -38,8 +21,6 @@
 <fullyQualifiedTypeName name="com.oreilly.servlet.multipart.FileRenamePolicy"/>
 <fullyQualifiedTypeName name="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"/>
 <fullyQualifiedTypeName name="service.member.IDCheck"/>
-<fullyQualifiedTypeName name="domain.MemberVo"/>
-<fullyQualifiedTypeName name="mapper.MemberDao"/>
 <fullyQualifiedTypeName name="service.member.MemberInsert"/>
 <fullyQualifiedTypeName name="domain.SingerVo"/>
 <fullyQualifiedTypeName name="domain.PostSuggestVo"/>
@@ -60,4 +41,23 @@
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.lang.Object"/>
+<fullyQualifiedTypeName name="javax.mail.Session"/>
+<fullyQualifiedTypeName name="javax.mail.AuthenticationFailedException"/>
+<fullyQualifiedTypeName name="javax.mail.Authenticator"/>
+<fullyQualifiedTypeName name="java.lang.Override"/>
+<fullyQualifiedTypeName name="javax.mail.PasswordAuthentication"/>
+<fullyQualifiedTypeName name="javax.mail.internet.MimeMessage"/>
+<fullyQualifiedTypeName name="javax.mail.Message.RecipientType"/>
+<fullyQualifiedTypeName name="javax.mail.internet.InternetAddress"/>
+<fullyQualifiedTypeName name="javax.mail.Transport"/>
+<fullyQualifiedTypeName name="com.sun.javafx.collections.MappingChange.Map"/>
+<fullyQualifiedTypeName name="java.io.PrintWriter"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="service.member.CertiCheck"/>
+<fullyQualifiedTypeName name="domain.MemberVo"/>
+<fullyQualifiedTypeName name="mapper.MemberDao"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="com.google.gson.Gson"/>
+<fullyQualifiedTypeName name="service.member.MemberAccess"/>
 </qualifiedTypeNameHistroy>

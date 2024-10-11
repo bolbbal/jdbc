@@ -5,6 +5,7 @@
     <!-- contents start -->
     <c:set var = "post" value = "${list[0]}"/>
     <c:set var = "suggest" value = "${list[1]}"/>
+    <input type="hidden" id="post_idx" value="${post.post_idx }">
     <div class = "container">
     	<div class = "container post-title">
     		<h3>${post.title}</h3>
@@ -34,11 +35,12 @@
 			</div>
 		</c:if>
 		<div class = "container text-center post-like">
-			<button type="button" class="btn btn-default">
-				<span class="material-symbols-outlined">thumb_up</span><span>${post.likecount}</span>
+			<span id="likeCount">${post.likecount}</span>
+			<button type="button" class="btn btn-default" id="like">
+				<span class="material-symbols-outlined">thumb_up</span>
 			</button>
-			<button type="button" class="btn btn-default">
-				<span class="material-symbols-outlined">thumb_down</span><span>${post.hatecount}</span>
+			<button type="button" class="btn btn-default" id="hate">
+				<span class="material-symbols-outlined">thumb_down</span>
 			</button>
 		</div>
 		<div class="form-group">
@@ -53,5 +55,31 @@
 		</div>
 	</div>
 	 <!-- contents end -->
-	
+	<script>
+		var post_idx = $("#post_idx").val();
+		
+		$("#like").on("click", function() {
+			$.ajax({
+				type:"post",
+				url:"/posts/like.do",
+				data:{"post_idx":post_idx},
+				dataType:"json",
+				success:function(data) {
+					$("#likeCount").text(data.likecount);
+				}
+			})
+		})
+		
+		$("#hate").on("click", function() {
+			$.ajax({
+				type:"post",
+				url:"/posts/hate.do",
+				data:{"post_idx":post_idx},
+				dataType:"json",
+				success:function(data) {
+					$("#hateCount").text(data.hatecount);
+				}
+			})
+		})
+	</script>
 <%@ include file="/footer.jsp" %>

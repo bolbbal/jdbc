@@ -251,6 +251,35 @@ public class PostDao {
 		}
 		return count;
 	}
+	
+	public int getPopularPostCount(String query) {
+
+		String sql = "";
+		int count = 0;
+
+		if (query != "") {
+			sql = "select count(*) as count from post where likecount > 4 and " + query;
+		} else {
+			sql = "select count(*) as count from post where likecount > 4";
+		}
+
+		try {
+
+			conn = DBManager.getInstance().getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt("count");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return count;
+	}
 
 	public List<PostVo> getPostList(Criteria cri, String query) {
 
@@ -258,14 +287,24 @@ public class PostDao {
 
 		if (query == "") {
 			sql = "select * \r\n" + 
-					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type_idx, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, hatecount\r\n" + 
-					"      from post \r\n" + 
-					"      where rownum <= (? * ?))\r\n" + 
+					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, hatecount\r\n" + 
+					"      FROM (\r\n" + 
+					"        SELECT p.*, pt.post_type\r\n" + 
+					"        FROM post p\r\n" + 
+					"        JOIN post_type pt ON p.post_type_idx = pt.post_type_idx\r\n" + 
+					"        ORDER BY p.post_idx DESC\r\n" + 
+					"    ) p "+  
+					"      where rownum <= (? * ?)) p \r\n" + 
 					"where rn > ((?-1) * ?)";
 		} else {
 			sql = "select * \r\n" + 
 					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type_idx, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, hatecount\r\n" + 
-					"      from post \r\n" + 
+					"      FROM (\r\n" + 
+					"        SELECT p.*, pt.post_type\r\n" + 
+					"        FROM post p\r\n" + 
+					"        JOIN post_type pt ON p.post_type_idx = pt.post_type_idx\r\n" + 
+					"        ORDER BY p.post_idx DESC\r\n" + 
+					"    ) p " + 
 					"      where (" + query + ") and rownum <= (? * ?))\r\n" + 
 					"where rn > ((?-1) * ?)";
 		}
@@ -289,7 +328,7 @@ public class PostDao {
 				PostVo vo = new PostVo();
 
 				vo.setPost_idx(rs.getInt("post_idx"));
-				vo.setPost_type_idx(rs.getInt("post_type_idx"));
+				vo.setPost_type(rs.getNString("post_type"));
 				vo.setTitle(rs.getNString("title"));
 				vo.setContents(rs.getNString("contents"));
 				vo.setNickname(rs.getNString("nickname"));
@@ -315,14 +354,27 @@ public class PostDao {
 		String sql = null;
 
 		if (query == "") {
-			sql = "select * \r\n"
-					+ "from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type_idx, title, contents, nickname, regdate, modifydate, viewcount, likecount, replycount\r\n"
-					+ "      from post where likecount > 4 and rownum <= (? * ?))\r\n" + "where rn > ((?-1) * ?)";
+			sql = "select * \r\n" + 
+					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, hatecount\r\n" + 
+					"      FROM (\r\n" + 
+					"        SELECT p.*, pt.post_type\r\n" + 
+					"        FROM post p\r\n" + 
+					"        JOIN post_type pt ON p.post_type_idx = pt.post_type_idx\r\n" + 
+					"        ORDER BY p.post_idx DESC\r\n" + 
+					"    ) p "+  
+					"      where likecount > 4 amd rownum <= (? * ?)) p \r\n" + 
+					"where rn > ((?-1) * ?)";
 		} else {
-			sql = "select * \r\n"
-					+ "from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type_idx, title, contents, nickname, regdate, modifydate, viewcount, likecount, replycount\r\n"
-					+ "      from post where likecount > 4 and (" + query + ") and rownum <= (? * ?))\r\n"
-					+ "where rn > ((?-1) * ?)";
+			sql = "select * \r\n" + 
+					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type_idx, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, hatecount\r\n" + 
+					"      FROM (\r\n" + 
+					"        SELECT p.*, pt.post_type\r\n" + 
+					"        FROM post p\r\n" + 
+					"        JOIN post_type pt ON p.post_type_idx = pt.post_type_idx\r\n" + 
+					"        ORDER BY p.post_idx DESC\r\n" + 
+					"    ) p " + 
+					"      where likecount > 4 and (" + query + ") and rownum <= (? * ?))\r\n" + 
+					"where rn > ((?-1) * ?)";
 		}
 
 		List<PostVo> list = new ArrayList<PostVo>();
@@ -344,12 +396,11 @@ public class PostDao {
 				PostVo vo = new PostVo();
 
 				vo.setPost_idx(rs.getInt("post_idx"));
-				vo.setPost_type_idx(rs.getInt("post_type_idx"));
+				vo.setPost_type(rs.getNString("post_type"));
 				vo.setTitle(rs.getNString("title"));
 				vo.setContents(rs.getNString("contents"));
 				vo.setNickname(rs.getNString("nickname"));
 				vo.setRegdate(rs.getNString("regdate").substring(0, 10));
-				vo.setModifydate(rs.getNString("modifydate").substring(0, 10));
 				vo.setViewcount(rs.getInt("viewcount"));
 				vo.setLikecount(rs.getInt("likecount"));
 				vo.setReplycount(rs.getInt("replycount"));
@@ -468,10 +519,42 @@ public class PostDao {
 			close();
 		}
 	}
+	
+	public PostVo selectPopularCount(int post_idx) {
+		
+		String sql = "select * from post where post_idx = ?";
+		
+		int likecount = 0;
+		PostVo vo = null;
+		
+		try {
+			
+			conn = DBManager.getInstance().getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, post_idx);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new PostVo();
+				
+				vo.setLikecount(rs.getInt("likecount"));
+				vo.setHatecount(rs.getInt("hatecount"));
+				vo.setReplycount(rs.getInt("replycount"));
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return vo;
+	}
 
 	public void UpdateHatecount(int post_idx) {
 
-		String sql = "update post set hatecount = hatecount + 1 where post_idx = ?";
+		String sql = "update post set hatecount = hatecount + 1, likecount = likecount - 1 where post_idx = ?";
 
 		try {
 

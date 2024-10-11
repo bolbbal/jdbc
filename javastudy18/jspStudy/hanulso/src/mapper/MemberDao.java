@@ -48,7 +48,6 @@ public class MemberDao {
 			
 			conn = DBManager.getInstance().getDBManager();
 			pstmt = conn.prepareStatement(sql);
-			
 			pstmt.setNString(1, vo.getName());
 			pstmt.setNString(2, vo.getId());
 			pstmt.setNString(3, vo.getPassword());
@@ -56,6 +55,7 @@ public class MemberDao {
 			pstmt.setNString(5, vo.getEmail());
 			
 			pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

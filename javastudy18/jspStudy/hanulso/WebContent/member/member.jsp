@@ -45,7 +45,7 @@
                         <li>회원정보는 개인정보 취급방침에 따라 안전하게 보호되며 회원님의 명백한 동의 없이 공개 또는 제3자에게 제공되지 않습니다.</li>
                     </ul>
                 </div>
-           <form name="member" method="post" action="/mem/memberpro.do" id="member">
+          
             <table class="table_write02" summary="회원가입을 위한 이름, 아이디, 비밀번호, 비밀번호확인, 소속, 유선전화번호, 휴대전화번호, 이메일, 주소, 본인확인질문, 본인확인답, 주활용사이트, 알림여부 정보 입력">
                 <caption>회원가입을 위한 정보입력표</caption>
                 <colgroup>
@@ -87,14 +87,14 @@
 					<tr>
                         <th><label for="phone">전화번호<span class="must"><b>필수입력</b></span></label></th>
                         <td>
-                            <select name="phone1">
+                            <select name="phone1" id="phone1">
                             	<option value="02">02</option>
                             	<option value="042">042</option>
                             	<option value="052">052</option>
                             	<option value="063">063</option>
                             </select> - 
-                            <input type="text" name="phone2" maxlength="4" style="width:105px;"> - 
-                            <input type="text" name="phone3" maxlength="4" style="width:105px;">
+                            <input type="text" name="phone2" id="phone2" maxlength="4" style="width:105px;"> - 
+                            <input type="text" name="phone3" id="phone3" maxlength="4" style="width:105px;">
                         </td>
                     </tr>
                     <tr>
@@ -104,25 +104,27 @@
                             <input type="button" id="btn_email" value="메일전송" style="width:10%;" class="btn_round"><br>
                             <p id="emailmsg"></p><br>
                             <input type="text" name="certinumber" id="certinumber" class="w300" placeholder="인증번호 입력">
-                    		<input type="button" id="certichk" value="확인" style="width:10%;" class="btn_round">
+                    		<input type="button" id="certiChk" value="확인" style="width:10%;" class="btn_round">
                             <p id="certimsg"></p>
                         </td>
                     </tr>
                	</tbody>
             </table>
-           </form>
+				<div class="btnArea Acenter pt60 pb100">
+			        <button class="btn_round btn_large btn_BlueGray w180" id="btn_reset"><b>취소</b></button>
+			        <button class="btn_round btn_large btn_pointColor w180" id="btn_submit"><b>확인</b></button>
+			    </div>
+
         </div>
 	</div>
 	<!-- end contents -->
 	
-	<div class="btnArea Acenter pt60 pb100">
-        <a href="javascript:history.go(-1);" class="btn_round btn_large btn_BlueGray w180"><b>취소</b></a>
-        <a href="javascript:fn_save();" class="btn_round btn_large btn_pointColor w180"><b>확인</b></a>
-    </div>
 	
 	
 	<script>
+		
 		$(function() {
+			
 			$(".location  .dropdown > a").on("click",function(e) {
 				e.preventDefault();
 				if($(this).next().is(":visible")) {
@@ -194,6 +196,8 @@
 				
 			})
 			
+			var certiChk;
+			
 			$("#btn_email").on("click", function () {
 				var email = $("#email").val();
 				if(email == "") {
@@ -206,6 +210,7 @@
 					data:{email:$('#email').val()},
 					dataType:'json', //리턴받는 데이터 형식
 					success:function(data) {
+						certinum = data.certinum;
 						alert(data.msg);
 					}, error:function() {
 						alert("통신 실패");
@@ -213,7 +218,74 @@
 				})
 			})
 			
+			$("#certiChk").on("click", function() {
+				var certinumber = $("#certinumber").val();
+				if($("#certinumber") == "") {
+					$("#certimsg").html("<span style='color:#f00;'>인증번호를 입력하세요.</span>");
+					$("#certinumber").focus();
+					return false;
+				}
+				
+				$.ajax({
+					type:"post",
+					data:{"certinumber":certinumber},
+					url:"/mem/certiCheck.do",
+					dataType:"json",
+					success:function(data) {
+						if(data.check == "ok") {
+							$("#certimsg").html("<span style='color:#0f0;'>" + data.msg + "</span>");
+							certiChk = 1;
+						} else if(data.check == "nok") {
+							$("#certimsg").html("<span style='color:#f00;'>" + data.msg + "</span>");
+							certiChk = 0;
+						}
+					}, error:function() {
+						alert("통신 에러");
+					}
+				})
+				/*if(certinum != $("#certinumber")) {
+					$("#certimsg").html("<span style='color:#f00;'>인증번호가 틀립니다.</span>");
+				} else if(certinum == $("#certinumber")) {
+					$("#certimsg").html("<span style='color:#0f0;'>인증됐습니다.</span>");
+				}*/
+			})
+			
+			
+		    
+			$("#btn_submit").on("click", function() {
+				var name = $("#name").val();
+			    var id = $("#id").val();
+			    var pw1 = $("#pw1").val();
+			    var phone1 = $("#phone1").val();
+			    var phone2 = $("#phone2").val();
+			    var phone3 = $("#phone3").val();
+			    var email = $("#email").val();
+			    
+				if(certiChk == 0) {
+					alert("메일인증 번호 확인은 필수입니다.");
+					return;
+				} else {
+					$.ajax({
+						type:"post",
+						data:{"name" : name,
+							"id" : id,
+							"pw1" : pw1,
+							"phone" : phone1 + phone2 + phone3,
+							"email" : email
+							},
+						url:"/mem/access.do",
+						dataType:"json",
+						success:function(data) {
+							alert(data.msg);
+							location.href="/";
+						}, error:function() {
+							alert("통신 에러");
+						}
+					})
+				}
+			})
 		});
+		
 	</script>
 
 <%@ include file = "/footer.jsp"%>

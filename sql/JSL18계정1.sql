@@ -1133,5 +1133,5 @@ create table hanulso (
 create sequence hanulso_seq;
 
 insert into hanulso values (1, '°ü¸®ÀÚ', 'system', '1234', '0212345678', 'dyddnr25@gmail.com');
-
+select * from hanulso;
 commit;

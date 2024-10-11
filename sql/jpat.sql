@@ -11,10 +11,10 @@ create table post_type (
     post_type varchar2(50) not null,
     constraint post_type_pk primary key (post_type_idx)
 );
-
+commit;
 insert into post_type values (1, 'μιΪυ');
 insert into post_type values (2, 'ͺͺ?ͺα');
-
+update post_type set post_type = 'ͺͺ?ͺα' where post_type_idx = 2;
 select * from post order by viewcount desc;
 
 SELECT *
@@ -115,7 +115,7 @@ insert into post (idx, title, singer, contents, nickname, password) values (post
 
 select *
 from post_suggest;
-
+select * from post;
 select * from singer;
 
 select * from music;
@@ -129,13 +129,27 @@ from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type_idx
 where rn > ((1-1) * 5);
 
 SELECT *
-FROM (SELECT /*+ index_desc(post post_pk) */ ROWNUM rn, post_idx, post_type_idx, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, hatecount
+FROM (SELECT /*+ index_desc(post post_pk) */ ROWNUM rn, p.post_idx, pt.post_type, p.title, p.contents, p.nickname, p.password, p.imgurl, p.regdate, p.modifydate, p.viewcount, p.likecount, p.replycount, p.hatecount
         FROM (SELECT p.*, pt.post_type
                 FROM post p
                 JOIN post_type pt ON p.post_type_idx = pt.post_type_idx
                 ORDER BY p.post_idx desc)
     WHERE ROWNUM <= (1 * 5))
 WHERE rn > ((1 - 1) * 5);
+
+
+SELECT *
+FROM (
+    SELECT ROWNUM rn, p.post_idx, p.post_type, p.title, p.contents, p.nickname, p.password, p.imgurl, p.regdate, p.modifydate, p.viewcount, p.likecount, p.replycount, p.hatecount
+    FROM (
+        SELECT p.*, pt.post_type
+        FROM post p
+        JOIN post_type pt ON p.post_type_idx = pt.post_type_idx
+        ORDER BY p.post_idx DESC
+    ) p
+    WHERE ROWNUM <= 5
+)
+WHERE rn > 0;
 
 commit;
 

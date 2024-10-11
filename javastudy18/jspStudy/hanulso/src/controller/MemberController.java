@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.member.CertiCheck;
 import service.member.EmailSend;
 import service.member.IDCheck;
+import service.member.MemberAccess;
 import service.member.MemberInsert;
 import service.notice.NoticeDelete;
 import service.notice.NoticeDetail;
@@ -61,6 +63,14 @@ public class MemberController extends HttpServlet {
 			
 		case "/emailsend.do":
 			new EmailSend().command(request, response);
+			break;
+			
+		case "/certiCheck.do":
+			new CertiCheck().command(request, response);
+			break;
+			
+		case "/access.do":
+			new MemberAccess().command(request, response);
 			break;
 		}
 		
