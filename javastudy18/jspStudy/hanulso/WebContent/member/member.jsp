@@ -80,7 +80,7 @@
                         <td>
                             <input type="password" name="pw2" id="pw2" class="w300">
                             <p id="pw2msg"></p>
-                            <p class="guideTxt"><span class="tc_point">비밀번호 미입력시 기존비밀번호가 유지됩니다.</span></p>
+                            <p class="guideTxt"></p>
                         </td>
                     </tr>
                     
@@ -260,29 +260,52 @@
 			    var phone2 = $("#phone2").val();
 			    var phone3 = $("#phone3").val();
 			    var email = $("#email").val();
-			    
+			    var isValid = true;
+			    var pwRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+	               // ^ : 문자열의 시작
+	               //(?=.[a-zA-Z]) : 문자열에 영문자가 적어도 1개 이상 포함되어야 함
+	               //(?=.[\W_]) : 문자열에 특수문자가 적어도 1개 이상 포함되어야 함
+	               //[a-zA-Z0-9\W_]{8,15} : 영문, 숫자, 특수문자 조합으로 이루어진 8~15자의 문자열
+	               //$ : 문자열의 끝
+	               //[!@#$%^+=-] 이 부분이 특수문자까지 허용
 				if(certiChk == 0) {
 					alert("메일인증 번호 확인은 필수입니다.");
 					return;
 				} else {
-					$.ajax({
-						type:"post",
-						data:{"name" : name,
-							"id" : id,
-							"pw1" : pw1,
-							"phone" : phone1 + phone2 + phone3,
-							"email" : email
-							},
-						url:"/mem/access.do",
-						dataType:"json",
-						success:function(data) {
-							alert(data.msg);
-							location.href="/";
-						}, error:function() {
-							alert("통신 에러");
-						}
-					})
+					if($("#name").val().trim() === '') {
+						$("#namemsg").html("<span style='color:#f00;'>이름 입력</span>");
+						isValid = false;
+					}
+					if($("#id").val().trim() === '') {
+						$("#idmsg").html("<span style='color:#f00;'>아이디 입력</span>");
+						isValid = false;
+					}
+					if(!pwRegex.test(pw1)) {
+						$("#pw1").next(".guideTxt").html("<span style='color:#f00;'>비밀번호는 영문 대문자, 소문자, 숫자, 특수문자를 포함한 9~13자로 작성해 주십시오.</span>");
+						isValid = false;
+					}
+					if(isValid) {
+						$.ajax({
+							type:"post",
+							data:{"name" : name,
+								"id" : id,
+								"pw1" : pw1,
+								"phone" : phone1 + phone2 + phone3,
+								"email" : email
+								},
+							url:"/mem/access.do",
+							dataType:"json",
+							success:function(data) {
+								alert(data.msg);
+								location.href="/";
+							}, error:function() {
+								alert("통신 에러");
+							}
+						})
+					}
 				}
+				
+				
 			})
 		});
 		

@@ -14,14 +14,17 @@
     		</div>
     		<div class="text-right popular">
     			<span class="material-symbols-outlined">visibility</span><span>${post.viewcount} | </span>
-    			<span class="material-symbols-outlined">favorite</span><span>${post.likecount} | </span>
-    			<span class="material-symbols-outlined">chat_bubble</span><span>${post.replycount}</span>
+    			<span class="material-symbols-outlined">favorite</span><span id="likeCount">${post.likecount} | </span>
+    			<span class="material-symbols-outlined">chat_bubble</span><span id="replyCount">${post.replycount}</span>
     		</div>
     	</div>
 		<div class = "container text-left post-detail">
 			<p>
 				${post.contents}
 			</p>
+			<c:if test="${post.imgurl != null }">
+				<img src="/upload/${post.imgurl}" alt="">
+			</c:if>
 		</div>
 		<c:if test="${suggest != null }">
 			<div class = "container video">
@@ -35,12 +38,14 @@
 			</div>
 		</c:if>
 		<div class = "container text-center post-like">
-			<span id="likeCount">${post.likecount}</span>
+			
 			<button type="button" class="btn btn-default" id="like">
 				<span class="material-symbols-outlined">thumb_up</span>
+				<span id="likeCount">${post.likecount}</span>
 			</button>
 			<button type="button" class="btn btn-default" id="hate">
 				<span class="material-symbols-outlined">thumb_down</span>
+				<span id="hateCount">${post.hatecount}</span>
 			</button>
 		</div>
 		<div class="form-group">

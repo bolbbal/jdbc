@@ -6,6 +6,7 @@ public class PostVo {
 	private String post_type;
 	private String title;
 	private String contents;
+	private int user_idx;
 	private String nickname;
 	private String password;
 	private String regdate;
@@ -16,8 +17,12 @@ public class PostVo {
 	private int hatecount;
 	private String imgurl;
 	
-	
-	
+	public int getUser_idx() {
+		return user_idx;
+	}
+	public void setUser_idx(int user_idx) {
+		this.user_idx = user_idx;
+	}
 	public int getPost_idx() {
 		return post_idx;
 	}

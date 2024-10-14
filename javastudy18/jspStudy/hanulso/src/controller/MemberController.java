@@ -72,6 +72,10 @@ public class MemberController extends HttpServlet {
 		case "/access.do":
 			new MemberAccess().command(request, response);
 			break;
+			
+		case "/login.do":
+			page = "/member/login.jsp";
+			break;
 		}
 		
 		if(page!=null) {

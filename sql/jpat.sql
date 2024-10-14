@@ -11,36 +11,39 @@ create table post_type (
     post_type varchar2(50) not null,
     constraint post_type_pk primary key (post_type_idx)
 );
-commit;
+
 insert into post_type values (1, 'ìéÚõ');
 insert into post_type values (2, 'ªª?ªá');
 update post_type set post_type = 'ªª?ªá' where post_type_idx = 2;
-select * from post order by viewcount desc;
 
-SELECT *
-FROM (
-    SELECT *
-    FROM post
-    join post_suggest on post.post_idx = post_suggest.post_idx
-    ORDER BY (post.viewcount + (post.likecount * 2)) DESC
-)
-WHERE ROWNUM <= 5;
+create table users (
+    user_idx number(4) not null,
+    user_id varchar2(50) not null unique,
+    user_pw varchar2(500) not null,
+    user_nickname varchar2(50) not null unique,
+    user_email varchar2(100) not null unique,
+    user_img varchar2(200),
+    joindate date default sysdate,
+    constraint user_pk primary key (user_idx)
+);
 
 create table post (
     post_idx number(4) not null,
     post_type_idx number default 1,
     title varchar2(50) not null,
     contents varchar2(4000) not null,
+    user_idx number(4), 
     nickname varchar2(50) not null,
-    password varchar2(50) not null,
-    imgurl varchar2(50),
+    password varchar2(500) not null,
+    imgurl varchar2(3000),
     regdate date default sysdate,
     modifydate date default null,
     viewcount number(4) default 0,
     likecount number(4) default 0,
     replycount number(4) default 0,
     hatecount number(4) default 0,
-    constraint post_fk foreign key (post_type_idx) references post_type (post_type_idx),
+    constraint post_fk1 foreign key (post_type_idx) references post_type (post_type_idx),
+    constraint post_fk2 foreign key (user_idx) references users (user_idx),
     constraint post_pk primary key (post_idx)
 );
 
@@ -69,12 +72,6 @@ create table singer (
 
 create sequence singer_seq;
 
-insert into singer (singer_idx, singer) values (singer_seq.nextval, 'VAUNDY');
-
-select * 
-from singer
-where singer like '%VAUNDY%';
-
 create table music (
     post_idx number(4) not null,
     music_idx number not null,
@@ -88,39 +85,7 @@ create table music (
 
 create sequence music_seq;
 
-insert into post (post_idx, title, contents, nickname, password) 
-            values (post_idx_seq.nextval, 'ĞÑìíªÎü¥', 'ĞÑìíªÏÎùª·ªÖªêªËéÒÓ¹ªÈ«««é«ª«±ªËú¼ªÃªÆª­ª¿¡£íşª¤Êàú¼ª±ªÊª«ªÃª¿«««é«ª«±ªÀªÃª¿ªÎªÇ¡¢Üâ?ªË«ï«¯«ï«¯ª·ª¿?İÂªÀªÃª¿¡£éÒÓ¹ªÈìé?ªËû¿ª­ªÊÍØªòÊ°ª¤ªÊª¬ªé?ª·ª¤ãÁÊàªòÎ¦ª´ª·ª¿¡£<br>÷åªË?ÑûªÎÍØªòª¤ª¯ªÄª«Óû?ª·ª¿ª±ªÉ¡¢ŞÖªÃª¿ªèªêªâÑñª·ª¯ªÆÌóª¤ª¿¡£«á«í«Ç«£ªÏÜâ?ªËÚ¸ª·ª¤ªÎªË¡¢ÍÔëåİ»İÂªÏîïæÔÊ°ª¨ªÊª«ªÃª¿¡£éÒÓ¹ªÈªªû»ª¤ªËáÅª¤ªÊª¬ªé¡¸ª³ªìªÏÜâ?ªËÑñª·ª¤£¡¡¹ªÈåëªÃªÆ?ª·ªóªÀ¡£<br>«««é«ª«±ªÇªÎá³ªµªÊâëÊàª¬ÓŞï·ªÀªÈª¤ª¦ª³ªÈªòî¢ü¬ìãª·¡¢ó­ªÏªâªÃªÈÖ£ã§ª·ªÆ«Ò«²«À«óªÎÍØªòªÁªãªóªÈÊ°ª¤ª¿ª¤ªÈŞÖªÃª¿¡£ĞÑìíªÎŞÖª¤õóªòªºªÃªÈÓŞï·ªËª·ªÆª¤ª­ª¿ª¤¡£', 'ëåÒ¬?ñ´', '0420');
-insert into post (post_idx, post_type_idx, title, contents, nickname, password) 
-            values (post_idx_seq.nextval, 2, 'ĞÑìíªÎÍØ', 'ĞÑìíªÏŞçª¬ìéÛãû¿ª­ªÊÊ°â¢¡¢VAUNDYªÎ¡¸ÎÖ?ªÎü£ø¦¡¹ªËªÄª¤ªÆÍÅª¨ª¿¡£ª³ªÎÍØªÏÜâ?ªËŞçªÎãıªòªÄª«ªàÍØªÇ¡¢ª¤ªÄªÇªâ?ª­ª¿ª¤ª·¡¢«««é«ª«±ªÇÊ°ªÃªÆªßª¿ª¤ªÈŞÖªÃªÆª¤ªë¡£<br>ªÇªâ?Ò·ªÊª³ªÈªË¡¢ùÛ?ªÎ«««é«ª«±ªËªÏª³ªÎÍØª¬??ªµªìªÆª¤ªÊª¤¡£ªÀª«ªééÒÓ¹ªÈìé?ªË«««é«ª«±ªËú¼ªÃªÆªâ¡¢ª³ªÎÍØªòÊ°ª¦ª³ªÈª¬ªÇª­ªÊª¯ªÆÜâ?ªË?Ò·ªÀ¡£ŞçªÎªª?ªËìıªêªÎÍØªòéÒÓ¹ªÈìé?ªËÊ°ª¤ªÊª¬ªé?ª·ªßª¿ª¤ªÎªË¡¢ª½ªìª¬ªÇª­ªÊª¤ªÈŞÖª¦ªÈãıª¬îÖª·ª¯ªÊªë¡£<br>ª¤ªÄª«VAUNDYªÎÍØª¬ùÛ?ªÎ«««é«ª«±ªËõÚÊ¥ªµªìªëª³ªÈªòêÃªÃªÆª¤ªÆ¡¢ª½ªÎìíª¬?ª¿ªéù±ªºéÒÓ¹ªÈìé?ªËàüªêß¾ª¬ªÃªÆÊ°ª¤ª¿ª¤¡£ĞÑìíªâª½ªÎÍØªò?ª¤ªÆë¨ªµªìªÊª¬ªé¡¢ìéìíªòğûª¨ªèª¦ªÈŞÖª¦¡£', 'ëåÒ¬?ñ´', '0420');
-insert into post_suggest (post_idx, youtube_url, music, singer, lyrics, thumnail) 
-            values (30, 'https://youtu.be/UM9XNpgrqVk?si=wn7a9mLW4aosMJER', 'ÎÖ?ªÎü£ø¦',¡¡'VAUNDY', '´ëÃæ °¡»ç', 'thumnail');
-
-commit;
-
-select * from post join post_suggest on post.post_idx = post_suggest.post_idx where post.post_idx = 30;
-
-create table users (
-    user_idx number(4) not null,
-    user_id varchar2(50) not null,
-    user_pw varchar2(50) not null,
-    user_nickname varchar2(50) not null,
-    user_img varchar2(200) not null,
-    joindate date default sysdate,
-    constraint user_pk primary key (user_idx)
-);
-
 CREATE SEQUENCE users_seq;
-
-insert into post (idx, title, singer, contents, nickname, password) values (post_seq.nextval, '1', '2', '3', '4', '5');
-
-select *
-from post_suggest;
-select * from post;
-select * from singer;
-
-select * from music;
-
-update post set viewcount = viewcount+1 where idx = 3;
 
 select * 
 from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type_idx, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, hatecount
@@ -137,12 +102,11 @@ FROM (SELECT /*+ index_desc(post post_pk) */ ROWNUM rn, p.post_idx, pt.post_type
     WHERE ROWNUM <= (1 * 5))
 WHERE rn > ((1 - 1) * 5);
 
-
 SELECT *
 FROM (
-    SELECT ROWNUM rn, p.post_idx, p.post_type, p.title, p.contents, p.nickname, p.password, p.imgurl, p.regdate, p.modifydate, p.viewcount, p.likecount, p.replycount, p.hatecount
+    SELECT ROWNUM rn, p.post_idx, p.post_type, p.title, p.contents, p.nickname, p.password, p.imgurl, p.regdate, p.modifydate, p.viewcount, likecount, replycount, hatecount
     FROM (
-        SELECT p.*, pt.post_type
+        SELECT p.*, pt.*
         FROM post p
         JOIN post_type pt ON p.post_type_idx = pt.post_type_idx
         ORDER BY p.post_idx DESC
@@ -150,6 +114,34 @@ FROM (
     WHERE ROWNUM <= 5
 )
 WHERE rn > 0;
+
+select * 
+from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, hatecount, user_idx
+		FROM (
+            SELECT p.*, pt.*
+            FROM post p
+            JOIN post_type pt ON p.post_type_idx = pt.post_type_idx
+            ORDER BY p.post_idx DESC
+		) p
+        where rownum <= 5
+)
+where rn > 0;
+
+select * 
+from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, hatecount, user_idx, youtube_url, music, singer, thumnail, lyrics
+		FROM (
+            SELECT p.*, ps.youtube_url, ps.thumnail, ps.music, ps.singer, ps.lyrics
+            FROM post p
+            JOIN post_suggest ps ON p.post_idx = ps.post_idx
+		)
+        where rownum <= 5
+) 
+where rn > 0;
+
+select *
+from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, hatecount, user_idx, youtube_url, music, singer, thumnail, lyrics;
+
+select * from users where user_id like 'cyw9007' and user_pw like 'royalwook12!';
 
 commit;
 

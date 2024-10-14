@@ -19,9 +19,9 @@ import service.post.PostModify;
 
 @WebServlet("/posts/*")
 @MultipartConfig(
-		fileSizeThreshold = 1024*1024*2, //2MB 이상일 때 임시 디스크에 저장
-		maxFileSize = 1024*1024*20, //최대 파일 크기 20MB
-		maxRequestSize = 1024*1024*100 //최대 요청 크기 100MB
+		fileSizeThreshold = 1024*1024*2, 
+		maxFileSize = 1024*1024*20, 
+		maxRequestSize = 1024*1024*100 
 )
 public class PostController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -72,12 +72,17 @@ public class PostController extends HttpServlet {
 			page=null;
 			response.sendRedirect("/posts/list.do");
 			break;
-			
+		
 		case "/best.do" :
 			new BestPost().command(request, response);
-			page = "/post/BestPost.jsp";
+			page = "/post/bestPost.jsp";
 			break;
 		
+		case "/suggest.do" :
+			new PostList().command(request, response);
+			page="/post/postSuggestList.jsp";
+			break;
+			
 		case "/like.do" :
 			new LikeButton().command(request, response);
 			break;
@@ -85,7 +90,8 @@ public class PostController extends HttpServlet {
 		case "/hate.do" :
 			new HateButton().command(request, response);
 			break;
-			
+		
+		
 //		case "/reply.do" :
 //			new replyButton().command(request, response);
 //			break;

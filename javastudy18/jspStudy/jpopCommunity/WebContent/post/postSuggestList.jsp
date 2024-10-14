@@ -32,11 +32,11 @@
 		      		<img src="" alt="" class="thumbnail music-thumbnail">
 		      	</div>
 		      	<div class="col-md-5">
-		      		<h3>${list.getTitle()}<c:if test="${list.getSinger() != null}"><c:out value = " | ${list.getSinger()}"/></c:if></h3>
+		      		<h3>${list.getTitle()} | ${list.getSinger()}"/></h3>
 		      		<p>${list.getContents()}</p>
 		      	</div>
 		      	<div class="col-md-2">
-		      		<img src="" alt="" class="img-circle member-img">
+		      		<img src="/upload/${user.userImg != null ? user.userImg : 'noUserImg.png' }" alt="" class="img-circle member-img">
 		      	</div>
 		      	<div class="col-md-2 writer">
 		      		<p>${list.getNickname()}</p>

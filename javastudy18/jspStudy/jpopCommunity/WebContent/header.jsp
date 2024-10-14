@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,8 +42,14 @@
 						</form>
     				</div>
     				<div class = "col-md-3 member text-right">
-    					<a href="/users/login.do" class = "login"><span class="material-symbols-outlined">login</span></a>
-    					<a href="/users/signup.do" class = "signup"><span class="material-symbols-outlined">person_add</span></a>
+    					<c:if test="${empty user}">
+	    					<a href="/users/login.do" class = "login"><span class="material-symbols-outlined">login</span></a>
+	    					<a href="/users/signup.do" class = "signup"><span class="material-symbols-outlined">person_add</span></a>
+    					</c:if>
+    					<c:if test="${not empty user }">
+    						<a href="/users/logout.do" class = "login"><span class="material-symbols-outlined">logout</span></a>
+	    					<a href="/users/myPageTerms.do" class = "signup"><span class="material-symbols-outlined">contact_page</span></a>
+    					</c:if>
     				</div>
     			</div>
     		</div>
@@ -68,7 +75,7 @@
 			      <ul class="nav navbar-nav">
 			        <li><a href="/posts/list.do">新着 <span class="sr-only">(current)</span></a></li>
 			        <li><a href="/posts/best.do">人気</a></li>
-			        <li><a href="#">おすすめ</a></li>
+			        <li><a href="/posts/suggest.do">おすすめ</a></li>
 			        <li><a href="#">歌手</a></li>
 			      </ul>
 			    </div><!-- /.navbar-collapse -->
@@ -76,3 +83,4 @@
 			</nav>
     	</div> <!-- header nav end -->
     </header> <!-- header end -->
+    

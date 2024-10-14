@@ -29,10 +29,6 @@ a {
 	padding: 65px 10px 0;
 }
 
-.header-index .member .login:hover {
-	
-}
-
 .header-index .form-control {
 	width: 350px;
 }
@@ -233,8 +229,9 @@ a {
 }
 
 /*member signup css*/
-.signup>input {
-	width: 70%;
+.signUp {
+	width:70%;
+	display:inline-block;
 }
 
 /*footer css*/

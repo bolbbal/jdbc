@@ -17,13 +17,19 @@
                     <label><input type="radio" name="post_type_idx" value="2" onclick="toggleExtraInputs()"> 추천</label>
                 </td>
             </tr>
-            <tr>
-                <th>Nickname</th>
-                <td><input type="text" name="nickname" class="writer-info"></td>
-                <th>Password</th>
-                <td><input type="password" name="password" class="writer-info"></td>
-                <th></th>
-            </tr>
+            <c:if test="${not empty user}">
+	    		
+    		</c:if>
+    		<c:if test="${empty user }">
+	    		<tr>
+	                <th>Nickname</th>
+	                <td><input type="text" name="nickname" class="writer-info"></td>
+	                <th>Password</th>
+	                <td><input type="password" name="password" class="writer-info"></td>
+	                <th></th>
+	            </tr>
+    		</c:if>
+            
             <tr>
                 <th>Title</th>
                 <td colspan="3"><input type="text" name="title" class="write-title"></td>
@@ -115,18 +121,22 @@
         	if(post.music.value == "") {
         		alert("노래 제목을 입력하세요.");
         		post.music.focus();
+        		return false;
         	}
         	if(post.singer.value == "") {
         		alert("가수 이름을 입력하세요.");
         		post.music.focus();
+        		return false;
         	}
         	if(post.youtube_url.value == "") {
         		alert("유튜브 링크를 입력하세요.");
         		post.youtube_url.focus();
+        		return false;
         	}
         	if(post.lyrics.value == "") {
         		alert("가사를 입력하세요.");
         		post.lyrics.focus();
+        		return false;
         	}
         	
         	alert("글이 등록되었습니다.");

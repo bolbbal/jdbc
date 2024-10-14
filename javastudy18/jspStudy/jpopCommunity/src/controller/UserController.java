@@ -1,0 +1,95 @@
+package controller;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import service.user.EmailCheck;
+import service.user.IDCheck;
+import service.user.Login;
+import service.user.Logout;
+import service.user.MyPageCheck;
+import service.user.NicknameCheck;
+import service.user.SendEmail;
+import service.user.UserInsert;
+
+@WebServlet("/users/*")
+public class UserController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doAction(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doAction(request, response);
+	}
+	
+	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
+		String action = request.getPathInfo();
+		String page = null;
+		
+		System.out.println(action);
+		switch(action) {
+		case "/login.do" :
+			page="/user/login.jsp";
+			break;
+		
+		case "/loginpro.do" :
+			new Login().command(request, response);
+			break;
+			
+		case "/logout.do" :
+			new Logout().command(request, response);
+			response.sendRedirect("/");
+			break;
+			
+		case "/signup.do" :
+			page="/user/signup.jsp";
+			break;
+			
+		case "/idCheck.do" :
+			new IDCheck().command(request, response);
+			break;
+			
+		case "/nicknameCheck.do" :
+			new NicknameCheck().command(request, response);
+			break;
+			
+		case "/emailCheck.do" :
+			new EmailCheck().command(request, response);
+			break;
+			
+		case "/sendEmail.do" :
+			new SendEmail().command(request, response);
+			break;
+			
+		case "/access.do" :
+			new UserInsert().command(request, response);
+			break;
+			
+		case "/myPageTerms.do" :
+			page="/user/myPageTerms.jsp";
+			break;
+			
+		case "/myPageTermspro.do" :
+			new MyPageCheck().command(request, response);
+			break;
+		
+		case "/myPage.do" :
+			page="/user/myPage.jsp";
+			break;
+		}
+		
+		System.out.println(page);
+		if(page!=null) {
+			request.getRequestDispatcher(page).forward(request, response);
+		}
+	}
+
+}

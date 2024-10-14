@@ -90,4 +90,33 @@ public class MemberDao {
 		
 		return result;
 	}
+	
+	public int getSelectIdPw(String id, String pw) {
+		
+		String sql = "select * from hanulso where id like ?";
+		int result = 0;
+		
+		try {
+			conn = DBManager.getInstance().getDBManager();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setNString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(rs.getNString("pw") != null && rs.getNString("pw").equals(pw)) {
+					result = 1;
+				} else {
+					result = 0;
+				}
+			} else {
+				result = -1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return result;
+	}
 }
