@@ -103,7 +103,7 @@ public class MemberDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				if(rs.getNString("pw") != null && rs.getNString("pw").equals(pw)) {
+				if(rs.getNString("password") != null && rs.getNString("password").equals(pw)) {
 					result = 1;
 				} else {
 					result = 0;

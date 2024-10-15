@@ -1,4 +1,4 @@
-package service.user;
+package service.member;
 
 import java.io.IOException;
 
@@ -20,12 +20,7 @@ public class Logout implements Action {
 		
 		session.invalidate();
 		
-//		HttpSession session = request.getSession(false);
-//		
-//		session.removeAttribute("login");
-		
 		response.sendRedirect("/");
-		
 	}
 
 }

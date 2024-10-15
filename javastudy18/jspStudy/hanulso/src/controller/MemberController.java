@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import service.member.CertiCheck;
 import service.member.EmailSend;
 import service.member.IDCheck;
+import service.member.IdPwSearch;
+import service.member.Logout;
 import service.member.MemberAccess;
 import service.member.MemberInsert;
 import service.notice.NoticeDelete;
@@ -75,6 +77,14 @@ public class MemberController extends HttpServlet {
 			
 		case "/login.do":
 			page = "/member/login.jsp";
+			break;
+			
+		case "/loginpro.do":
+			new IdPwSearch().command(request, response);
+			break;
+			
+		case "/logout.do":
+			new Logout().command(request, response);
 			break;
 		}
 		

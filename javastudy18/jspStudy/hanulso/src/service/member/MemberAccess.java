@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import domain.MemberVo;
 import mapper.MemberDao;
 import service.Action;
+import util.SecurityPassword;
 
 public class MemberAccess implements Action {
 
@@ -24,6 +25,7 @@ public class MemberAccess implements Action {
 		String name = request.getParameter("name");
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw1");
+		String newPassword = SecurityPassword.encoding(pw);
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
 		
@@ -31,7 +33,7 @@ public class MemberAccess implements Action {
 		
 		vo.setName(name);
 		vo.setId(id);
-		vo.setPassword(pw);
+		vo.setPassword(newPassword);
 		vo.setPhone(phone);
 		vo.setEmail(email);
 		

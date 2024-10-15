@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/header.jsp"%>
 	<!-- sub contents -->
+
 	<div class="sub_title">
 		<h2>접속자 로그인</h2>
 		<div class="container">
@@ -48,6 +49,9 @@
 		                    <input name="pw" id="pw" type="password">
 	                    </div>
                     <a class="btn_login btn_Blue" href="javascript:fn_login();">로그인</a>
+                    <c:if test="${not empty param.msg }">
+						<p>${param.msg}</p>
+					</c:if>
                     </form>
                 </div>
                

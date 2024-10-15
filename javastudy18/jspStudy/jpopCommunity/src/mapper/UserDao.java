@@ -202,6 +202,10 @@ public class UserDao {
 			pstmt.setNString(2, vo.getUserNickname());
 			pstmt.setNString(3, vo.getUserImg());
 			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
 		}
 	}
 }
