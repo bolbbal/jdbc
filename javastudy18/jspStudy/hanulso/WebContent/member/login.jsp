@@ -49,8 +49,9 @@
 		                    <input name="pw" id="pw" type="password">
 	                    </div>
                     <a class="btn_login btn_Blue" href="javascript:fn_login();">로그인</a>
-                    <c:if test="${not empty param.msg }">
-						<p>${param.msg}</p>
+                    <c:if test="${not empty msg }">
+						<p>${msg}</p>
+						<c:remove var="msg" scope="session"/>
 					</c:if>
                     </form>
                 </div>

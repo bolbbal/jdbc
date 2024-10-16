@@ -23,14 +23,14 @@ public class IdPwSearch implements Action {
 		String pw = SecurityPassword.encoding(request.getParameter("pw"));
 		
 		int result = MemberDao.getInstance().getSelectIdPw(id, pw);
-		
+		HttpSession session = request.getSession();
 		if(result == 1) {
-			HttpSession session = request.getSession();
+			
 			session.setAttribute("login", id);
 			response.sendRedirect("/");
 		} else if(result == 0 || result == -1) {
-			String msg = "아이디 또는 패스워드 확인 바랍니다";
-			response.sendRedirect("/mem/login.do?msg=" + URLEncoder.encode(msg, "utf-8"));
+			session.setAttribute("msg", "아이디 또는 패스워드 확인");
+			response.sendRedirect("/mem/login.do");
 		}
 
 	}

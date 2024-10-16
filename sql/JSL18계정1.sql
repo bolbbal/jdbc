@@ -1138,11 +1138,11 @@ commit;
 
 create table reply (
     reply_idx number not null,
-    post_idx number not null,
+    port_idx number not null,
     member_idx number not null,
-    member_id varchar2 not null,
-    reply_contents varchar2 not null,
-    constraint reply_fk1 foreign key (post_idx) references portfolio (idx),
-    constraint reply_fk2 foreign key (member_idx, member_id) references hanulso (member_idx, id),
+    reply varchar2(4000) not null,
+    regdate date default sysdate,
+    constraint reply_fk1 foreign key (port_idx) references portfolio (idx),
+    constraint reply_fk2 foreign key (member_idx) references hanulso (member_idx),
     constraint reply_pk primary key (reply_idx)
 );
