@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import domain.MemberVo;
 import mapper.MemberDao;
 import service.Action;
 import util.SecurityPassword;
@@ -25,8 +26,8 @@ public class IdPwSearch implements Action {
 		int result = MemberDao.getInstance().getSelectIdPw(id, pw);
 		HttpSession session = request.getSession();
 		if(result == 1) {
-			
-			session.setAttribute("login", id);
+			MemberVo vo = MemberDao.getInstance().SetID(id);
+			session.setAttribute("login", vo);
 			response.sendRedirect("/");
 		} else if(result == 0 || result == -1) {
 			session.setAttribute("msg", "아이디 또는 패스워드 확인");

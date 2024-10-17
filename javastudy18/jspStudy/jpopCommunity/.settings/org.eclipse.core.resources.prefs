@@ -1,4 +1,4 @@
 eclipse.preferences.version=1
-encoding//WebContent/index.jsp=UTF-8
-encoding//WebContent/post/postSuggestList.jsp=UTF-8
-encoding//WebContent/user/signup.jsp=UTF-8
+encoding//Servers/WebContent/index.jsp=UTF-8
+encoding//Servers/WebContent/post/postSuggestList.jsp=UTF-8
+encoding//Servers/WebContent/user/signup.jsp=UTF-8

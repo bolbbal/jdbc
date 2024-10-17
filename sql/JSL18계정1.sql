@@ -1146,3 +1146,12 @@ create table reply (
     constraint reply_fk2 foreign key (member_idx) references hanulso (member_idx),
     constraint reply_pk primary key (reply_idx)
 );
+
+create sequence reply_seq;
+
+select * from reply;
+
+select * from (select r.*, h.name
+                from reply r, hanulso h
+                where r.member_idx = h.member_idx) p, portfolio pf
+        where pf.idx = 18 and p.port_idx = 18;

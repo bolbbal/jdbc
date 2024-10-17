@@ -91,6 +91,34 @@ public class MemberDao {
 		return result;
 	}
 	
+	public MemberVo SetID(String id) {
+		
+		String sql = "select * from hanulso where id like ?";
+		
+		MemberVo vo = null;
+		try {
+			conn = DBManager.getInstance().getDBManager();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setNString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new MemberVo();
+				
+				vo.setId(rs.getNString("id"));
+				vo.setMemberIdx(rs.getInt("member_idx"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return vo;
+	}
+	
 	public int getSelectIdPw(String id, String pw) {
 		
 		String sql = "select * from hanulso where id like ?";
@@ -119,4 +147,30 @@ public class MemberDao {
 		
 		return result;
 	}
+	
+	public String getMemberName(int idx) {
+		
+		String sql = "select name from hanulso where member_idx = ?";
+		
+		String memberName = "";
+		
+		try {
+			conn = DBManager.getInstance().getDBManager();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				memberName = rs.getNString("name");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return memberName;
+	}
+	
 }

@@ -4,8 +4,6 @@
     
     <!-- contents start -->
     <div class = "container post-type">
-    <c:set var = "post" value = "${list[0]}"/>
-    <c:set var = "suggest" value = "${list[1]}"/>
     	<h3>新着</h3>
     	<div class="nav navbar-nav navbar-right dropdown-style">
 			<div class="dropdown">
@@ -58,15 +56,15 @@
     			<c:forEach var="list" items="${list }">
 	    			<tr>
 	    				<td>${num }</td>
-	    				<td>${post.post_type}</td>
-	    				<td class="title"><a href="/posts/view.do?post_idx=${post.post_idx }">${list.title} <c:if test="${list.replycount} != null">[${list.replycount}]</c:if></a></td>
-	    				<td>${post.nickname}</td>
+	    				<td>${list.post_type}</td>
+	    				<td class="title"><a href="/posts/view.do?post_idx=${list.post_idx }">${list.title} <c:if test="${list.replycount} != null">[${list.replycount}]</c:if></a></td>
+	    				<td>${list.nickname}</td>
 	    				<td>
-	    					<c:if test = "${post.modifydate == null}">${post.regdate}</c:if>
-	    					<c:if test = "${post.modifydate} != null">${post.modifydate}</c:if>
+	    					<c:if test = "${list.modifydate == null}">${list.regdate}</c:if>
+	    					<c:if test = "${list.modifydate} != null">${list.modifydate}</c:if>
 	    				</td>
-	    				<td>${post.viewcount}</td>
-	    				<td>${post.likecount}</td>
+	    				<td>${list.viewcount}</td>
+	    				<td>${list.likecount}</td>
 	    			</tr>
 	    			<c:set var = "num" value="${num-1 }"/>
     			</c:forEach>

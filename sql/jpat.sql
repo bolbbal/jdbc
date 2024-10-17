@@ -47,8 +47,9 @@ create table post (
     constraint post_pk primary key (post_idx)
 );
 
+select * from post_suggest;
 CREATE SEQUENCE post_idx_seq;
-
+select case when max(post_idx) is null then 0 else max(post_idx) end as post_idx from post_suggest;
 create table post_suggest (
     post_type_idx number default 2,
     post_idx number not null,

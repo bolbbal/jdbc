@@ -7,6 +7,7 @@ import domain.PostSuggestVo;
 import domain.PostTypeVo;
 import domain.PostVo;
 import domain.SingerVo;
+import domain.UserVo;
 import util.Criteria;
 import util.DBManager;
 
@@ -40,6 +41,71 @@ public class PostDao {
 		return instance;
 	}
 
+	public void insertPost(PostVo postVo, PostSuggestVo suggestVo, UserVo userVo) {
+
+		String sql = null;
+
+		if (suggestVo != null) {
+			
+			sql = "insert into post (post_idx, post_type_idx, title, contents, nickname, password, imgurl, user_idx) values (post_idx_seq.nextval, ?, ?, ?, ?, ?, ?, ?)";
+			
+			try {
+				conn = DBManager.getInstance().getConnection();
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setInt(1, postVo.getPost_type_idx());
+				pstmt.setNString(2, postVo.getTitle());
+				pstmt.setNString(3, postVo.getContents());
+				pstmt.setNString(4, userVo.getUserNickname());
+				pstmt.setNString(5, userVo.getUserPw());
+				pstmt.setNString(6, postVo.getImgurl());
+				pstmt.setInt(7, userVo.getUserIdx());
+
+				pstmt.executeUpdate();
+				
+				sql = "SELECT post_idx_seq.currval FROM dual";
+		        pstmt = conn.prepareStatement(sql);
+		        ResultSet rs = pstmt.executeQuery();
+		        
+		        int currentPostIdx = 0;
+		        if (rs.next()) {
+		            currentPostIdx = rs.getInt(1);
+		            System.out.println("Current Post Index: " + currentPostIdx);
+		        }
+		        
+		        insertPostSuggest(suggestVo, currentPostIdx);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			
+		} else {
+			
+			sql = "insert into post (post_idx, title, contents, nickname, password, imgurl, user_idx) values (post_idx_seq.nextval, ?, ?, ?, ?, ?, ?)";
+			
+			try {
+				conn = DBManager.getInstance().getConnection();
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setNString(1, postVo.getTitle());
+				pstmt.setNString(2, postVo.getContents());
+				pstmt.setNString(3, userVo.getUserNickname());
+				pstmt.setNString(4, userVo.getUserPw());
+				pstmt.setNString(5, postVo.getImgurl());
+				pstmt.setInt(6, userVo.getUserIdx());
+
+				pstmt.executeUpdate();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			} finally {
+				close();
+			}
+		}
+	}
 	public void insertPost(PostVo postVo, PostSuggestVo suggestVo) {
 
 		String sql = null;
@@ -106,6 +172,23 @@ public class PostDao {
 		}
 	}
 	
+	public int currentPostIdx() {
+		int cpi = 0;
+		
+		try {
+			String sql = "select case when max(post_idx) is null then 0 else max(post_idx) end as post_idx from post_suggest";
+			Connection conn = DBManager.getInstance().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			cpi = rs.getInt("post_idx") + 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return cpi;
+	}
+	
 	public void insertPostSuggest(PostSuggestVo suggestVo, int currentPostIdx) {
 		
 		String sql = "";
@@ -114,16 +197,22 @@ public class PostDao {
 
 			conn = DBManager.getInstance().getConnection();
 		
-	        sql = "insert into post_suggest (post_idx, youtube_url, thumnail, music, singer, lyrics) values (?, ?, ?, ?, ?, ?)";
+//	        sql = "insert into post_suggest (post_idx, youtube_url, thumnail, music, singer, lyrics) values (?, ?, ?, ?, ?, ?)";
+	        sql = "insert into post_suggest (post_idx, youtube_url, thumnail, music, singer, lyrics) values (post_idx_seq.NEXTVAL, ?, ?, ?, ?, ?)";
 	        
 			pstmt = conn.prepareStatement(sql);
 			System.out.println(suggestVo.getThumnail());
-			pstmt.setInt(1, currentPostIdx);
-			pstmt.setNString(2, suggestVo.getYoutube_url());
-			pstmt.setNString(3, suggestVo.getThumnail());
-			pstmt.setNString(4, suggestVo.getMusic());
-			pstmt.setNString(5, suggestVo.getSinger());
-			pstmt.setNString(6, suggestVo.getLyrics());
+//			pstmt.setInt(1, currentPostIdx);
+//			pstmt.setNString(2, suggestVo.getYoutube_url());
+//			pstmt.setNString(3, suggestVo.getThumnail());
+//			pstmt.setNString(4, suggestVo.getMusic());
+//			pstmt.setNString(5, suggestVo.getSinger());
+//			pstmt.setNString(6, suggestVo.getLyrics());
+			pstmt.setNString(1, suggestVo.getYoutube_url());
+			pstmt.setNString(2, suggestVo.getThumnail());
+			pstmt.setNString(3, suggestVo.getMusic());
+			pstmt.setNString(4, suggestVo.getSinger());
+			pstmt.setNString(5, suggestVo.getLyrics());
 
 			pstmt.executeUpdate();
 			

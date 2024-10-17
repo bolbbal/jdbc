@@ -60,7 +60,7 @@ public class SendEmail implements Action {
 				return new PasswordAuthentication(user, password);
 			}
 		});
-		
+		System.out.println(temp);
 		try {
 			MimeMessage msg = new MimeMessage(session);
 			
