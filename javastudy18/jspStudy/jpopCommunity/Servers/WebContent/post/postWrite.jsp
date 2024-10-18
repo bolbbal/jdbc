@@ -18,7 +18,8 @@
                 </td>
             </tr>
             <c:if test="${not empty user}">
-	    		
+	    		<input type="hidden" name="nickname" class="writer-info" value="${user.userNickname }">
+	    		<input type="hidden" name="password" class="writer-info" value="${user.userPw }">
     		</c:if>
     		<c:if test="${empty user }">
 	    		<tr>
@@ -92,8 +93,8 @@
     }
     
     function check() {
-      
-        if (post.nickname.value == "") {
+      	
+    	if (post.nickname.value == "") {
             alert("닉네임을 입력하세요.");
             post.nickname.focus();
             return false;
@@ -105,7 +106,7 @@
             return false;
         }
         
-        if (post.post_type_idx.value == 2) {
+        if (post.post_type_idx.value === "2") {
         	
         	let youtubeUrl = post.youtube_url.value;
         	console.log(youtubeUrl);
@@ -114,7 +115,7 @@
         	youtubeUrl = youtubeUrl.replace("https://www.youtube.com/watch?v=", '');
         	
         	let thumnailUrl = youtubeUrl.split('&')[0];
-        	console.log(youtubeUrl);
+        	console.log(youtubeUrl+":123");
         	post.thumnail.value = "https://img.youtube.com/vi/" + thumnailUrl + "/mqdefault.jpg";
         	post.youtube_url.value = "https://www.youtube.com/embed/" + thumnailUrl;
         	

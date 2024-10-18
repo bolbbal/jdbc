@@ -201,6 +201,36 @@ a {
 	border-bottom: 1px soild #777;
 }
 
+.reply {
+	border-top:1px solid #ccc;
+}
+
+.reply-count {
+	font-size: 22px; 
+	font-weight: bold; 
+	padding: 20px 0;
+}
+
+.reply-input {
+	display: flex; 
+	justify-content: 
+	space-between;
+}
+
+.reply-contents {
+	width: 88%; 
+	height: 130px; 
+	
+	vertical-align: top; 
+	resize: none;
+}
+
+.reply-button {
+	width: 10%; 
+	height: 130px;
+}
+
+
 /*postWrite css*/
 
 .post-write th, .post-write td {

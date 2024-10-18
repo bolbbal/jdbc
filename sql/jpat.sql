@@ -5,7 +5,15 @@ drop table users;
 drop table music;
 drop table singer;
 drop sequence post_idx_seq;
-
+drop sequence user_seq;
+drop sequence reply_seq;
+drop sequence music_seq;
+drop sequence singer_seq;
+create sequence music_seq;
+CREATE SEQUENCE users_seq;
+create sequence reply_seq;
+create sequence singer_seq;
+create sequence post_idx_seq;
 create table post_type (
     post_type_idx number(2) not null,
     post_type varchar2(50) not null,
@@ -14,7 +22,6 @@ create table post_type (
 
 insert into post_type values (1, 'μιΪυ');
 insert into post_type values (2, 'ͺͺ?ͺα');
-update post_type set post_type = 'ͺͺ?ͺα' where post_type_idx = 2;
 
 create table users (
     user_idx number(4) not null,
@@ -41,15 +48,11 @@ create table post (
     viewcount number(4) default 0,
     likecount number(4) default 0,
     replycount number(4) default 0,
-    hatecount number(4) default 0,
     constraint post_fk1 foreign key (post_type_idx) references post_type (post_type_idx),
     constraint post_fk2 foreign key (user_idx) references users (user_idx),
     constraint post_pk primary key (post_idx)
 );
 
-select * from post_suggest;
-CREATE SEQUENCE post_idx_seq;
-select case when max(post_idx) is null then 0 else max(post_idx) end as post_idx from post_suggest;
 create table post_suggest (
     post_type_idx number default 2,
     post_idx number not null,
@@ -62,6 +65,18 @@ create table post_suggest (
     constraint post_suggest_fk2 foreign key (post_type_idx) references post_type (post_type_idx)
 );
 
+CREATE TABLE reply (
+    reply_idx NUMBER NOT NULL,
+    post_idx NUMBER NOT NULL,
+    nickname VARCHAR2(50) NOT NULL,
+    reply_password VARCHAR2(500) NOT NULL,
+    comments VARCHAR2(4000) NOT NULL,
+    regdate DATE DEFAULT SYSDATE,
+    modifydate DATE DEFAULT NULL,
+    CONSTRAINT reply_pk PRIMARY KEY (reply_idx),
+    CONSTRAINT reply_fk FOREIGN KEY (post_idx) REFERENCES post (post_idx)
+);
+
 create table singer (
     post_idx number(4) not null,
     singer_idx number not null,
@@ -70,8 +85,6 @@ create table singer (
     constraint singer_pk primary key (singer_idx),
     constraint singer_fk foreign key (post_idx) references post (post_idx)
 );
-
-create sequence singer_seq;
 
 create table music (
     post_idx number(4) not null,
@@ -83,11 +96,7 @@ create table music (
     constraint music_fk1 foreign key (singer_idx) references singer (singer_idx),
     constraint music_fk2 foreign key (post_idx) references post (post_idx)
 );
-
-create sequence music_seq;
-
-CREATE SEQUENCE users_seq;
-
+select * from reply;
 select * 
 from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type_idx, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, hatecount
       from post 

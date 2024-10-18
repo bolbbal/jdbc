@@ -41,11 +41,10 @@
 			
 			<button type="button" class="btn btn-default" id="like">
 				<span class="material-symbols-outlined">thumb_up</span>
-				<span id="likeCount">${post.likecount}</span>
 			</button>
+			<span id="likeCount">${post.likecount}</span>
 			<button type="button" class="btn btn-default" id="hate">
 				<span class="material-symbols-outlined">thumb_down</span>
-				<span id="hateCount">${post.hatecount}</span>
 			</button>
 		</div>
 		<div class="form-group">
@@ -60,7 +59,75 @@
 		</div>
 	</div>
 	 <!-- contents end -->
+	 
+	 <!-- comment -->
+	<div class="container">
+		<div class="reply">
+           <p class="reply-count">
+              Comments: 5
+           </p>
+           </div>
+           <div class="reply-input">
+           	  <c:if test="${not empty user}">
+	    		<input type="hidden" name="nickname" class="writer-info" value="${user.userNickname }">
+	    		<input type="hidden" name="password" class="writer-info" value="${user.userPw }">
+	    	  </c:if>
+	    	  
+	    	  <c:if test="${empty user }">
+		    		<tr>
+		                <th>Nickname</th>
+		                <td><input type="text" name="nickname" class="writer-info"></td>
+		                <th>Password</th>
+		                <td><input type="password" name="password" class="writer-info"></td>
+		            </tr>
+		            <br>
+		            <br>
+	    	  </c:if>
+	    	  <br>
+              	<textarea name="comment" class="reply-contents"></textarea>
+              	<button id="btn_comment" class="reply-button" onclick="cmtWrite()">댓글등록</button> 
+                 
+           </div>
+           <div>
+               <ul>
+               	 
+                  <li style="padding:12px 0;"><span>ㄴ</span> 닉네임 | 날짜</li>
+                  <li>내용</li>
+                  
+               </ul>
+            </div>
+	</div>
 	<script>
+		function cmtWrite() {
+			if($(".nickname").val() == "") {
+				alert("닉네임을 적어주세요.");
+				return false;
+			}
+			if($(".password").val == "") {
+				alert("비밀번호를 적어주세요.");
+				return false;
+			}
+			
+			let replyData = {
+					post_idx : "<c:out value='${post.post_idx}'/>",
+					nickname : $(".nickname").val(),
+					password : $(".password").val(),
+					comment : $(".comment").val(),
+			}
+			
+			$.ajax({
+				type : "post",
+				url : "/reply/commentSave.do",
+				data : replyData,
+				dateType : "json",
+				success : function(data) {
+					alert(data.result);
+				}, error : function() {
+					alert("통신에러");
+				}
+			})
+		}
+		
 		var post_idx = $("#post_idx").val();
 		
 		$("#like").on("click", function() {
@@ -82,7 +149,7 @@
 				data:{"post_idx":post_idx},
 				dataType:"json",
 				success:function(data) {
-					$("#hateCount").text(data.hatecount);
+					$("#likeCount").text(data.hatecount);
 				}
 			})
 		})

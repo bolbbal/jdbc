@@ -14,7 +14,6 @@ public class PostVo {
 	private int viewcount;
 	private int likecount;
 	private int replycount;
-	private int hatecount;
 	private String imgurl;
 	
 	public int getUser_idx() {
@@ -58,12 +57,6 @@ public class PostVo {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public int getHatecount() {
-		return hatecount;
-	}
-	public void setHatecount(int hatecount) {
-		this.hatecount = hatecount;
 	}
 	public int getReplycount() {
 		return replycount;

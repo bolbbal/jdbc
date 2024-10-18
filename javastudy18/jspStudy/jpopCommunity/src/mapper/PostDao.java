@@ -65,7 +65,7 @@ public class PostDao {
 				
 				sql = "SELECT post_idx_seq.currval FROM dual";
 		        pstmt = conn.prepareStatement(sql);
-		        ResultSet rs = pstmt.executeQuery();
+		        rs = pstmt.executeQuery();
 		        
 		        int currentPostIdx = 0;
 		        if (rs.next()) {
@@ -106,13 +106,14 @@ public class PostDao {
 			}
 		}
 	}
+	
 	public void insertPost(PostVo postVo, PostSuggestVo suggestVo) {
 
 		String sql = null;
 
 		if (suggestVo != null) {
 			
-			sql = "insert into post (post_idx, post_type_idx, title, contents, nickname, password, imgurl, user_idx) values (post_idx_seq.nextval, ?, ?, ?, ?, ?, ?, ?)";
+			sql = "insert into post (post_idx, post_type_idx, title, contents, nickname, password, imgurl) values (post_idx_seq.nextval, ?, ?, ?, ?, ?, ?)";
 			
 			try {
 				conn = DBManager.getInstance().getConnection();
@@ -124,7 +125,6 @@ public class PostDao {
 				pstmt.setNString(4, postVo.getNickname());
 				pstmt.setNString(5, postVo.getPassword());
 				pstmt.setNString(6, postVo.getImgurl());
-				pstmt.setInt(7, postVo.getUser_idx());
 
 				pstmt.executeUpdate();
 				
@@ -148,7 +148,7 @@ public class PostDao {
 			
 		} else {
 			
-			sql = "insert into post (post_idx, title, contents, nickname, password, imgurl, user_idx) values (post_idx_seq.nextval, ?, ?, ?, ?, ?, ?)";
+			sql = "insert into post (post_idx, title, contents, nickname, password, imgurl) values (post_idx_seq.nextval, ?, ?, ?, ?, ?)";
 			
 			try {
 				conn = DBManager.getInstance().getConnection();
@@ -159,7 +159,6 @@ public class PostDao {
 				pstmt.setNString(3, postVo.getNickname());
 				pstmt.setNString(4, postVo.getPassword());
 				pstmt.setNString(5, postVo.getImgurl());
-				pstmt.setInt(6, postVo.getUser_idx());
 
 				pstmt.executeUpdate();
 
@@ -172,23 +171,6 @@ public class PostDao {
 		}
 	}
 	
-	public int currentPostIdx() {
-		int cpi = 0;
-		
-		try {
-			String sql = "select case when max(post_idx) is null then 0 else max(post_idx) end as post_idx from post_suggest";
-			Connection conn = DBManager.getInstance().getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			ResultSet rs = pstmt.executeQuery();
-			rs.next();
-			cpi = rs.getInt("post_idx") + 1;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return cpi;
-	}
-	
 	public void insertPostSuggest(PostSuggestVo suggestVo, int currentPostIdx) {
 		
 		String sql = "";
@@ -197,22 +179,16 @@ public class PostDao {
 
 			conn = DBManager.getInstance().getConnection();
 		
-//	        sql = "insert into post_suggest (post_idx, youtube_url, thumnail, music, singer, lyrics) values (?, ?, ?, ?, ?, ?)";
-	        sql = "insert into post_suggest (post_idx, youtube_url, thumnail, music, singer, lyrics) values (post_idx_seq.NEXTVAL, ?, ?, ?, ?, ?)";
+	        sql = "insert into post_suggest (post_idx, youtube_url, thumnail, music, singer, lyrics) values (?, ?, ?, ?, ?, ?)";
 	        
 			pstmt = conn.prepareStatement(sql);
 			System.out.println(suggestVo.getThumnail());
-//			pstmt.setInt(1, currentPostIdx);
-//			pstmt.setNString(2, suggestVo.getYoutube_url());
-//			pstmt.setNString(3, suggestVo.getThumnail());
-//			pstmt.setNString(4, suggestVo.getMusic());
-//			pstmt.setNString(5, suggestVo.getSinger());
-//			pstmt.setNString(6, suggestVo.getLyrics());
-			pstmt.setNString(1, suggestVo.getYoutube_url());
-			pstmt.setNString(2, suggestVo.getThumnail());
-			pstmt.setNString(3, suggestVo.getMusic());
-			pstmt.setNString(4, suggestVo.getSinger());
-			pstmt.setNString(5, suggestVo.getLyrics());
+			pstmt.setInt(1, currentPostIdx);
+			pstmt.setNString(2, suggestVo.getYoutube_url());
+			pstmt.setNString(3, suggestVo.getThumnail());
+			pstmt.setNString(4, suggestVo.getMusic());
+			pstmt.setNString(5, suggestVo.getSinger());
+			pstmt.setNString(6, suggestVo.getLyrics());
 
 			pstmt.executeUpdate();
 			
@@ -376,7 +352,7 @@ public class PostDao {
 
 		if (query == "") {
 			sql = "select * \r\n" + 
-					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, hatecount, user_idx\r\n" + 
+					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, user_idx\r\n" + 
 					"      FROM (\r\n" + 
 					"        SELECT p.*, pt.*\r\n" + 
 					"        FROM post p\r\n" + 
@@ -387,7 +363,7 @@ public class PostDao {
 					"where rn > ((?-1) * ?)";
 		} else {
 			sql = "select * \r\n" + 
-					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type_idx, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, hatecount, user_idx\r\n" + 
+					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type_idx, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, user_idx\r\n" + 
 					"      FROM (\r\n" + 
 					"        SELECT p.*, pt.*\r\n" + 
 					"        FROM post p\r\n" + 
@@ -425,7 +401,6 @@ public class PostDao {
 				vo.setViewcount(rs.getInt("viewcount"));
 				vo.setLikecount(rs.getInt("likecount"));
 				vo.setReplycount(rs.getInt("replycount"));
-				vo.setHatecount(rs.getInt("hatecount"));
 				vo.setUser_idx(rs.getInt("user_idx"));
 				vo.setImgurl(rs.getNString("imgurl"));
 
@@ -448,7 +423,7 @@ public class PostDao {
 
 		if (query == "") {
 			sql = "select * \r\n" + 
-					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, hatecount\r\n" + 
+					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount \r\n" + 
 					"      FROM (\r\n" + 
 					"        SELECT p.*, pt.post_type\r\n" + 
 					"        FROM post p\r\n" + 
@@ -459,7 +434,7 @@ public class PostDao {
 					"where rn > ((?-1) * ?)";
 		} else {
 			sql = "select * \r\n" + 
-					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, hatecount\r\n" + 
+					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, post_type, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount \r\n" + 
 					"      FROM (\r\n" + 
 					"        SELECT p.*, pt.post_type\r\n" + 
 					"        FROM post p\r\n" + 
@@ -518,7 +493,7 @@ public class PostDao {
 
 		if (query == "") {
 			sql = "select * \r\n" + 
-					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, hatecount, user_idx, youtube_url, music, singer, thumnail, lyrics\r\n" + 
+					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, user_idx, youtube_url, music, singer, thumnail, lyrics\r\n" + 
 					"		FROM (\r\n" + 
 					"            SELECT p.*, ps.youtube_url, ps.thumnail, ps.music, ps.singer, ps.lyrics\r\n" + 
 					"            FROM post p\r\n" + 
@@ -529,7 +504,7 @@ public class PostDao {
 					"where rn > ((?-1) * ?)";
 		} else {
 			sql = "select * \r\n" + 
-					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, hatecount, user_idx, youtube_url, music, singer, thumnail, lyrics\r\n" + 
+					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, user_idx, youtube_url, music, singer, thumnail, lyrics\r\n" + 
 					"		FROM (\r\n" + 
 					"            SELECT p.*, ps.youtube_url, ps.thumnail, ps.music, ps.singer, ps.lyrics\r\n" + 
 					"            FROM post p\r\n" + 
@@ -616,7 +591,6 @@ public class PostDao {
 				}
 				postVo.setViewcount(rs.getInt("viewcount"));
 				postVo.setLikecount(rs.getInt("likecount"));
-				postVo.setHatecount(rs.getInt("hatecount"));
 				postVo.setReplycount(rs.getInt("replycount"));
 				
 				list.add(postVo);
@@ -660,7 +634,6 @@ public class PostDao {
 					}
 					postVo.setViewcount(rs.getInt("viewcount"));
 					postVo.setLikecount(rs.getInt("likecount"));
-					postVo.setHatecount(rs.getInt("hatecount"));
 					postVo.setReplycount(rs.getInt("replycount"));
 					
 					list.add(postVo);
@@ -734,7 +707,6 @@ public class PostDao {
 				vo = new PostVo();
 				
 				vo.setLikecount(rs.getInt("likecount"));
-				vo.setHatecount(rs.getInt("hatecount"));
 				vo.setReplycount(rs.getInt("replycount"));
 				
 			}
@@ -749,7 +721,7 @@ public class PostDao {
 
 	public void UpdateHatecount(int post_idx) {
 
-		String sql = "update post set hatecount = hatecount + 1 where post_idx = ?";
+		String sql = "update post set likecount = likecount - 1 where post_idx = ?";
 
 		try {
 

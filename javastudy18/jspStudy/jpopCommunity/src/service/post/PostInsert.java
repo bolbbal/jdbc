@@ -58,43 +58,24 @@ public class PostInsert implements Action {
 			suggestVo.setYoutube_url(request.getParameter("youtube_url"));
 			suggestVo.setLyrics(request.getParameter("lyrics").replace("\r\n", "<br>"));
 			suggestVo.setThumnail(request.getParameter("thumnail"));
+			
+			
 		}
 		
 		HttpSession session = request.getSession(false);
+		UserVo userVo = (UserVo) session.getAttribute("user");
 		
-		if(session != null) {
+		if(userVo != null) {
+			PostDao.getInstance().insertPost(postVo, suggestVo, userVo);
+		}
 			
-			UserVo userVo = (UserVo) session.getAttribute("user");
+		else {
 			
-			if(userVo != null) {
-				int currentPostIdx = PostDao.getInstance().currentPostIdx();
-				PostDao.getInstance().insertPostSuggest(suggestVo, currentPostIdx);
-			}
-			
-			
-		} else {
 			postVo.setNickname(request.getParameter("nickname"));
 			postVo.setPassword(request.getParameter("password"));
+			
 			PostDao.getInstance().insertPost(postVo, suggestVo);
 		}
-		
-		
-//			Part thumnail = request.getPart("thumnail");
-//			String thumName = thumnail.getSubmittedFileName();
-//			
-//			if(thumName != null && !thumName.isEmpty()) {
-//				String realPath = thumName.substring(0, thumName.lastIndexOf("."));
-//				String ext = thumName.substring(thumName.lastIndexOf("."));
-//				String uuid = UUID.randomUUID().toString();
-//				
-//				thumName = realPath + "_" + uuid + ext;
-//				
-//				imgurl.write(path + File.separator + thumName);
-//			}
-//			System.out.println(thumName);
-//			suggestVo.setThumnail(thumName);
-		
-		
 		
 	}
 
