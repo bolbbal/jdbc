@@ -75,7 +75,7 @@
 			      <ul class="nav navbar-nav">
 			        <li><a href="/posts/list.do">新着 <span class="sr-only">(current)</span></a></li>
 			        <li><a href="/posts/best.do">人気</a></li>
-			        <li><a href="/posts/suggest.do">おすすめ</a></li>
+			        <li><a href="/posts/suggest.do">お勧め</a></li>
 			        <li><a href="#">歌手</a></li>
 			      </ul>
 			    </div><!-- /.navbar-collapse -->

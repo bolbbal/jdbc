@@ -8,7 +8,6 @@
     		<div class = "col-md-2"></div>
     		<div class = "col-md-8">
     			<h3 class = "text-center">회원정보 수정</h3>
-    		
 				  <div class="form-group">
 				    <label for="id" class="col-sm-4 control-label">ID</label>
 				    <div class="col-sm-8">
@@ -47,7 +46,7 @@
 				  <div class="form-group">
 				    <label for="user-img" class="col-sm-4 control-label">User Image</label>
 				    <div class="col-sm-8">
-				    	<img src="/upload/${user.userImg != null ? user.userImg : 'noUserImg.png' }" alt="" class="img-circle member-img">
+				    	<img id="preview" src="/upload/${user.userImg != null ? user.userImg : 'noUserImg.png' }" alt="" class="img-circle member-img">
 					    <input type="file" class="form-control signUp" name="userImg" id="userImg">
 				    </div>
 				  </div>
@@ -118,26 +117,77 @@
 				
 			})
 			
-			$("#sumbit").on("click", function() {
+			document.getElementById('userImg').addEventListener('change', function(event) {
+			    const file = event.target.files[0];
+			    if (file) {
+			        const validTypes = ['image/jpeg', 'image/png'];
+			        if (!validTypes.includes(file.type)) {
+			            alert('유효한 이미지 파일을 선택해 주세요 (JPEG, PNG)');
+			            return;
+			        }
+			
+			        const reader = new FileReader();
+			        reader.onload = function(e) {
+			            document.getElementById('preview').src = e.target.result;
+			        };
+			        reader.readAsDataURL(file);
+			
+			        const formData = new FormData();
+			        formData.append('userImg', file);
+			
+			        $.ajax({
+			            type: 'POST',
+			            url: '/users/imgPreview.do',
+			            data: formData,
+			            contentType: false,
+			            processData: false,
+			            dataType: 'json',
+			            beforeSend: function() {
+			                // 로딩 스피너 표시 (예: $('#loading').show())
+			            },
+			            success: function(data) {
+			                $('#preview').attr('src', data.imageUrl);
+			            },
+			            error: function() {
+			                alert('이미지 업로드에 실패했습니다.');
+			            },
+			            complete: function() {
+			                // 로딩 스피너 숨김 (예: $('#loading').hide())
+			            }
+			        });
+			    }
+			});
+
+			
+			$("#submit").on("click", function() {
 				
-				if($("#password").val() == "" || $("#passwordChk").val() == "" || passwordChk != 1) {
+				/*if($("#password").val() == "" || $("#passwordChk").val() == "" || passwordChk != 1) {
 			    	$("#passwordChkMsg").html("<span style='color:#f00;'>동일한 비밀번호를 입력해주세요.</sapn>");
 			    	$("#passwordChk").focus();
 			    	return false;
-			    }
+			    }*/
 			    if($("#nickname").val() == "" || nicknameChk != 1) {
 			    	$("#nicknameMsg").html("<span style='color:#f00;'>사용가능한 닉네임을 입력해주세요.</sapn>");
 			    	$("#nickname").focus();
 			    	return false;
 			    }
 			    
+			 	// FormData 객체 생성
+			    var formData = new FormData();
+			    formData.append("nickname", $("#nickname").val());
+			    
+			    // 파일 추가
+			    var userImg = $("#userImg")[0].files[0]; // 파일 객체 가져오기
+			    if (userImg) {
+			        formData.append("userImg", userImg);
+			    }
+			    
 				$.ajax({
 					type:"post",
-					data:{"password": $("#password").val(),
-						"nickname": $("#nickname").val(),
-						"userImg" : $("#userImg").val()
-						},
+					data:formData,
 					url:"/users/userUpdate.do",
+					contentType: false,  // jQuery가 Content-Type을 자동으로 설정하지 않도록
+			        processData: false,  // jQuery가 데이터를 자동으로 처리하지 않도록
 					dataType:"json",
 					success:function(data) {
 						alert(data.msg);

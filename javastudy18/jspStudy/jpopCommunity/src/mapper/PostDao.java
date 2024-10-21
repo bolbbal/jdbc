@@ -6,6 +6,7 @@ import java.util.*;
 import domain.PostSuggestVo;
 import domain.PostTypeVo;
 import domain.PostVo;
+import domain.PostWithSuggestVo;
 import domain.SingerVo;
 import domain.UserVo;
 import util.Criteria;
@@ -487,20 +488,50 @@ public class PostDao {
 		return list;
 	}
 	
-	public List<Object> getPostSuggestList(Criteria cri, String query) {
+	public int getPostSuggestCount(String query) {
+		
+		String sql = "";
+		int count = 0;
+
+		if (query != "") {
+			sql = "select count(*) as count from post_suggest where " + query;
+		} else {
+			sql = "select count(*) as count from post";
+		}
+
+		try {
+
+			conn = DBManager.getInstance().getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt("count");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return count;
+		
+	}
+	
+	public List<PostWithSuggestVo> getPostSuggestList(Criteria cri, String query) {
 		
 		String sql = null;
 
 		if (query == "") {
-			sql = "select * \r\n" + 
-					"from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, user_idx, youtube_url, music, singer, thumnail, lyrics\r\n" + 
-					"		FROM (\r\n" + 
-					"            SELECT p.*, ps.youtube_url, ps.thumnail, ps.music, ps.singer, ps.lyrics\r\n" + 
-					"            FROM post p\r\n" + 
-					"            JOIN post_suggest ps ON p.post_idx = ps.post_idx\r\n" + 
-					"		)\r\n" + 
-					"        where rownum <= (? * ?)\r\n" + 
-					") \r\n" + 
+			sql = "select * from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, user_idx, youtube_url, music, singer, thumnail, lyrics\r\n" + 
+					"            	FROM (\r\n" + 
+					"                    SELECT p.*, ps.youtube_url, ps.thumnail, ps.music, ps.singer, ps.lyrics\r\n" + 
+					"                    FROM post p\r\n" + 
+					"                    JOIN post_suggest ps ON p.post_idx = ps.post_idx order by p.post_idx desc \r\n" + 
+					"                    )\r\n" + 
+					"                 where rownum <= (? * ?)\r\n" + 
+					"                 )\r\n" + 
 					"where rn > ((?-1) * ?)";
 		} else {
 			sql = "select * \r\n" + 
@@ -508,14 +539,14 @@ public class PostDao {
 					"		FROM (\r\n" + 
 					"            SELECT p.*, ps.youtube_url, ps.thumnail, ps.music, ps.singer, ps.lyrics\r\n" + 
 					"            FROM post p\r\n" + 
-					"            JOIN post_suggest ps ON p.post_idx = ps.post_idx\r\n" + 
+					"            JOIN post_suggest ps ON p.post_idx = ps.post_idx order by p.post_idx desc \r\n " + 
 					"		)\r\n" + 
 					"        where rownum <= 5 and (" + query + ")\r\n" + 
 					") \r\n" + 
 					"where rn > ((?-1) * ?)";
 		}
 
-		List<Object> list = new ArrayList<Object>();
+		List<PostWithSuggestVo> list = new ArrayList<PostWithSuggestVo>();
 
 		try {
 
@@ -531,20 +562,52 @@ public class PostDao {
 
 			while (rs.next()) {
 
-				PostVo vo = new PostVo();
+				PostVo postVo = new PostVo();
 
-				vo.setPost_idx(rs.getInt("post_idx"));
-				vo.setPost_type(rs.getNString("post_type"));
-				vo.setTitle(rs.getNString("title"));
-				vo.setContents(rs.getNString("contents"));
-				vo.setNickname(rs.getNString("nickname"));
-				vo.setRegdate(rs.getNString("regdate").substring(0, 10));
-				vo.setViewcount(rs.getInt("viewcount"));
-				vo.setLikecount(rs.getInt("likecount"));
-				vo.setReplycount(rs.getInt("replycount"));
-				vo.setUser_idx(rs.getInt("user_idx"));
-				vo.setImgurl(rs.getNString("imgurl"));
-
+				postVo.setPost_idx(rs.getInt("post_idx"));
+				postVo.setTitle(rs.getNString("title"));
+				postVo.setContents(rs.getNString("contents"));
+				postVo.setNickname(rs.getNString("nickname"));
+				postVo.setRegdate(rs.getNString("regdate").substring(0, 10));
+				postVo.setViewcount(rs.getInt("viewcount"));
+				postVo.setLikecount(rs.getInt("likecount"));
+				postVo.setReplycount(rs.getInt("replycount"));
+				postVo.setUser_idx(rs.getInt("user_idx"));
+				postVo.setImgurl(rs.getNString("imgurl"));
+				
+				PostSuggestVo suggestVo = new PostSuggestVo();
+				
+				suggestVo.setYoutube_url(rs.getNString("youtube_url"));
+				suggestVo.setMusic(rs.getNString("music"));
+				suggestVo.setSinger(rs.getNString("singer"));
+				suggestVo.setThumnail(rs.getNString("thumnail"));
+				String lyrics = rs.getNString("lyrics");
+			    if (lyrics != null) {
+			        // <br> 태그를 기준으로 문자열 분리
+			        String[] parts = lyrics.split("<br>");
+			        
+			        // 세 번째 <br> 까지의 내용을 결합
+			        StringBuilder combinedLyrics = new StringBuilder();
+			        for (int i = 0; i < Math.min(parts.length, 3); i++) {
+			            combinedLyrics.append(parts[i]);
+			            if (i < 2) { // 마지막 항목이 아닐 때만 <br> 추가
+			                combinedLyrics.append("<br>");
+			            }
+			        }
+			        
+			        if (parts.length > 3) {
+			            combinedLyrics.append("...");
+			        }
+			        
+			        // 결합된 내용을 suggestVo에 저장
+			        suggestVo.setLyrics(combinedLyrics.toString());
+			    }
+				
+				
+				PostWithSuggestVo vo = new PostWithSuggestVo();
+				vo.setPost(postVo);
+				vo.setSuggest(suggestVo);
+				
 				list.add(vo);
 			}
 

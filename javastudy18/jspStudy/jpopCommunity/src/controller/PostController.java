@@ -16,6 +16,7 @@ import service.post.PostUpdate;
 import service.post.PostView;
 import service.post.HateButton;
 import service.post.PostModify;
+import service.post.PostSuggestList;
 
 @WebServlet("/posts/*")
 @MultipartConfig(
@@ -79,7 +80,7 @@ public class PostController extends HttpServlet {
 			break;
 		
 		case "/suggest.do" :
-			new PostList().command(request, response);
+			new PostSuggestList().command(request, response);
 			page="/post/postSuggestList.jsp";
 			break;
 			

@@ -27,14 +27,11 @@ public class HateButton implements Action {
 		
 		PostVo vo = PostDao.getInstance().selectPopularCount(post_idx);
 		
-		Integer hate = vo.getHatecount();
 		Integer like = vo.getLikecount();
 		
 		String likecount = like.toString();
-		String hatecount = hate.toString();
 		
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("hatecount", hatecount);
 		map.put("likecount", likecount);
 		
 		Gson gson = new Gson();

@@ -4,7 +4,7 @@
     
     <!-- contents start -->
     <div class = "container post-type">
-    	<h3>新着</h3>
+    	<h3>人気</h3>
     	<div class="nav navbar-nav navbar-right dropdown-style">
 			<div class="dropdown">
 				<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

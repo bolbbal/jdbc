@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +15,16 @@ import service.user.Logout;
 import service.user.MyPageCheck;
 import service.user.NicknameCheck;
 import service.user.SendEmail;
+import service.user.UserImgPreview;
 import service.user.UserInsert;
+import service.user.UserUpdate;
 
 @WebServlet("/users/*")
+@MultipartConfig(
+		fileSizeThreshold = 1024*1024*2, 
+		maxFileSize = 1024*1024*20, 
+		maxRequestSize = 1024*1024*100 
+)
 public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -83,6 +91,14 @@ public class UserController extends HttpServlet {
 		
 		case "/myPage.do" :
 			page="/user/myPage.jsp";
+			break;
+			
+		case "/imgPreview.do" :
+			new UserImgPreview().command(request, response);
+			break;
+			
+		case "/userUpdate.do" :
+			new UserUpdate().command(request, response);
 			break;
 		}
 		

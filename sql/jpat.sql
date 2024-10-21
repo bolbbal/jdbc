@@ -86,6 +86,8 @@ create table singer (
     constraint singer_fk foreign key (post_idx) references post (post_idx)
 );
 
+alter table singer add suggest_count number default 1 not null;
+
 create table music (
     post_idx number(4) not null,
     music_idx number not null,
@@ -154,4 +156,29 @@ from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, title, conten
 select * from users where user_id like 'cyw9007' and user_pw like 'royalwook12!';
 
 commit;
+select * from post;
+select * from post_suggest;
+select * from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, title, contents, nickname, password, imgurl, regdate, modifydate, viewcount, likecount, replycount, user_idx, youtube_url, music, singer, thumnail, lyrics
+            	FROM (
+                    SELECT p.*, ps.youtube_url, ps.thumnail, ps.music, ps.singer, ps.lyrics
+                    FROM post p
+                    JOIN post_suggest ps ON p.post_idx = ps.post_idx
+                    order by p.post_idx desc
+                    )
+                 where rownum <= (1 * 5)
+                 )
+where rn > ((1-1) * 5);
+select * from post_suggest;
+update post_suggest set thumnail = 'https://img.youtube.com/vi/UMViKmsAm2c/mqdefault.jpg' where post_idx = 8;
+commit;
 
+select * from singer;
+
+select /*+ index_desc (singer singer_pk) */ singer, count(*) as count 
+from singer 
+group by singer 
+order by count desc;
+
+select * from singer where singer = 'Vaundy';
+select * from users;
+select * from music;

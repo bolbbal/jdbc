@@ -192,15 +192,15 @@ public class UserDao {
 	
 	public void updateUser(UserVo vo) {
 		
-		String sql = "update users set user_pw = ?, user_nickname = ?, user_img = ? where user_idx = ?";
+		String sql = "update users set user_nickname = ?, user_img = ? where user_idx = ?";
 		
 		try {
 			
 			conn = DBManager.getInstance().getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setNString(1, vo.getUserPw());
-			pstmt.setNString(2, vo.getUserNickname());
-			pstmt.setNString(3, vo.getUserImg());
+			pstmt.setNString(1, vo.getUserNickname());
+			pstmt.setNString(2, vo.getUserImg());
+			pstmt.setInt(3, vo.getUserIdx());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
