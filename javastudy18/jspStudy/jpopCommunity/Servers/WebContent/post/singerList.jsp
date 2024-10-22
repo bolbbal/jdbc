@@ -28,25 +28,13 @@
     <div class = "container">
     	<c:forEach var="list" items="${list}">
 	    <div class="row post">
-	    	<a href="/posts/view.do?post_idx=${list.post.post_idx }">
+	    	<a href="/posts/view.do?singer=${list.singer}">
 		  		<div class="col-md-3">
-		      		<img src="${list.suggest.thumnail }" alt="" class="thumbnail music-thumbnail">
+		      		<img src="" alt="" class="thumbnail music-thumbnail">
 		      	</div>
-		      	<div class="col-md-5">
-		      		<h3>${list.suggest.music} | ${list.suggest.singer}</h3>
-		      		<p>${list.suggest.lyrics}</p>
-		      	</div>
-		      	<div class="col-md-2">
-		      		<img src="/upload/${user.userImg != null ? user.userImg : 'noUserImg.png' }" alt="" class="img-circle member-img">
-		      	</div>
-		      	<div class="col-md-2 writer">
-		      		<p>${list.post.nickname}</p>
-		      		<p>
-		      			<c:if test = "${list.post.modifydate == null}">${list.post.regdate}</c:if>
-		      			<c:if test = "${list.post.modifydate != null}">${list.post.modifydate}</c:if>
-		      			<br><br><br>
-		      		</p>
-		      		<p class="text-right">${list.post.viewcount} | ${list.post.likecount}</p>
+		      	<div class="col-md-9">
+		      		<h3>${list.singer}</h3>
+		      		<p>${list.suggest_count}</p>
 		      	</div>
 		    </a>
 		  </div>

@@ -19,7 +19,7 @@ create table post_type (
     post_type varchar2(50) not null,
     constraint post_type_pk primary key (post_type_idx)
 );
-
+select * from post p left outer join post_suggest ps on p.post_idx = ps.post_idx where p.post_idx = (select max(p.post_idx) from post p left outer JOIN post_suggest ps ON p.post_idx = ps.post_idx) or p.post_idx = (select max(p.post_idx) from post p left outer JOIN post_suggest ps ON p.post_idx = ps.post_idx where p.post_idx < (select max(post_idx) from post));
 insert into post_type values (1, 'μιΪυ');
 insert into post_type values (2, 'ͺͺ?ͺα');
 
@@ -169,16 +169,22 @@ select * from (select /*+ index_desc (post post_pk) */ rownum rn, post_idx, titl
                  )
 where rn > ((1-1) * 5);
 select * from post_suggest;
-update post_suggest set thumnail = 'https://img.youtube.com/vi/UMViKmsAm2c/mqdefault.jpg' where post_idx = 8;
+update post_suggest set thumnail = 'https://img.youtube.com/vi/V-gxqhWEbxI/mqdefault.jpg' where post_idx = 11;
 commit;
 
 select * from singer;
 
-select /*+ index_desc (singer singer_pk) */ singer, count(*) as count 
-from singer 
-group by singer 
-order by count desc;
+select /*+ index_desc (singer singer_pk) */ singer, count(*) as count, singer_img
+from singer, singer_img
+group by singer;
 
-select * from singer where singer = 'Vaundy';
+select /*+ index_desc (singer singer_pk) */ count(count(*)) as count
+from singer 
+group by singer;
+select post_idx from post;
+
+select * from post p left outer join post_suggest ps on p.post_idx = ps.post_idx where p.post_idx = (select max(p.post_idx) from post p left outer JOIN post_suggest ps ON p.post_idx = ps.post_idx) or p.post_idx = (select max(p.post_idx) from post p left outer JOIN post_suggest ps ON p.post_idx = ps.post_idx where p.post_idx < (select max(post_idx) from post));
+select * from post;
+select * from singer where singer like '%Vaundy%';
 select * from users;
 select * from music;

@@ -66,7 +66,7 @@
 	<script>
 		$(function() {
 			
-			var nicknameChk = 0;
+			var nicknameChk = 1;
 			var passwordChk = 0;
 			
 			$("#nickname").blur(function() {
@@ -81,14 +81,14 @@
 					data:{nickname:$("#nickname").val()},
 					dataType:'json',
 					success:function(data) {
-						if(data.result == "possible") {
+						if(data.result === "possible") {
 							if($("#nickname").val() != "") {
 								$("#nicknameMsg").html("<span style='color:#0f0;'>사용 가능</sapn>");
-								nicknameChk = 1;
 							} 
-						} else if(data.result == "impossible") {
+						} else if(data.result === "impossible") {
 							if($("#nickname").val() != "") {
 								$("#nicknameMsg").html("<span style='color:#f00;'>사용 불가능</sapn>");
+								nicknameChk = 0;
 							}
 						}
 					}, error: function() {
@@ -160,12 +160,16 @@
 
 			
 			$("#submit").on("click", function() {
+				var formData = new FormData();
 				
-				/*if($("#password").val() == "" || $("#passwordChk").val() == "" || passwordChk != 1) {
+				if($("#password").val() == "" && $("#passwordChk").val() == "") {
+			    	formData.append("password", "${sessionScope.user.userPw}");
+			    } else if (passwordChk != 1) {
 			    	$("#passwordChkMsg").html("<span style='color:#f00;'>동일한 비밀번호를 입력해주세요.</sapn>");
 			    	$("#passwordChk").focus();
 			    	return false;
-			    }*/
+			    }
+				
 			    if($("#nickname").val() == "" || nicknameChk != 1) {
 			    	$("#nicknameMsg").html("<span style='color:#f00;'>사용가능한 닉네임을 입력해주세요.</sapn>");
 			    	$("#nickname").focus();
@@ -173,7 +177,7 @@
 			    }
 			    
 			 	// FormData 객체 생성
-			    var formData = new FormData();
+			    formData.append("password", $("#password").val());
 			    formData.append("nickname", $("#nickname").val());
 			    
 			    // 파일 추가

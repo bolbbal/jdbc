@@ -31,38 +31,35 @@
 	    	<div class = "col-md-8">
 		    	<div class = "container-fluid new">
 		    		<h4>新しいポスト</h4>
-				  <div class="col-md-6">
-				    <div class="thumbnail">
-				    	<a href="#" class="movepost list-group-item">
-					      <img src="/images/bansanka.png" alt="">
-					      <div class="caption">
-					        <h3>晩餐歌</h3>
-					        <h3>tuki.</h3>
-					        <p>
-					        
-					        <br>
-					        <br></p>
-					        <p class = "text-right">2024-09-08 赤ちゃん 227 5</p>
-					      </div>
-				      	</a>
-				    </div>
-				  </div>
-				  <div class="col-md-6">
-				    <div class="thumbnail">
-				    	<a href="#" class="movepost list-group-item">
-					      <img src="/images/bokunokoto.png" alt="">
-					      <div class="caption">
-					        <h3>僕のこと</h3>
-					        <h3>Mrs. GREEN APPLE</h3>
-					        <p>
-					        
-					        <br>
-					        <br></p>
-					        <p class = "text-right">2024-09-08 Jesmon 187 7</p>
-					      </div>
-				      	</a>
-				    </div>
-				  </div>
+		    		<p>리스트 크기: ${fn:length(newList)}</p>
+		    	<c:forEach var="newList" items="${newList}">
+					  <div class="col-md-6">
+					    <div class="thumbnail">
+					    	<a href="/posts/view.do?post_idx=${newList.post.post_idx }" class="movepost list-group-item">
+					    		<c:if test="${newList.post.imgurl || newList.suggest.thumnail}">
+						      		<img src="/upload/${newList.post.imgurl != null ? newList.post.imgurl : newList.suggest.thumnail}" alt="">
+						      	</c:if>
+						      <div class="caption">
+						      	<c:choose>
+						      		<c:when test="${not empty newList.suggest}">
+								        <h3>${newList.suggest.music}</h3>
+								        <h3>${newList.suggest.singer }</h3>
+							        </c:when>
+							        <c:when test="${empty newList.suggest}">
+							        	<h3>${newList.post.title}</h3>
+								        <h3>${newList.post.contents }</h3>
+							        </c:when>
+						        </c:choose>
+						        <p>
+						        
+						        <br>
+						        <br></p>
+						        <p class = "text-right">${newList.post.modifydate != null ? newList.post.regdate : newList.post.modifydate} | ${newList.post.nickname} | ${newList.post.viewcount} | ${newList.post.likecount}</p>
+						      </div>
+					      	</a>
+					    </div>
+					  </div>
+				  </c:forEach>
 				  <div class="text-right moveall">
 					<a href="/posts/list.do" >概要欄 ></a>
 				  </div>

@@ -4,7 +4,14 @@ public class SingerVo {
 	private int singer_idx;
 	private String singer;
 	private String singer_img;
+	private int suggest_count;
 	
+	public int getSuggest_count() {
+		return suggest_count;
+	}
+	public void setSuggest_count(int suggest_count) {
+		this.suggest_count = suggest_count;
+	}
 	public int getSinger_idx() {
 		return singer_idx;
 	}

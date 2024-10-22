@@ -219,6 +219,7 @@ public class PostDao {
 				
 				int singer_idx = rs.getInt("singer_idx");
 				
+				insertSuggestCount(singer_idx);
 				insertMusicInfo(suggestVo, singer_idx, currentPostIdx);
 				
 			} else {
@@ -233,6 +234,25 @@ public class PostDao {
 			close();
 		}
 		
+	}
+	
+	public void insertSuggestCount(int singer_idx) {
+		
+		String sql = "update singer set suggest_count = suggest_count + 1 where singer_idx = ?";
+		
+		try {
+			
+			conn = DBManager.getInstance().getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, singer_idx);
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
 	}
 	
 	public void insertSingerInfo(PostSuggestVo suggestVo, int currentPostIdx) {
@@ -916,5 +936,65 @@ public class PostDao {
 		} finally {
 			close();
 		}
+	}
+	
+	public List<SingerVo> getSingerSuggestList() {
+		
+		String sql = "select /*+ index_desc (singer singer_pk) */ singer, count(*) as count \r\n" + 
+				"from singer \r\n" + 
+				"group by singer \r\n" + 
+				"order by count desc";
+		
+		List<SingerVo> list = new ArrayList<SingerVo>();
+		
+		try {
+			
+			conn = DBManager.getInstance().getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				SingerVo vo = new SingerVo();
+				
+				vo.setSinger(rs.getNString("singer"));
+				vo.setSuggest_count(rs.getInt("count"));
+				
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return list;
+	}
+	
+	public int getSingerSuggestCount() {
+		
+		String sql = "select /*+ index_desc (singer singer_pk) */ count(count(*)) as count\r\n" + 
+				"from singer \r\n" + 
+				"group by singer";
+		
+		int count = 0;
+		
+		try {
+			
+			conn = DBManager.getInstance().getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt("count");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return count;
 	}
 }

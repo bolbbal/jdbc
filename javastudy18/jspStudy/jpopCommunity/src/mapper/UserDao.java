@@ -73,7 +73,7 @@ public class UserDao {
 	
 	public String getUserNickname(String nickname) {
 		
-		String sql = "select * from users where user_nickname like ?";
+		String sql = "select * from users where user_nickname = ?";
 		
 		String result = "";
 		
@@ -192,7 +192,7 @@ public class UserDao {
 	
 	public void updateUser(UserVo vo) {
 		
-		String sql = "update users set user_nickname = ?, user_img = ? where user_idx = ?";
+		String sql = "update users set user_nickname = ?, user_img = ?, user_pw = ? where user_idx = ?";
 		
 		try {
 			
@@ -200,12 +200,39 @@ public class UserDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setNString(1, vo.getUserNickname());
 			pstmt.setNString(2, vo.getUserImg());
-			pstmt.setInt(3, vo.getUserIdx());
+			pstmt.setNString(3, vo.getUserPw());
+			pstmt.setInt(4, vo.getUserIdx());
+			
+			pstmt.executeUpdate();
+			
+			updatePostInfo(vo.getUserNickname(), vo.getUserPw(), vo.getUserIdx());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close();
 		}
+	}
+	
+	public void updatePostInfo(String nickname, String password, int userIdx) {
+		
+		String sql = "update post set nickname = ?, password = ? where user_idx = ?";
+		
+		try {
+			
+			conn = DBManager.getInstance().getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setNString(1, nickname);
+			pstmt.setNString(2, password);
+			pstmt.setInt(3, userIdx);
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
 	}
 }

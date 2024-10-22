@@ -7,9 +7,11 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import domain.UserVo;
 import mapper.UserDao;
 import service.Action;
 
@@ -22,8 +24,18 @@ public class NicknameCheck implements Action {
 		
 		String nickname = request.getParameter("nickname");
 		
-		String result = UserDao.getInstance().getUserNickname(nickname);
-		System.out.println(result);
+		HttpSession session = request.getSession(false);
+		
+		UserVo vo = (UserVo) session.getAttribute("user");
+		
+		String result = "";
+		
+		if(!vo.getUserNickname().equals(nickname)) {
+			result = UserDao.getInstance().getUserNickname(nickname);
+		} else {
+			result = "possible";
+		}
+		
 		Map<String, String> map = new HashMap<String, String>();
 		Gson gson = new Gson();
 		

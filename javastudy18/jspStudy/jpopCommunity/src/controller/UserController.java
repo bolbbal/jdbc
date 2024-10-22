@@ -54,8 +54,7 @@ public class UserController extends HttpServlet {
 			
 		case "/logout.do" :
 			new Logout().command(request, response);
-			response.sendRedirect("/");
-			break;
+			return;
 			
 		case "/signup.do" :
 			page="/user/signup.jsp";

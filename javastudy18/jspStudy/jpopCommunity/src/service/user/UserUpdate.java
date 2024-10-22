@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import domain.UserVo;
 import mapper.UserDao;
 import service.Action;
+import util.SecurityPassword;
 
 public class UserUpdate implements Action {
 
@@ -31,8 +32,29 @@ public class UserUpdate implements Action {
 		ServletContext context = request.getServletContext();
 		String path = context.getRealPath(savepath);
 		
+		HttpSession session = request.getSession(false);
+		
+		UserVo originalVo = (UserVo) session.getAttribute("user");
+		
+		UserVo vo = new UserVo();
+		if(originalVo.getUserPw().equals(request.getParameter("password"))) {
+			vo.setUserPw(originalVo.getUserPw());
+		} else {
+			String password = request.getParameter("password");
+			String newPassword = SecurityPassword.encording(password);
+			vo.setUserPw(newPassword);
+		}
+		
+		vo.setUserIdx(originalVo.getUserIdx());
+		vo.setUserNickname(request.getParameter("nickname"));
+		vo.setUserImg(originalVo.getUserImg());
+		
 		Part imgurl = request.getPart("userImg");
-		String imgName = imgurl.getSubmittedFileName();
+		String imgName = null;
+		
+		if(imgurl != null) {
+			imgName = imgurl.getSubmittedFileName();
+		}
 		
 		if(imgName != null && !imgName.isEmpty()) {
 			String realPath = imgName.substring(0, imgName.lastIndexOf("."));
@@ -42,19 +64,14 @@ public class UserUpdate implements Action {
 			imgName = realPath + "_" + uuid + ext;
 			
 			imgurl.write(path + File.separator + imgName);
-		}
-		
-		HttpSession session = request.getSession(false);
-		
-		UserVo originalVo = (UserVo) session.getAttribute("user");
-		
-		UserVo vo = new UserVo();
-		
-		vo.setUserIdx(originalVo.getUserIdx());
-		vo.setUserNickname(request.getParameter("nickname"));
-		vo.setUserImg(imgName);
+			vo.setUserImg(imgName);
+		} 
 		
 		UserDao.getInstance().updateUser(vo);
+		
+		vo = UserDao.getInstance().login(originalVo.getUserId(), vo.getUserPw());
+		
+		session.setAttribute("user", vo);
 		
 		Map<String, String> map = new HashMap<String, String>();
 		

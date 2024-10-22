@@ -14,6 +14,7 @@ import service.post.PostInsert;
 import service.post.PostList;
 import service.post.PostUpdate;
 import service.post.PostView;
+import service.post.SingerSuggestList;
 import service.post.HateButton;
 import service.post.PostModify;
 import service.post.PostSuggestList;
@@ -92,6 +93,10 @@ public class PostController extends HttpServlet {
 			new HateButton().command(request, response);
 			break;
 		
+		case "/singer.do" :
+			new SingerSuggestList().command(request, response);
+			page="/post/singerList.jsp";
+			break;
 		
 //		case "/reply.do" :
 //			new replyButton().command(request, response);

@@ -109,13 +109,11 @@
         if (post.post_type_idx.value === "2") {
         	
         	let youtubeUrl = post.youtube_url.value;
-        	console.log(youtubeUrl);
         	youtubeUrl = youtubeUrl.replace("https://youtu.be/", '');
         	youtubeUrl = youtubeUrl.replace("https://www.youtube.com/embed/", '');
         	youtubeUrl = youtubeUrl.replace("https://www.youtube.com/watch?v=", '');
         	
-        	let thumnailUrl = youtubeUrl.split('&')[0];
-        	console.log(youtubeUrl+":123");
+        	let thumnailUrl = youtubeUrl.substring(0, 11);
         	post.thumnail.value = "https://img.youtube.com/vi/" + thumnailUrl + "/mqdefault.jpg";
         	post.youtube_url.value = "https://www.youtube.com/embed/" + thumnailUrl;
         	
