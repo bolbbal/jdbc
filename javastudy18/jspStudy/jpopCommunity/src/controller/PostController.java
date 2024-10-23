@@ -8,16 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import service.post.BestPost;
-import service.post.LikeButton;
-import service.post.PostInsert;
-import service.post.PostList;
-import service.post.PostUpdate;
-import service.post.PostView;
-import service.post.SingerSuggestList;
-import service.post.HateButton;
-import service.post.PostModify;
-import service.post.PostSuggestList;
+import service.main.MainService;
+import service.post.*;
+
 
 @WebServlet("/posts/*")
 @MultipartConfig(
@@ -101,6 +94,11 @@ public class PostController extends HttpServlet {
 //		case "/reply.do" :
 //			new replyButton().command(request, response);
 //			break;
+			
+		case "/test.do" :
+			new MainService().command(request, response);
+			page="/post/test.jsp";
+			break;
 		}
 		
 		if(page!=null) {

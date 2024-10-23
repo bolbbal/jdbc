@@ -4,9 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import domain.PostSuggestVo;
-import domain.PostVo;
-import domain.PostWithSuggestVo;
+import domain.*;
 import util.DBManager;
 
 public class MainDao {
@@ -46,11 +44,11 @@ public class MainDao {
 //		
 //	}
 	
-	public List<PostWithSuggestVo> getRecentlyPost() {
+	public List<PostAndSuggestVo> getRecentlyPost() {
 		
 		String sql = "select * from post p left outer join post_suggest ps on p.post_idx = ps.post_idx where p.post_idx = (select max(p.post_idx) from post p left outer JOIN post_suggest ps ON p.post_idx = ps.post_idx) or p.post_idx = (select max(p.post_idx) from post p left outer JOIN post_suggest ps ON p.post_idx = ps.post_idx where p.post_idx < (select max(post_idx) from post))";
 		
-		List<PostWithSuggestVo> list = new ArrayList<PostWithSuggestVo>();
+		List<PostAndSuggestVo> list = new ArrayList<PostAndSuggestVo>();
 		
 		try {
 			
@@ -102,7 +100,7 @@ public class MainDao {
 			        suggestVo.setLyrics(combinedLyrics.toString());
 			    }
 				
-			    PostWithSuggestVo vo = new PostWithSuggestVo();
+			    PostAndSuggestVo vo = new PostAndSuggestVo();
 			    
 			    vo.setPost(postVo);
 			    vo.setSuggest(suggestVo);

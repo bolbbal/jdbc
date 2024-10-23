@@ -174,9 +174,17 @@ commit;
 
 select * from singer;
 
-select /*+ index_desc (singer singer_pk) */ singer, count(*) as count, singer_img
-from singer, singer_img
-group by singer;
+select /*+ index_desc (singer singer_pk) */ *
+from singer
+order by suggest_count desc;
+
+SELECT *
+FROM (
+    SELECT /*+ index_desc (singer singer_pk) */ *
+    FROM singer
+    ORDER BY suggest_count DESC
+)
+WHERE ROWNUM <= 3;
 
 select /*+ index_desc (singer singer_pk) */ count(count(*)) as count
 from singer 
@@ -188,3 +196,7 @@ select * from post;
 select * from singer where singer like '%Vaundy%';
 select * from users;
 select * from music;
+
+SELECT * FROM post WHERE ROWNUM <= 5;
+
+select * from reply;
