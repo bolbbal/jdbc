@@ -1,0 +1,184 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="F154E37D-35A8-D4D2-07AA-5D690F737CD0" schemaObject="721080CB-B87B-893A-B925-A9C95B093BE2" name="USERS">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>JPAT</sourceObjSchema>
+<sourceObjName>USERS</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="USER_IDX" id="A7395204-E4C4-7A7C-6037-2A1EF2D7E246">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>USERS</sourceObjSchema>
+<sourceObjName>USER_IDX</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,4,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="USER_ID" id="9D743A4F-9E78-9F8C-8B2C-5A8ACC024317">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>USERS</sourceObjSchema>
+<sourceObjName>USER_ID</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="USER_PW" id="022B2A6C-E80F-19F5-AFE8-23DBD1C0E8C6">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>USERS</sourceObjSchema>
+<sourceObjName>USER_PW</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>500 BYTE</dataTypeSize>
+<ownDataTypeParameters>500 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="USER_NICKNAME" id="7BB603FB-7A23-EA72-351B-F5CC7BC95E0E">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>USERS</sourceObjSchema>
+<sourceObjName>USER_NICKNAME</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="USER_EMAIL" id="D29030B5-A8E4-BA60-1C71-F6B165CE2938">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>USERS</sourceObjSchema>
+<sourceObjName>USER_EMAIL</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="USER_IMG" id="754D7B0C-3E4B-FDD8-AB30-5151047714DA">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>USERS</sourceObjSchema>
+<sourceObjName>USER_IMG</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>200 BYTE</dataTypeSize>
+<ownDataTypeParameters>200 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="JOINDATE" id="B9A53AE4-CC17-201F-70A9-FC52B5476A19">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>USERS</sourceObjSchema>
+<sourceObjName>JOINDATE</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<defaultValue>sysdate</defaultValue>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E8E66974-E3E4-61DC-21B3-17849CBE3D89" name="USER_PK">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>JPAT</sourceObjSchema>
+<sourceObjName>USER_PK</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A7395204-E4C4-7A7C-6037-2A1EF2D7E246"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="E6959266-7947-2C46-A975-D878D5F21171" schemaObject="721080CB-B87B-893A-B925-A9C95B093BE2" name="USERS_USER_ID_UN">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>JPAT</sourceObjSchema>
+<sourceObjName>SYS_C0010210</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9D743A4F-9E78-9F8C-8B2C-5A8ACC024317"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="E55A2F0E-FE8F-02AC-9869-7C7BC41E47BC" schemaObject="721080CB-B87B-893A-B925-A9C95B093BE2" name="USERS_USER_NICKNAME_UN">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>JPAT</sourceObjSchema>
+<sourceObjName>SYS_C0010211</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7BB603FB-7A23-EA72-351B-F5CC7BC95E0E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="DA12A444-48C3-C3CC-A4EB-D45DCC799F88" schemaObject="721080CB-B87B-893A-B925-A9C95B093BE2" name="USERS_USER_EMAIL_UN">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>JPAT</sourceObjSchema>
+<sourceObjName>SYS_C0010212</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D29030B5-A8E4-BA60-1C71-F6B165CE2938"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9D57E8D7-B534-5D90-656D-9C347CF4F656" schemaObject="721080CB-B87B-893A-B925-A9C95B093BE2" name="USER_PK">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>JPAT</sourceObjSchema>
+<sourceObjName>USER_PK</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A7395204-E4C4-7A7C-6037-2A1EF2D7E246"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

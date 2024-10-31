@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="MUSIC" directorySegmentName="seg_0" id="C5100272-31C3-ACA6-2D9B-02739C727404">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<schemaObject>721080CB-B87B-893A-B925-A9C95B093BE2</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>97ABC758-560A-2DD1-377B-17234AEE34D4</segment>
+<tableSpace>21B93825-D618-F7B6-F518-7916C41BB3E5</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="SINGER_IDX" id="30F4159D-F283-07BC-18F4-6D1F17F78B3E">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="LYRICS" id="433C2B56-4616-5E56-C1A1-1D20202EC4BB">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="MUSIC" id="95199592-B650-4D02-78B3-2DFD26802AB2">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="POST_IDX" id="B31ECF71-C136-1D43-8BA0-7B871765DEE6">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="MUSIC_IDX" id="D69755FA-7E58-1FA1-D2C4-97A3DA0887E2">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="MUSIC_PK" id="651646F1-8B6A-D1C7-6144-279D37107B37">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<schemaObject>721080CB-B87B-893A-B925-A9C95B093BE2</schemaObject>
+<segment>EA7C09C7-54A0-1C69-3D1E-186B3A12711B</segment>
+<tableSpace>21B93825-D618-F7B6-F518-7916C41BB3E5</tableSpace>
+</IndexProxy>
+</indexProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="MUSIC_FK2" id="58E539B3-99F2-B319-9CA0-F94695682B02">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="MUSIC_FK1" id="6AD65D09-6F03-1CA3-B249-9687EC0D44DA">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="MUSIC_PK" id="ACD9981C-ED5C-7809-5538-278556DFA307">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<segment>EA7C09C7-54A0-1C69-3D1E-186B3A12711B</segment>
+<tableSpace>21B93825-D618-F7B6-F518-7916C41BB3E5</tableSpace>
+<existingIndex>651646F1-8B6A-D1C7-6144-279D37107B37</existingIndex>
+<indexSegment>EA7C09C7-54A0-1C69-3D1E-186B3A12711B</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

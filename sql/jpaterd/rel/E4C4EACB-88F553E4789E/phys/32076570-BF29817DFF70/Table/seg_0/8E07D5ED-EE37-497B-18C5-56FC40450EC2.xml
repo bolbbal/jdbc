@@ -1,0 +1,122 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="POST" directorySegmentName="seg_0" id="8E07D5ED-EE37-497B-18C5-56FC40450EC2">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<schemaObject>721080CB-B87B-893A-B925-A9C95B093BE2</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>97ABC758-560A-2DD1-377B-17234AEE34D4</segment>
+<tableSpace>21B93825-D618-F7B6-F518-7916C41BB3E5</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="MODIFYDATE" id="0207AA98-FD45-817C-F049-7BEF8A325C9F">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<defaultValue>null</defaultValue>
+</ColumnProxy>
+<ColumnProxy name="POST_IDX" id="05D8F5FD-BE36-98E9-73C1-1C2BDF2D0FC6">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PASSWORD" id="17B1DC73-095B-3FCB-68DA-0C97A44EC533">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="LIKECOUNT" id="3C666A7F-FE5F-023D-859F-D6BB56A24317">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<defaultValue>0</defaultValue>
+</ColumnProxy>
+<ColumnProxy name="TITLE" id="402F8743-C791-4A6B-0FBA-5780CDE581B1">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="USER_IDX" id="4D04D9AB-3EA0-1E9E-F48D-340E90B1C066">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="REGDATE" id="4DE1E764-8BA0-B314-4FBE-AEE1ADC3F961">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<defaultValue>sysdate</defaultValue>
+</ColumnProxy>
+<ColumnProxy name="POST_TYPE_IDX" id="65B4612E-6141-DCE8-7160-5BDD8AFE9036">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<defaultValue>1</defaultValue>
+</ColumnProxy>
+<ColumnProxy name="NICKNAME" id="789D7175-C719-6FC6-FC0D-BC994D1A2D02">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="IMGURL" id="7B18E70B-F697-627B-57F9-8E4961F1A3C4">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CONTENTS" id="B4302A5E-9026-6E38-19F2-E442F4FC5865">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="VIEWCOUNT" id="CB4C1287-1386-2B56-D679-DCD9336FC1C2">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<defaultValue>0</defaultValue>
+</ColumnProxy>
+<ColumnProxy name="REPLYCOUNT" id="F79C65B4-3FFE-3F16-81CA-6090D42E163E">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<defaultValue>0</defaultValue>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="POST_PK" id="1329272B-DE5F-9BCA-73AD-BD2BBE9CBF43">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<schemaObject>721080CB-B87B-893A-B925-A9C95B093BE2</schemaObject>
+<segment>EA7C09C7-54A0-1C69-3D1E-186B3A12711B</segment>
+<tableSpace>21B93825-D618-F7B6-F518-7916C41BB3E5</tableSpace>
+</IndexProxy>
+</indexProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="POST_FK1" id="3DB81A1B-BA65-5E06-0CBE-C47BCE85C334">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="POST_FK2" id="52623072-945A-B2E8-E095-E3676BC56BBE">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="POST_PK" id="754EA08E-F11C-E07A-58ED-CFA2ECD56D7B">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<segment>EA7C09C7-54A0-1C69-3D1E-186B3A12711B</segment>
+<tableSpace>21B93825-D618-F7B6-F518-7916C41BB3E5</tableSpace>
+<existingIndex>1329272B-DE5F-9BCA-73AD-BD2BBE9CBF43</existingIndex>
+<indexSegment>EA7C09C7-54A0-1C69-3D1E-186B3A12711B</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

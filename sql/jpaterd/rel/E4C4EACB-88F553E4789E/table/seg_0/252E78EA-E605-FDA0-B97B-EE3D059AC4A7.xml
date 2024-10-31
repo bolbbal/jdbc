@@ -1,0 +1,144 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="252E78EA-E605-FDA0-B97B-EE3D059AC4A7" schemaObject="721080CB-B87B-893A-B925-A9C95B093BE2" name="POST_SUGGEST">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>JPAT</sourceObjSchema>
+<sourceObjName>POST_SUGGEST</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="POST_TYPE_IDX" id="0DD0B972-62FB-F239-5DDD-386D75BD41D8">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>POST_SUGGEST</sourceObjSchema>
+<sourceObjName>POST_TYPE_IDX</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<defaultValue>2</defaultValue>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="1A7F9063-F33D-CBD9-EABC-0E32AE9C1B6E" referredColumn="4BD43E02-1BD9-6893-A30D-0D9B84EF3186"/>
+</associations>
+</Column>
+<Column name="POST_IDX" id="BAF9A0E8-BD9F-3C5D-1203-F897199D785A">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>POST_SUGGEST</sourceObjSchema>
+<sourceObjName>POST_IDX</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="058EE2DD-FFD6-3088-1095-1D94BD83775A" referredColumn="05D8F5FD-BE36-98E9-73C1-1C2BDF2D0FC6"/>
+</associations>
+</Column>
+<Column name="YOUTUBE_URL" id="52D70382-0552-F340-C4C0-09D204313182">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>POST_SUGGEST</sourceObjSchema>
+<sourceObjName>YOUTUBE_URL</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 BYTE</dataTypeSize>
+<ownDataTypeParameters>1000 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="THUMNAIL" id="FE3501A6-B9EA-DA65-C7F5-2FB745612B7D">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>POST_SUGGEST</sourceObjSchema>
+<sourceObjName>THUMNAIL</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 BYTE</dataTypeSize>
+<ownDataTypeParameters>1000 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="MUSIC" id="E459F241-3326-34E9-8982-F7C17803D049">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>POST_SUGGEST</sourceObjSchema>
+<sourceObjName>MUSIC</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SINGER" id="8A53AA69-704F-1EC9-D528-19A9F12B7659">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>POST_SUGGEST</sourceObjSchema>
+<sourceObjName>SINGER</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="LYRICS" id="C95AB332-2E97-F6B9-0652-F3773C6E52DE">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>POST_SUGGEST</sourceObjSchema>
+<sourceObjName>LYRICS</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>4000 BYTE</dataTypeSize>
+<ownDataTypeParameters>4000 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="C3CEA547-ACE8-D5D9-C4D2-BABFF5DFA753" name="POST_SUGGEST_FK1">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BAF9A0E8-BD9F-3C5D-1203-F897199D785A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3BF27E88-F561-0E38-6F63-4D70D1DE050D" name="POST_SUGGEST_FK2">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0DD0B972-62FB-F239-5DDD-386D75BD41D8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

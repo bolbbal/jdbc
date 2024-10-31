@@ -1,0 +1,172 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6ACC9D7E-12FA-2218-1BE7-CFAEC269C6D5" schemaObject="721080CB-B87B-893A-B925-A9C95B093BE2" name="REPLY">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>JPAT</sourceObjSchema>
+<sourceObjName>REPLY</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="REPLY_IDX" id="31ABA56C-46AF-D6CF-33A7-0371EC49DB44">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>REPLY</sourceObjSchema>
+<sourceObjName>REPLY_IDX</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="POST_IDX" id="C16E4597-EF02-2D1C-23E6-854F5762CA7C">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>REPLY</sourceObjSchema>
+<sourceObjName>POST_IDX</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="752ACE3E-9EF2-7BD8-FD5E-3E6486FD18EA" referredColumn="05D8F5FD-BE36-98E9-73C1-1C2BDF2D0FC6"/>
+</associations>
+</Column>
+<Column name="NICKNAME" id="D80B9742-F86F-3604-5CAD-89C34237AA8F">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>REPLY</sourceObjSchema>
+<sourceObjName>NICKNAME</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="REPLY_PASSWORD" id="9AF558E5-77E8-F51F-1555-F08B998ADECB">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>REPLY</sourceObjSchema>
+<sourceObjName>REPLY_PASSWORD</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>500 BYTE</dataTypeSize>
+<ownDataTypeParameters>500 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="COMMENTS" id="ACFB4FF0-09F8-0BDB-D01A-F1C860367547">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>REPLY</sourceObjSchema>
+<sourceObjName>COMMENTS</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>4000 BYTE</dataTypeSize>
+<ownDataTypeParameters>4000 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="REGDATE" id="665EA31F-26E6-50F5-A7A5-D4184A7BA6F2">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>REPLY</sourceObjSchema>
+<sourceObjName>REGDATE</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<defaultValue>SYSDATE</defaultValue>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="MODIFYDATE" id="26E1C9B4-04B5-A5BB-EE01-02027773E5E3">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>REPLY</sourceObjSchema>
+<sourceObjName>MODIFYDATE</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<defaultValue>NULL</defaultValue>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="USER_IDX" id="2204E99F-9761-4722-C95C-14964B7D63CB">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>REPLY</sourceObjSchema>
+<sourceObjName>USER_IDX</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="B433D24A-2837-35F2-9528-9F703AF4F5AD" name="REPLY_PK">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>JPAT</sourceObjSchema>
+<sourceObjName>REPLY_PK</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="31ABA56C-46AF-D6CF-33A7-0371EC49DB44"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5A8E8036-0636-E9F7-B978-0700920CCE62" schemaObject="721080CB-B87B-893A-B925-A9C95B093BE2" name="REPLY_PK">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>JPAT</sourceObjSchema>
+<sourceObjName>REPLY_PK</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="31ABA56C-46AF-D6CF-33A7-0371EC49DB44"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="EB058D89-D9E9-DA55-6A88-A25F7370E735" name="REPLY_FK">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C16E4597-EF02-2D1C-23E6-854F5762CA7C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

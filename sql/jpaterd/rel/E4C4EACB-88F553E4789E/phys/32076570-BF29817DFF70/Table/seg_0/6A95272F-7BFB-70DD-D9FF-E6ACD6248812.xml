@@ -1,0 +1,61 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="SINGER_POST_RELATION" directorySegmentName="seg_0" id="6A95272F-7BFB-70DD-D9FF-E6ACD6248812">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<schemaObject>721080CB-B87B-893A-B925-A9C95B093BE2</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>97ABC758-560A-2DD1-377B-17234AEE34D4</segment>
+<tableSpace>21B93825-D618-F7B6-F518-7916C41BB3E5</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="SINGER_IDX" id="2F292DA4-DEFC-1992-4936-86A2200C1EDE">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="POST_IDX" id="9F887004-937D-D472-F7DE-D7FAC2C2E001">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="SPR_PK" id="25EED684-0AE8-41C7-674E-E552ABF5BD91">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<schemaObject>721080CB-B87B-893A-B925-A9C95B093BE2</schemaObject>
+<segment>EA7C09C7-54A0-1C69-3D1E-186B3A12711B</segment>
+<tableSpace>21B93825-D618-F7B6-F518-7916C41BB3E5</tableSpace>
+</IndexProxy>
+</indexProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="SPR_FK1" id="4044675D-1780-B165-468E-61454974FC6E">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="SPR_FK2" id="8D85984B-1ADE-983A-EE14-9DE8EEF6D42E">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="SPR_PK" id="0BCA2AB9-36EF-41DC-A1F1-FC4F7F357B53">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<segment>EA7C09C7-54A0-1C69-3D1E-186B3A12711B</segment>
+<tableSpace>21B93825-D618-F7B6-F518-7916C41BB3E5</tableSpace>
+<existingIndex>25EED684-0AE8-41C7-674E-E552ABF5BD91</existingIndex>
+<indexSegment>EA7C09C7-54A0-1C69-3D1E-186B3A12711B</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

@@ -1,0 +1,99 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6A95272F-7BFB-70DD-D9FF-E6ACD6248812" schemaObject="721080CB-B87B-893A-B925-A9C95B093BE2" name="SINGER_POST_RELATION">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>JPAT</sourceObjSchema>
+<sourceObjName>SINGER_POST_RELATION</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="SINGER_IDX" id="2F292DA4-DEFC-1992-4936-86A2200C1EDE">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>SINGER_POST_RELATION</sourceObjSchema>
+<sourceObjName>SINGER_IDX</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B9CEAA5D-BC44-7B80-36AB-42C7F0256A05" referredColumn="B8EA092E-2D7D-17E8-8AFF-A89E02601D91"/>
+</associations>
+</Column>
+<Column name="POST_IDX" id="9F887004-937D-D472-F7DE-D7FAC2C2E001">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>SINGER_POST_RELATION</sourceObjSchema>
+<sourceObjName>POST_IDX</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="5A179E77-C6B6-ADC7-B129-82DD9E539DA0" referredColumn="05D8F5FD-BE36-98E9-73C1-1C2BDF2D0FC6"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="0BCA2AB9-36EF-41DC-A1F1-FC4F7F357B53" name="SPR_PK">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>JPAT</sourceObjSchema>
+<sourceObjName>SPR_PK</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2F292DA4-DEFC-1992-4936-86A2200C1EDE"/>
+<colUsage columnID="9F887004-937D-D472-F7DE-D7FAC2C2E001"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="25EED684-0AE8-41C7-674E-E552ABF5BD91" schemaObject="721080CB-B87B-893A-B925-A9C95B093BE2" name="SPR_PK">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>JPAT</sourceObjSchema>
+<sourceObjName>SPR_PK</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2F292DA4-DEFC-1992-4936-86A2200C1EDE"/>
+<colUsage columnID="9F887004-937D-D472-F7DE-D7FAC2C2E001"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4044675D-1780-B165-468E-61454974FC6E" name="SPR_FK1">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2F292DA4-DEFC-1992-4936-86A2200C1EDE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="8D85984B-1ADE-983A-EE14-9DE8EEF6D42E" name="SPR_FK2">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9F887004-937D-D472-F7DE-D7FAC2C2E001"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="893ED5E9-5EBD-9000-8458-7C6552A9945A" containerWithKeyObject="C5100272-31C3-ACA6-2D9B-02739C727404" localFKIndex="6AD65D09-6F03-1CA3-B249-9687EC0D44DA" name="MUSIC_FK1">
+<sourceConnName>jpat</sourceConnName>
+<sourceObjSchema>JPAT</sourceObjSchema>
+<sourceObjName>MUSIC_FK1</sourceObjName>
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<referredTableLongName>JPAT.SINGER</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>02F674F9-CABB-D001-DA2D-18AE78B38F98</referredTableID>
+<keyObject>AF676898-5758-72AC-78F9-4B5E18BC1007</keyObject>
+<referredKeyID>AF676898-5758-72AC-78F9-4B5E18BC1007</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>SINGER_IDX</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

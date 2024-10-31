@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="jpaterd" id="73951AD1-1A3A-EE63-02F4-BEC86E048CA9" version="3.5">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:10:15 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>73951AD1-1A3A-EE63-02F4-BEC86E048CA9</designId>
+</OSDM_Design>

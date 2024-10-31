@@ -1,0 +1,64 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="POST_SUGGEST" directorySegmentName="seg_0" id="252E78EA-E605-FDA0-B97B-EE3D059AC4A7">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<schemaObject>721080CB-B87B-893A-B925-A9C95B093BE2</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>97ABC758-560A-2DD1-377B-17234AEE34D4</segment>
+<tableSpace>21B93825-D618-F7B6-F518-7916C41BB3E5</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="POST_TYPE_IDX" id="0DD0B972-62FB-F239-5DDD-386D75BD41D8">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<defaultValue>2</defaultValue>
+</ColumnProxy>
+<ColumnProxy name="YOUTUBE_URL" id="52D70382-0552-F340-C4C0-09D204313182">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="SINGER" id="8A53AA69-704F-1EC9-D528-19A9F12B7659">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="POST_IDX" id="BAF9A0E8-BD9F-3C5D-1203-F897199D785A">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="LYRICS" id="C95AB332-2E97-F6B9-0652-F3773C6E52DE">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="MUSIC" id="E459F241-3326-34E9-8982-F7C17803D049">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="THUMNAIL" id="FE3501A6-B9EA-DA65-C7F5-2FB745612B7D">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="POST_SUGGEST_FK2" id="3BF27E88-F561-0E38-6F63-4D70D1DE050D">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="POST_SUGGEST_FK1" id="C3CEA547-ACE8-D5D9-C4D2-BABFF5DFA753">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+</TableProxyOraclev11g>

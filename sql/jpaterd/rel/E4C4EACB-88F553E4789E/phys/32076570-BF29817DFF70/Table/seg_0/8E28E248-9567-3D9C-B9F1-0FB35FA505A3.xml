@@ -1,0 +1,49 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="POST_TYPE" directorySegmentName="seg_0" id="8E28E248-9567-3D9C-B9F1-0FB35FA505A3">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<schemaObject>721080CB-B87B-893A-B925-A9C95B093BE2</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>97ABC758-560A-2DD1-377B-17234AEE34D4</segment>
+<tableSpace>21B93825-D618-F7B6-F518-7916C41BB3E5</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="POST_TYPE_IDX" id="4BD43E02-1BD9-6893-A30D-0D9B84EF3186">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="POST_TYPE" id="F8D71F14-8647-ED5C-5DAB-71B7ECB83AC7">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="POST_TYPE_PK" id="04311BAB-E45F-E374-6DAB-5440D5489ACF">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<schemaObject>721080CB-B87B-893A-B925-A9C95B093BE2</schemaObject>
+<segment>EA7C09C7-54A0-1C69-3D1E-186B3A12711B</segment>
+<tableSpace>21B93825-D618-F7B6-F518-7916C41BB3E5</tableSpace>
+</IndexProxy>
+</indexProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="POST_TYPE_PK" id="3105D864-F65E-74C2-6EA5-CE51BAEF2132">
+<createdBy>jjhh1</createdBy>
+<createdTime>2024-10-31 05:12:18 UTC</createdTime>
+<ownerDesignName>jpaterd</ownerDesignName>
+<segment>EA7C09C7-54A0-1C69-3D1E-186B3A12711B</segment>
+<tableSpace>21B93825-D618-F7B6-F518-7916C41BB3E5</tableSpace>
+<existingIndex>04311BAB-E45F-E374-6DAB-5440D5489ACF</existingIndex>
+<indexSegment>EA7C09C7-54A0-1C69-3D1E-186B3A12711B</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>
